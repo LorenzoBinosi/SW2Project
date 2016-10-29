@@ -1,0 +1,46 @@
+\documentclass[a4paper, 12pt, titlepage]{article}
+\usepackage{graphicx}
+\usepackage{titlesec}
+\usepackage{hyperref}
+\graphicspath{{Images/}}
+\setcounter{secnumdepth}{4}
+\hypersetup{
+	colorlinks=true,
+	linkcolor=black,
+	filecolor=magenta,      
+	urlcolor=cyan,
+}
+%opening
+\title{
+	\begin{figure}[h]
+		\centering
+		\includegraphics{polimi_logo}
+	\end{figure}
+	Politecnico di Milano, A.A. 2016/2017 
+	\newline\newline 
+	Software Engineering 2: PowerEnJoy 
+	\textbf{R}equirements \textbf{A}nalysis and \textbf{S}pecification \textbf{D}ocument}
+\author{Binosi Lorenzo 876022}
+	
+	
+\begin{document}
+
+\maketitle
+\tableofcontents
+\newpage
+
+\include{introduction}
+
+\include{Overall_description}
+
+\include{requirements}
+
+\include{scenario}
+
+\include{uml}
+
+\include{alloy}
+
+\include{appendix}
+
+\end{document}
