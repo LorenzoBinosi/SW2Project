@@ -1,4 +1,5 @@
-\section{Introduction}
+\section{Introduction}\label{sec introduction}
+
 \subsection{Purpose}
 
 This is the  Requirement Analysis and Specification Document for the PowerEnJoy car-sharing service.
@@ -9,20 +10,48 @@ This document is written for project managers, developers, testers and systems a
 
 \subsection{Scope}
 
-PowerEnJoy is a digital management system for a car-sharing service that exclusively employs electric cars.This car rental system provides an alternative solution to public transport, thus being not only eco-friendly, but also simple and reliable.
+PowerEnJoy is a digital management system for a car-sharing service that exclusively employs electric cars. This car rental system provides an alternative solution to public transport, thus being not only eco-friendly, but also simple and reliable.
 
 The service is available to whomever has a valid driving license. Anybody who wants to register must provide a copy of it, along with his credentials and payment informations.
-
-Once registered, they will be allowed to search a car in a specific area, and reserve one for up to an hour before picking it up. The system will cancel the reservation in case of them failing to arrive to the car in time, will make that specific car available again and apply a fine to the user.
-Upon arrival to the car, the user will be able to get inside and drive it, at the cost of a per-minute fee of which he will be notified by the system through a screen on the car itself; this until the car will be left parked in a safe area, where the system will close the doors and make the vehicle available again.
-
-\subsection{Actors}
-\begin{itemize}
-	\item Driver: the only user of the system. He can register and log-in to the system, using it for the car-sharing service.  
-\end{itemize}
+Once registered, they will be allowed to search a car in a specific area, and reserve one for up to an hour before picking it up. The system will cancel the reservation in case of them failing to arrive to the car in time, will make that specific car available again and apply a fine to the driver.
+Upon arrival to the car, the driver will be able to get inside and drive it, at the cost of a per-minute fee of which he will be notified by the system through a screen on the car itself; this until the car will be left parked in a safe area, where the system will close the doors and make the vehicle available again.
 
 \subsection{Goals}
 The goals of the PowerEnJoy service are the following:
 \begin{itemize}
-	\item {[G1]}
+	\item {[G1]} Allow a driver to rent a car.
+	\begin{itemize}
+		\item {[G1.1]} Allow a driver to search and reserve a car.
+		\item {[G1.2]} Allow a driver to use a reserved car.
+		\item {[G1.3]} Allow a driver to park a car in a safe area, suggested by the system.
+	\end{itemize}
+	\item {[G2]} Notify the driver about every fee, discount, or sanction/fine that will be applied to him while using the service
+	\item {[G3]} Allow a guest to signup to the system.
+	\item {[G4]} Motivate a driver into car pooling.
+	\item {[G5]} Motivate a driver to a better behavior.
 \end{itemize}
+
+\subsection{Definitions, acronyms, and abbreviations}
+
+\begin{description}
+	\item[RASD:] Requirements Analysis and Specification Document.
+	\item[System:] the whole software system to be developed, comprehensive of all its parts.
+	\item[Client:] the web application component or the mobile app.
+	\item[Guest:] anyone who's not registered to the system, who's going to, or is looking for informations about the service.
+	\item[Driver:] a registered user who using the car-sharing service. Only drivers can rent a car.
+	\item[User:] anyone who subscribes to the service, the driver.
+	\item[Car pooling:] the sharing of car journeys so that more than one person travels in a car.
+\end{description}
+
+\subsection{References}
+This document refers to the project rules of the Software Engineering 2 project~\cite{se-project-rules} and to the RASD assignment~\cite{se-assignment}.
+
+This document follows the IEEE Standard 830-1998~\cite{ieee-830-1198} for the format of Software Requirements specifications.
+\subsection{Overview}
+This document is structured in three parts:
+\begin{description}
+	\item[\autoref{sec introduction}: Introduction.] It provides an overall description of the system scope and purpose, together with some information on this document.
+	\item[\autoref{sec overall-desc}: Overall description.] Provides a broad perspective over the principal system features, constraints, and assumptions about the users and the environment.
+	\item[\autoref{sec requirements}: Specific requirements.] Goes into detail about functional and nonfunctional requirements. This chapter is arranged by feature.
+\end{description}
+
