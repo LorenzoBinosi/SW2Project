@@ -10,25 +10,35 @@ This document is written for project managers, developers, testers and systems a
 
 \subsection{Scope}
 
-PowerEnJoy is a digital management system for a car-sharing service that exclusively employs electric cars. This car rental system provides an alternative solution to public transport, thus being not only eco-friendly, but also simple and reliable.
+PowerEnJoy is a digital management system for a car-sharing service that exclusively employs electric vehicles. This car rental system provides an alternative solution to public transport, thus being not only eco-friendly, but also simple and reliable.
 
 The service is available to whomever has a valid driving license. Anybody who wants to register must provide a copy of it, along with his credentials and payment informations.
-Once registered, they will be allowed to search a car in a specific area, and reserve one for up to an hour before picking it up. The system will cancel the reservation in case of them failing to arrive to the car in time, will make that specific car available again and apply a fine to the driver.
-Upon arrival to the car, the driver will be able to get inside and drive it, at the cost of a per-minute fee of which he will be notified by the system through a screen on the car itself; this until the car will be left parked in a safe area, where the system will close the doors and make the vehicle available again.
+Once registered, they will be allowed to search a vehicle in a specific area, and reserve one for up to an hour before picking it up. The system will cancel the reservation in case of them failing to arrive to the vehicle in time, will make that specific vehicle available again and apply a fine to the driver.
+Upon arrival to the vehicle, the driver will be able to get inside and drive it, at the cost of a per-minute fee of which he will be notified by the system through a screen on the vehicle itself; this until the vehicle will be left parked in a safe area, where the system will close the doors and make the vehicle available again.
+
+A support team is provided by the service in case of incidents, vehicle failures and other cases of need.
+
+\subsection{Actors}
+\begin{itemize}
+	\item Guest: anyone not recognized by the system who can sign up or log in to it. He/She may look for informations about the service.
+	\item Driver: a user subscribed to the system.
+	\item Operator: a user that is working for, and subscribed by, the system.
+\end{itemize}
 
 \subsection{Goals}
 The goals of the PowerEnJoy service are the following:
 \begin{itemize}
-	\item {[G1]} Allow a driver to rent a car.
+	\item {[G1]} Allow a driver to rent a vehicle.
 	\begin{itemize}
-		\item {[G1.1]} Allow a driver to search and reserve a car.
-		\item {[G1.2]} Allow a driver to use a reserved car.
-		\item {[G1.3]} Allow a driver to park a car in a safe area, suggested by the system.
+		\item {[G1.1]} Allow a driver to search and reserve a vehicle.
+		\item {[G1.2]} Allow a driver to use a reserved vehicle.
+		\item {[G1.3]} Allow a driver to park a vehicle in a safe area, suggested by the system.
 	\end{itemize}
 	\item {[G2]} Notify the driver about every fee, discount, or sanction/fine that will be applied to him while using the service
 	\item {[G3]} Allow a guest to signup to the system.
 	\item {[G4]} Motivate a driver into car pooling.
 	\item {[G5]} Motivate a driver to a better behavior.
+	\item {[G6]} Provide an efficient and fast assistance in case of problems to vehicles.
 \end{itemize}
 
 \subsection{Definitions, acronyms, and abbreviations}
@@ -36,11 +46,11 @@ The goals of the PowerEnJoy service are the following:
 \begin{description}
 	\item[RASD:] Requirements Analysis and Specification Document.
 	\item[System:] the whole software system to be developed, comprehensive of all its parts.
-	\item[Client:] the web application component or the mobile app.
-	\item[Guest:] anyone who's not registered to the system, who's going to, or is looking for informations about the service.
-	\item[Driver:] a registered user who using the car-sharing service. Only drivers can rent a car.
-	\item[User:] anyone who subscribes to the service, the driver.
 	\item[Car pooling:] the sharing of car journeys so that more than one person travels in a car.
+	\item[User:] anyone recognized by the system. In this case drivers or operators.
+	\item[RDBMS:]
+	\item[API:]
+	\item[JVM:] 
 \end{description}
 
 \subsection{References}
