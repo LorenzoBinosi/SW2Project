@@ -70,7 +70,7 @@ The clients communicate with the server via HTTPS requests (port 443).
 
 \subsubsection{Driver registration}
 
-\paragraph{Purpose}
+\subsubsubsection{Purpose}
 Any guest can subscribe through web or mobile applications.
 
 In both cases the guest has to fill a registration form and must agree to the personal data policy according to his/her country privacy laws, otherwise the registration request shall be aborted.
@@ -80,7 +80,7 @@ must confirm his/her email address for end the registration.
 
 Once registered a guest can be recognized as a driver through the login phase.
 
-\paragraph{Scenario 1}
+\subsubsubsection{Scenario 1}
 Bob, a normal citizen without a car, has just discovered the existence of the PowerEnJoy Service and he wants to use it.
 
 He opens the homepage of PowerEnJoy website and procedes to the registration clicking on the button "sign up".
@@ -103,9 +103,94 @@ The system informs Bob that he is successfully registered.
 	\caption{Concept of the mobile registration.}
 \end{figure}
 
-\paragraph{Use case description}
+\subsubsubsection{Use case description and sequence diagram}
 
-\paragraph{Associated functional requirements}
+\begin{table}[H]
+\begin{center}
+	\begin{tabular}{| l | p{0.6\textwidth} |}
+		\hline
+		Actor & Guest \\
+		\hline
+		Goal & G3
+		\\
+		\hline
+		Input condition & The guest chooses to create a new driver account.  \\
+		\hline
+		Event Flow & \begin{enumerate}
+			\item The registration form is loaded and the guest compiles it.
+			\item The guest authorizes the personal data treatment.
+			\item The system sends a confirmation email.
+			\item The guest reads the e-mail, with his/her password, received by PowerEnJoy and clicks on the link to confirm the registration.
+		\end{enumerate}
+		\\
+		\hline
+		Output condition & The system tells the guest that he/she has been successfully registered. \\
+		\hline
+		
+		Exception &  \begin{itemize}
+			\item Some exceptions are handled notifying the guest of the problem through a dynamic message box or reloading the registration form.
+			
+			The requirements that generate these kind of exceptions are:
+			\ref{f-sameinfo},   %The username/e-mail is already used by someone else.
+			\ref{f-samelicense}, %The driving license is already used by someone else.
+			\ref{f-usrn},       %The username doesn't respect the restrictions.
+			\ref{f-wrongmail},  %The emails are not equals.
+			\ref{f-licenseexp}, %The driving license is expire
+			\ref{f-cc}.			%The payment method is not valid.
+			
+			\item Some exceptions are handled aborting the registration (all guest's data are deleted).
+			
+			The requirements that generate these kind of exceptions are:
+			\ref{f-dataTreat},   %The user doesn't authorises the data treatment.
+			\ref{f-confirm}.   %The user doesn't confirms the registration clicking on the link received via e-mail.
+		\end{itemize}
+		\\
+		\hline
+	\end{tabular}
+\end{center}
+\end{table}
+
+\begin{figure}[H]
+	\begin{center}
+		\includegraphics[width=0.8\textwidth]{sequence_diagram/Registration.jpg}
+		\caption{Sequence diagram of the registration process.}
+	\end{center}
+\end{figure}
+
+\subsubsubsection{Associated functional requirements}
+
+\begin{enumerate}
+	\item Guests must provide the following information:
+	\begin{itemize}
+		\item name
+		\item surname
+		\item username
+		\item email address
+		\item address
+		\item birthday
+		\item phone number
+		\item credit card number
+		\item credit card expire date
+		\item credit card security code
+		\item driving license ID
+		\item driving license expired date	
+	\end{itemize}
+	\item There mustn't be another user already subscribed with the same username or e-mail. \label{f-sameinfo}
+	\item There mustn't be another driver already subscribed with the same driving license. \label{f-samelicense}	
+	\item Username must match the regular expression\\``\texttt{[a-zA-Z][a-zA-Z0-9]\{2,20\}}''    \label{f-usrn}
+	\item The system accepts the email only if it is entered identically both times.\label{f-wrongmail}
+	\item The driving license mustn't be expired.
+	\label{f-licenseexp}
+	\item The payment method must be valid and not expired.
+	\label{f-cc}
+	\item If the personal data treatment is not authorised, the subscription is canceled. \label{f-dataTreat}
+	\item The system must allow the guest to abort the registration process at any time.
+	\item Email confirmation process:
+	\begin{enumerate}
+		\item The subscription ends successfully when the guest clicks on the link in the confirmation e-mail.
+		\item After one day without an answer, the guest's registration info are deleted and the guest may re-try the registration process.  \label{f-confirm}
+	\end{enumerate}
+\end{enumerate}
 
 \subsection{Performance Requirements}
 
