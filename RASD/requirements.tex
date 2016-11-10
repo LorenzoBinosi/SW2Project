@@ -19,13 +19,13 @@ The user interfaces must satisfy the following UI constraints:
 		\begin{enumerate}
 			\item The client applications must have an UI that is accessible to disabled people.
 			\item The interface must offer the possibility to choose the language used at all times.
-			\item The first screen must ask the user to login in order to begin operations.
+			\item The first screen must ask the guest to log in or sign up in order to begin operations.
 			\item UI controls and views must be suitable for the input interface and the screen size.
 		\end{enumerate}
-	\item Car application
+	\item Vehicle application
 	\begin{enumerate}
-		\item Radio and navigation applications must be implemented.
-		\item A Label on the screen will always notify the driver about the current cost of the ride.
+		\item Radio and navigator applications must be implemented.
+		\item A Label on the screen will always notify the driver about the current charges.
 	\end{enumerate}
 	\item Server back-end
 	\begin{enumerate}
@@ -83,22 +83,24 @@ Once registered a guest can be recognized as a driver through the login phase.
 \subsubsubsection{Scenario 1}
 Bob, a normal citizen without a car, has just discovered the existence of the PowerEnJoy Service and he wants to use it.
 
-He opens the homepage of PowerEnJoy website and procedes to the registration clicking on the button "sign up".
+He opens the homepage of PowerEnJoy website and procedes to the registration clicking on the button "Signup".
 
 He gives all the information required and authorises the personal data treatment. 
 
-The system verifies all the informations that bob submitted to the form and sends a confirmation mail to him.
+The system verifies all the information that bob submitted to the form and sends a confirmation mail to him.
 
 Bob checks his mailbox, opens the mail and clicks on "Confirm email". He is also notified about his current password.
 
 The system informs Bob that he is successfully registered.
 
 \begin{figure}[H]
+	\centering
 	\includegraphics[width=\textwidth]{mockup/WebRegistration.png}
 	\caption{Concept of the registration webpage.}
 \end{figure}
 
 \begin{figure}[H]
+	\centering
 	\includegraphics[width=\textwidth]{mockup/MobileRegistration.png}
 	\caption{Concept of the mobile registration.}
 \end{figure}
@@ -119,6 +121,7 @@ The system informs Bob that he is successfully registered.
 		Event Flow & \begin{enumerate}
 			\item The registration form is loaded and the guest compiles it.
 			\item The guest authorizes the personal data treatment.
+			\item The guest clicks on "Confirm".
 			\item The system sends a confirmation email.
 			\item The guest reads the e-mail, with his/her password, received by PowerEnJoy and clicks on the link to confirm the registration.
 		\end{enumerate}
@@ -152,7 +155,8 @@ The system informs Bob that he is successfully registered.
 
 \begin{figure}[H]
 	\begin{center}
-		\includegraphics[width=0.8\textwidth]{sequence_diagram/Registration.jpg}
+		\centering
+		\includegraphics[height=0.9\textheight, keepaspectratio]{sequence_diagram/Registration.jpg}
 		\caption{Sequence diagram of the registration process.}
 	\end{center}
 \end{figure}
@@ -191,6 +195,187 @@ The system informs Bob that he is successfully registered.
 		\item After one day without an answer, the guest's registration info are deleted and the guest may re-try the registration process.  \label{f-confirm}
 	\end{enumerate}
 \end{enumerate}
+
+\subsubsection{Search and reservation}
+
+\subsubsubsection{Purpose}
+Any logged driver, in possession of a valid driving license and a regular status of payments, can search and reserve a vehicle through the web application or the mobile app.
+
+The system shows him/her a map, of the area nearby the driver, with the available vehicles as colorful markers. There are 3 diffent colors for the markers:
+\begin{itemize}
+	\item red: 50-75\% of the battery empty
+	\item yellow: 25-50\% of the battery empty
+	\item green: 0-25\% of the battery empty
+\end{itemize}
+The driver can also search vehicles nearby from a given address through a search box on the page.
+
+Once the driver chooses the vehicle he can click on its marker and a new dynamic frame will show more information about the vehicle and the possibility to reserve it clicking on the button "Reserve".
+The system notifies the driver that he/she succesfully reserved a vehicle.
+
+Vehicles with more than 75\% of the battery empty require assistance from the operators to be recharged and the system won't show them as available. 
+
+
+\subsubsubsection{Scenario 1}
+Bob logs in the PowerEnJoy application through his web browser. He wants to reserve a vehicle because an important meeting is waiting for him. The application shows only a vehicle with a red icon within 1km from him. Bob has to hurry up so he clicks on the red icon and than on the button "Reserve".
+
+\subsubsubsection{Scenario 2}
+Alice logs in the PowerEnJoy application through his mobile phone. She wants to reserve a vehicle but everytime she clicks on the button "Reserve" of an available vehicle the system stops her showing a dynamic message box that remember her to solve her pending payments. Once alice solves her pending payments she will be able to reserve an available vehicle.
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=\textwidth]{mockup/WebSearch.png}
+	\caption{Concept of the search and reservation webpage.}
+\end{figure}
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=\textwidth]{mockup/MobileSearch.png}
+	\caption{Concept of the mobile search and reservation.}
+\end{figure}
+
+\subsubsubsection{Use case description and sequence diagram}
+
+\begin{table}[H]
+	\begin{center}
+		\begin{tabular}{| l | p{0.6\textwidth} |}
+			\hline
+			Actor & Driver \\
+			\hline
+			Goal & G1.1
+			\\
+			\hline
+			Input condition & The driver is already logged and chooses to reserve a vehicle.  \\
+			\hline
+			Event Flow & \begin{enumerate}
+				\item The driver opens the home page and search an available vehicle.
+				\item Once choosen, the driver clicks on "Reserve".
+			\end{enumerate}
+			\\
+			\hline
+			Output condition & The system notifies the driver that he/she succesfully reserved the choosen vehicle \\
+			\hline
+			
+			Exception &  \begin{itemize}
+				\item Some exceptions are handled notifying the driver of the problem through a dynamic message box.				
+				The requirements that generate these kind of exceptions are:
+				\ref{f-expired},    %The driving license is expired.
+				\ref{f-regular},    %Status of payments is not regular.
+				\ref{f-more},       %The driver has already reserved one vehicle.				
+				\item No vehicle is available in the driver's area.
+				\end{itemize}
+			\\
+			\hline
+		\end{tabular}
+	\end{center}
+\end{table}
+
+\begin{figure}[H]
+	\begin{center}
+		\centering
+		\includegraphics[height=0.9\textheight, keepaspectratio]{sequence_diagram/SearchReservation.png}
+		\caption{Sequence diagram of search and reservation process.}
+	\end{center}
+\end{figure}
+
+\subsubsubsection{Associated functional requirements}
+
+\begin{enumerate}
+	\item The driver must be logged in order to search and reserved a vehicle.
+	\item The system must show to the driver a map of the area within a range of 1km from the driver, or from a given address, with the available vehicles.
+	\item Driver's driving license mustn't be expired. \label{f-expired}
+	\item Driver's status of payments must be regular. \label{f-regular}
+	\item The driver mustn't reserve more than one vehicle at time. \label{f-more}	
+	\item The system must show to the driver a map of the area 
+	\item The system must prevent the driver from reserving a vehicle with more than 75\% of the battery empty.
+	\item The system must prevent the driver from reserving a vehicle already reserved by another driver.
+	\item The system must prevent the driver from reserving out of service vehicles.
+\end{enumerate}
+
+\subsubsection{Vehicle use}
+
+\subsubsubsection{Purpose}
+The driver can use the vehicle after he/she reserved it.
+
+When the driver is nearby the reserved vehicle he/she can click on the button "I'm nearby" and the system will check the GPS signal of both the vehicle and the driver's mobile phone, to assess if they are within a 25 meters range. If they are within that range, the system will unlock the vehicle and the driver can enter. This operation is available only through the mobile application.
+
+As soon as the engine ignites, the system starts charging the driver for a given amount of money per minute; the driver is notified of the current charges through a screen on the vehicle.
+
+\subsubsubsection{Scenario 1}
+Bob has already reserved a vehicle and he is going to pick it up. He is far about 50 meters from the vehicle and he clicks on the button "I'm nearby" of the mobile application. The system checks the GPS signal of both the vehicle and the Bob's mobile phone, and it doesn't unlock the vehicle notifing Bob that he's too far from it.
+
+Once Bob is in front of the vehicle he clicks again on "I'm nearby", the system unlocks the vehicle and he finally enter.
+
+Bob starts the vehicle and the system notifies him about his current charges thanks to the vehicle application. He can start his ride.
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[height=20cm]{mockup/MobileUnlock.png}
+	\caption{Concept of the mobile vehicle unlock page.}
+\end{figure}
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=\textwidth]{mockup/VehicleApplication.png}
+	\caption{Concept of the vehicle application.}
+\end{figure}
+
+\begin{table}[H]
+	\begin{center}
+		\begin{tabular}{| l | p{0.6\textwidth} |}
+			\hline
+			Actor & Driver \\
+			\hline
+			Goal & G1.2
+			\\
+			\hline
+			Input condition & The driver has already reserved a vehicle and he/she is going to pick it up.  \\
+			\hline
+			Event Flow & \begin{enumerate}
+				\item The driver is within 25 meters from the vehicole.
+				\item The driver opens the reservation mobile page, through a section of the homepage, and clicks on "I'm nearby".
+				\item The system unlocks the vehicle.
+				\item The driver enters and starts the vehicle. 
+			\end{enumerate}
+			\\
+			\hline
+			Output condition & The driver starts his/her ride and the system keeps notifying him/her about his/her current charges. \\
+			\hline
+			
+			Exception &  \begin{itemize}
+				\item Some exceptions are handled notifying the driver of the problem through a dynamic message box.				
+				The requirements that generate these kind of exceptions are:
+				\ref{f-reservationcanc},    %It passed more than one hour from the reservation
+				\ref{f-nearby},    %The driver isn't nearby.			
+			\end{itemize}
+			\\
+			\hline
+		\end{tabular}
+	\end{center}
+\end{table}
+
+\begin{figure}[H]
+	\begin{center}
+		\centering
+		\includegraphics[height=0.9\textheight, keepaspectratio]{sequence_diagram/Unlock.png}
+		\caption{Sequence diagram of the vehicle use process.}
+	\end{center}
+\end{figure}
+
+\subsubsubsection{Associated functional requirements}
+
+\begin{enumerate}
+	\item It mustn't pass more than one hour from the reservation to the 
+	unlocking of the vehicle. \label{f-reservationcanc}
+	\item The driver must be within 25 meters from the vehicle to unlock it. \label{f-nearby}
+\end{enumerate}
+
+\subsubsection{Vehicle parking}
+
+\subsubsubsection{Purpose}
+
+Once the driver has finished to use the vehicle he/she should be able to park it in safe areas provided by the system. These areas are displayed by the navigator vehicle application.
+
+
 
 \subsection{Performance Requirements}
 
