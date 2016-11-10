@@ -19,7 +19,8 @@ The user interfaces must satisfy the following UI constraints:
 		\begin{enumerate}
 			\item The client applications must have an UI that is accessible to disabled people.
 			\item The interface must offer the possibility to choose the language used at all times.
-			\item The first screen must ask the guest to log in or sign up in order to begin operations.
+			\item The first screen(homepage) must ask the guest to log in or sign up in order to begin operations.
+			\item Once logged, the homepage must show the vehicle search page.
 			\item UI controls and views must be suitable for the input interface and the screen size.
 		\end{enumerate}
 	\item Vehicle application
@@ -102,7 +103,7 @@ The system informs Bob that he is successfully registered.
 \begin{figure}[H]
 	\centering
 	\includegraphics[width=\textwidth]{mockup/MobileRegistration.png}
-	\caption{Concept of the mobile registration.}
+	\caption{Concept of the mobile registration page.}
 \end{figure}
 
 \subsubsubsection{Use case description and sequence diagram}
@@ -183,7 +184,7 @@ The system informs Bob that he is successfully registered.
 	\item There mustn't be another driver already subscribed with the same driving license. \label{f-samelicense}	
 	\item Username must match the regular expression\\``\texttt{[a-zA-Z][a-zA-Z0-9]\{2,20\}}''    \label{f-usrn}
 	\item The system accepts the email only if it is entered identically both times.\label{f-wrongmail}
-	\item The driving license mustn't be expired.
+	\item The driving license must be valid and not expired.
 	\label{f-licenseexp}
 	\item The payment method must be valid and not expired.
 	\label{f-cc}
@@ -191,7 +192,7 @@ The system informs Bob that he is successfully registered.
 	\item The system must allow the guest to abort the registration process at any time.
 	\item Email confirmation process:
 	\begin{enumerate}
-		\item The subscription ends successfully when the guest clicks on the link in the confirmation e-mail.
+		\item The subscription ends successfully when the guest clicks on the link in the confirmation email. The system will provide, through the mobile or the web application, a password for the new driver.
 		\item After one day without an answer, the guest's registration info are deleted and the guest may re-try the registration process.  \label{f-confirm}
 	\end{enumerate}
 \end{enumerate}
@@ -216,7 +217,7 @@ Vehicles with more than 75\% of the battery empty require assistance from the op
 
 
 \subsubsubsection{Scenario 1}
-Bob logs in the PowerEnJoy application through his web browser. He wants to reserve a vehicle because an important meeting is waiting for him. The application shows only a vehicle with a red icon within 1km from him. Bob has to hurry up so he clicks on the red icon and than on the button "Reserve".
+Bob logs in the PowerEnJoy application through his web browser. He wants to reserve a vehicle because an important meeting is waiting for him. Once logged the system redirects him to the homepage that now shows the vehicle search page. Bob realizes there's only a vehicle with a red marker within 1km from him. Bob has to hurry up so he clicks on the red marker and than on the button "Reserve".
 
 \subsubsubsection{Scenario 2}
 Alice logs in the PowerEnJoy application through his mobile phone. She wants to reserve a vehicle but everytime she clicks on the button "Reserve" of an available vehicle the system stops her showing a dynamic message box that remember her to solve her pending payments. Once alice solves her pending payments she will be able to reserve an available vehicle.
@@ -224,13 +225,13 @@ Alice logs in the PowerEnJoy application through his mobile phone. She wants to 
 \begin{figure}[H]
 	\centering
 	\includegraphics[width=\textwidth]{mockup/WebSearch.png}
-	\caption{Concept of the search and reservation webpage.}
+	\caption{Concept of the search webpage.}
 \end{figure}
 
 \begin{figure}[H]
 	\centering
 	\includegraphics[width=\textwidth]{mockup/MobileSearch.png}
-	\caption{Concept of the mobile search and reservation.}
+	\caption{Concept of the mobile search page.}
 \end{figure}
 
 \subsubsubsection{Use case description and sequence diagram}
@@ -259,8 +260,7 @@ Alice logs in the PowerEnJoy application through his mobile phone. She wants to 
 				\item Some exceptions are handled notifying the driver of the problem through a dynamic message box.				
 				The requirements that generate these kind of exceptions are:
 				\ref{f-expired},    %The driving license is expired.
-				\ref{f-regular},    %Status of payments is not regular.
-				\ref{f-more},       %The driver has already reserved one vehicle.				
+				\ref{f-regular},    %Status of payments is not regular.			
 				\item No vehicle is available in the driver's area.
 				\end{itemize}
 			\\
@@ -281,14 +281,20 @@ Alice logs in the PowerEnJoy application through his mobile phone. She wants to 
 
 \begin{enumerate}
 	\item The driver must be logged in order to search and reserved a vehicle.
-	\item The system must show to the driver a map of the area within a range of 1km from the driver, or from a given address, with the available vehicles.
-	\item Driver's driving license mustn't be expired. \label{f-expired}
-	\item Driver's status of payments must be regular. \label{f-regular}
-	\item The driver mustn't reserve more than one vehicle at time. \label{f-more}	
-	\item The system must show to the driver a map of the area 
-	\item The system must prevent the driver from reserving a vehicle with more than 75\% of the battery empty.
-	\item The system must prevent the driver from reserving a vehicle already reserved by another driver.
-	\item The system must prevent the driver from reserving out of service vehicles.
+	\item The system must show to the driver a map of the area, within a range of 1km from him/her or from a given address, with the available vehicles.
+	\item The system must provide more information about an availabe vehicle. These information are
+		\begin{itemize}
+			\item license plate
+			\item address
+			\item battery level
+		\end{itemize}
+	\item The system must allow a driver to reserve an available vehicle.
+	\item In order to reserve a vehicle the driver's driving license mustn't be expired. \label{f-expired}
+	\item In order to reserve a vehicle the driver's status of payments must be regular. \label{f-regular}
+	\item The system must prevent the driver from reserving more than one vehicle at time.
+	\item The system must prevent the driver from reserving a vehicle already reserved, or in use, by another driver.
+	\item The system must prevent the driver from reserving an out of service or a discharged vehicle.
+	\item After a reservation is 
 \end{enumerate}
 
 \subsubsection{Vehicle use}
