@@ -10,13 +10,14 @@ All the interfaces shall be intuitive and user friendly. They should not require
 
 \subsubsection{Hardware Interfaces}
 
-The main hardware interface is a dedicated embedded system, installed in any vehicles, provided of several plugins and a touchscreen display for interact with the car application.
-Thanks to this embedded architecture the system will be also notified about the status of the vehicle and its location, even if the main battery is completely discharged.
+All cars are provided with a dedicated embedded system connected to several plugins and a touchscreen display used for interact with the lele application.
+Thanks to this embedded architecture the system will be also notified about the status of the car and its location, even if the main battery is completely discharged.
 
 \subsubsection{Software Interfaces}
+
 Mobile application and web application are supposed to be friendly with any device, in particular the first one must be developed for iOS and Android, and the second one will work on any operating system that support a web browser.
 
-On the embedded system of any vehicles is installed a JVM that runs a Java application that provides informations to the driver and to the system.
+On the embedded system of any cars is installed a JVM that runs a Java application that provides informations to the driver and to the system.
 
 The back-end server stores its data in a RDBMS and can run on every platform that supports the JVM. It also provides different APIs for different functions that a user, or a guest, can do through client applications. 
 
@@ -37,71 +38,76 @@ The following lists reassume what anyone can do interacting with the system.
 \begin{itemize}
 	\item Guests can:
 	\begin{itemize}
-		\item create an account (signup to the system)
-		\item login
+		\item create an account (sign up to the system)
+		\item log in
 	\end{itemize}
 	\item Drivers can:
 	\begin{itemize}
 		\item edit profile informations
 		\item delete their account
-		\item rent a vehicle
-		\item check their status
-		\item access to the vehicle rental log book
-	\end{itemize}
-	\item Operators can:
-	\begin{itemize}
-		\item solve vehicle problems
+		\item rent a car
+		\item access to the car rental log book
 	\end{itemize}
 \end{itemize}
 
 \subsection{User Characteristics}
-The two kinds of users are drivers and operators. Only drivers can registered to the system independently, while operators must obtain a contract of employment with the PowerEnJoy service to access as operators. The system provides special accounts for them and they would be able to access to their job functionalities through the same, web and mobile applications, of drivers. They will be recognized by the system and a special view will be provided to them.
 
-It's granted that both kinds of users have access to Internet.
+The only users of the system are drivers. Driver must provide a valid driving license and a valid payment method in order to register to the service.
+
+It's granted that drivers have access to Internet.
 
 \subsection{Constraints}
 
 \subsubsection{Regulatory policies}
 Any driver must follow current traffic and regulamentation laws of the area where the system is operating its car-sharing service. Driving licenses from other countries must be compatible with the laws of the country where the service is operating.
 
-Aggiungere regolamentazioni di lavoro
-
 The system must ask the driver for the permission to acquire, store and process personal data and web cookies.
+
+\subsubsection{Interfaces with other services}
+
+PowerEnJoy ha bisogno di interfacciarsi con un servizio per risolvere tutti quei problemi che possono affliggere un veicolo o che possono generarsi durante l'utilizzo di essi.
+Questi problemi possono essere:
+\begin{itemize}
+	\item rottura di uno o piú componenti del veicolo
+	\item batteria scarica per piú del 75\%
+	\item incidenti
+	\item comunicazione mancante tra veicolo e sistema.
+\end{itemize}
+Il servizio delegato a risolvere questa tipologia di problemi, riceve tutte le segnalazioni che rientrano nei casi indicati precedentemente, e provvede a risolverli nel minor tempo possibile comunicandolo tempestivamente a PowerEnJoy.
 
 \subsubsection{Hardware limitations}
 The service requires an Internet connection fast enought to guarantee a fast response from the server and hardware architectures that can run properly the client side applications (web and mobile apps).
 
 \subsubsection{Reliability requirements}
-The system must have a minimum availability of 98\%.
+The system must have a minimum availability of 99\%.
 
 \subsubsection{Parallel operations}
 The system must support parallel operations from different drivers that may require access to the database.
+
+\subsection{Domain Properties}
+
+It suppose that the following properties hold in the analyzed domain
+\begin{itemize}
+	\item Once a reservation is done, it cannot be canceled by the driver.
+	\item Driver's payment method and driver's driving license must be valid in order to use the rental function.
+\end{itemize}
 
 \subsection{Assumptions and Dependencies}
 
 It assumes that:
 \begin{itemize}
 	\item All users have access to a stable Internet connection.
-	\item All drivers have a valid credit card.
-	\item The GPS on the vehicle is working correctly.
-	\item The driver specifies the correct location, if its GPS is not available.
-	\item Vehicles model is the same, so any cars will have the same number of seats.
-	\item Vehicle's sensors can detect correctly the number of passengers.
-	\item The System applies a correct discount at the end of the renting and than charges the drivers directly via credit card.
-	\item The System provides to make a vehicle available again if will pass more than one hour from the reservation time.
-	\item The number of vehicles is sufficient to satisfy the demand in each area.
-	\item Any fine taken by a driver will be paid by the system that will charge him/her for the same fine plus an additional fine provided by the system.
+	\item Cars model is the same, so any cars will have the same number of seats.
+	\item The number of cars is sufficient to satisfy the demand in each area.
 	\item All the areas where the system is operating are covered by a reliable 3G/4G connection.
-	\item Operators are arranged in convenient locations that allow them to be efficient and fast when recovering and charging vehicles.
 	\item The system is operating in an area composed by a city or agglomerated cities, of the same country, closed each other.
-	\item The application on the vehicle will automatically notify the system about incidents, vehicle failures or low charges. If the application will stop to dialogate with the server, the system will considered it like a notification of vehicle failure in the last position assumed by the vehicle.
 \end{itemize}
 
 \subsection{Future Extensions}
 The system will be implemented foreseeing the possibility of further extensions, for example:
 
 \begin{enumerate}
-	\item If a vehicle is left at special parking areas where they can be recharged and the driver take care of pluggin the vehicle into the power grid, the system applies a discount of 30\% on the last ride.
-	\item If a vehicle is left at more than 3 KM from the nearest power grid station or with more than 80\% of the battery empty, the system charges 30\% more on the last ride to compensate to compensate for the cost required to re-charge the vehicle on-site.
-	\item If the driver enables the money saving option, he/she can input his/her final destination and the system provides information about the station where to leave the vehicle to get a discount. This station is determinate to ensure a uniform distribution of vehicles in the city and depends both on the destination of the driver and on the availability of power plugs at the selected station.
+	\item If a car is left at special parking areas where they can be recharged and the driver take care of pluggin the car into the power grid, the system applies a discount of 30\% on the last ride.
+	\item If a car is left at more than 3 KM from the nearest power grid station or with more than 80\% of the battery empty, the system charges 30\% more on the last ride to compensate to compensate for the cost required to re-charge the car on-site.
+	\item If the driver enables the money saving option, he/she can input his/her final destination and the system provides information about the station where to leave the car to get a discount. This station is determinate to ensure a uniform distribution of cars in the city and depends both on the destination of the driver and on the availability of power plugs at the selected station.
 \end{enumerate}

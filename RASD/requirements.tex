@@ -19,14 +19,19 @@ The user interfaces must satisfy the following UI constraints:
 		\begin{enumerate}
 			\item The client applications must have an UI that is accessible to disabled people.
 			\item The interface must offer the possibility to choose the language used at all times.
-			\item The first screen(homepage) must ask the guest to log in or sign up in order to begin operations.
-			\item Once logged, the homepage must show the vehicle search page.
+			\item The first screen (homepage) must ask the guest to log in or sign up in order to begin operations.
+			\item Once logged, the homepage must show the car search page. It also includes one button for log out and buttons that open different pages. These pages are:
+				\begin{itemize}
+					\item reservation page; where the driver can mainly notify the system about his/her position in order to unlock the car.
+					\item profile management page; where the driver can manage his/her credentials or update his/her driving license and payment method.
+					\item past cars rent page; where the driver can manage his/her credentials or update his/her driving license and payment method.
+				\end{itemize}
 			\item UI controls and views must be suitable for the input interface and the screen size.
 		\end{enumerate}
-	\item Vehicle application
+	\item Car application
 	\begin{enumerate}
-		\item Radio and navigator applications must be implemented.
-		\item A Label on the screen will always notify the driver about the current charges.
+		\item Radio and GPS navigator applications must be implemented.
+		\item Always notifies the driver about his/her current charges.
 	\end{enumerate}
 	\item Server back-end
 	\begin{enumerate}
@@ -34,14 +39,14 @@ The user interfaces must satisfy the following UI constraints:
 	\end{enumerate}
 	
 \subsubsection{Hardware interfaces}
-The embedded system of any vehicles must be provided of	
+The embedded system of any cars must be provided of	
 \begin{itemize}
 	\item a 7" touchscreen display
 	\item a GPS device
 	\item sensors that check if all the parts of the car are working correctly
 	\item sensors that check how many passengers are on the car
 	\item a 4G router for a stable Internet connection
-	\item a secondary battery used only if the main battery is discharged. The vehicle can't use this battery
+	\item a secondary battery used only if the main battery is discharged. The car can't use this battery
 \end{itemize}
 
 \subsubsection{Software interfaces}
@@ -60,7 +65,7 @@ The required operating systems for the mobile application atr:
 	\item Android 6.0 or more recent
 \end{itemize}
 
-For a detailed specification of the programmatic interfaces, see \autoref{sec:api}.
+A set of APIs for the several functionalities must be provided by the system
 	
 \subsubsection{Communications interfaces}
 The clients communicate with the server via HTTPS requests (port 443).
@@ -74,36 +79,35 @@ The clients communicate with the server via HTTPS requests (port 443).
 \subsubsubsection{Purpose}
 Any guest can subscribe through web or mobile applications.
 
-In both cases the guest has to fill a registration form and must agree to the personal data policy according to his/her country privacy laws, otherwise the registration request shall be aborted.
+In both cases the guest has to fill a registration form and must agree to the personal data policy according to his/her country privacy laws, otherwise the registration request will be aborted.
 
-As soon as the guest has submitted all the data, the system verifies the consistency of the information and a confirmation mail with a password is sent to the email address indicated in the registration form. The guest 
-must confirm his/her email address for end the registration.
+As soon as the guest has submitted all the data, the system verifies the consistency of the information and a confirmation mail with a password is sent to the email address indicated in the registration form. The guest must confirm his/her email address to end the registration.
 
-Once registered a guest can be recognized as a driver through the login phase.
+Once registered a guest can be recognized as a driver by logging in.
 
 \subsubsubsection{Scenario 1}
-Bob, a normal citizen without a car, has just discovered the existence of the PowerEnJoy Service and he wants to use it.
+Bob, a normal citizen without a car, has just discovered the existence of the PowerEnJoy service and wants to use it.
 
-He opens the homepage of PowerEnJoy website and procedes to the registration clicking on the button "Signup".
+He opens the homepage of PowerEnJoy website and proceeds to register by clicking on the button "Sign up".
 
-He gives all the information required and authorises the personal data treatment. 
+He fills in all the information required and authorises the personal data treatment. 
 
-The system verifies all the information that bob submitted to the form and sends a confirmation mail to him.
+The system verifies all the information that bob submitted in the form and sends him a confirmation mail.
 
-Bob checks his mailbox, opens the mail and clicks on "Confirm email". He is also notified about his current password.
+Bob checks his mailbox, opens the email and clicks on "Confirm email". He is also notified about his current password.
 
-The system informs Bob that he is successfully registered.
+The system then informs Bob that he is successfully registered.
 
 \begin{figure}[H]
 	\centering
 	\includegraphics[width=\textwidth]{mockup/WebRegistration.png}
-	\caption{Concept of the registration webpage.}
+	\caption{Concept for the registration webpage.}
 \end{figure}
 
 \begin{figure}[H]
 	\centering
 	\includegraphics[width=\textwidth]{mockup/MobileRegistration.png}
-	\caption{Concept of the mobile registration page.}
+	\caption{Concept for the mobile registration page.}
 \end{figure}
 
 \subsubsubsection{Use case description and sequence diagram}
@@ -124,7 +128,7 @@ The system informs Bob that he is successfully registered.
 			\item The guest authorizes the personal data treatment.
 			\item The guest clicks on "Confirm".
 			\item The system sends a confirmation email.
-			\item The guest reads the e-mail, with his/her password, received by PowerEnJoy and clicks on the link to confirm the registration.
+			\item The guest reads the e-mail containing his/her password, received by PowerEnJoy and clicks on the link to confirm the registration.
 		\end{enumerate}
 		\\
 		\hline
@@ -132,7 +136,7 @@ The system informs Bob that he is successfully registered.
 		\hline
 		
 		Exception &  \begin{itemize}
-			\item Some exceptions are handled notifying the guest of the problem through a dynamic message box or reloading the registration form.
+			\item Some exceptions are handled by notifying the guest of the problem through a dynamic message box or reloading the registration form.
 			
 			The requirements that generate these kind of exceptions are:
 			\ref{f-sameinfo},   %The username/e-mail is already used by someone else.
@@ -172,15 +176,15 @@ The system informs Bob that he is successfully registered.
 		\item username
 		\item email address
 		\item address
-		\item birthday
+		\item day of birth
 		\item phone number
 		\item credit card number
-		\item credit card expire date
+		\item credit card date of expire
 		\item credit card security code
 		\item driving license ID
-		\item driving license expired date	
+		\item driving license date of expire	
 	\end{itemize}
-	\item There mustn't be another user already subscribed with the same username or e-mail. \label{f-sameinfo}
+	\item There mustn't be another user already subscribed with the same username and/or email. \label{f-sameinfo}
 	\item There mustn't be another driver already subscribed with the same driving license. \label{f-samelicense}	
 	\item Username must match the regular expression\\``\texttt{[a-zA-Z][a-zA-Z0-9]\{2,20\}}''    \label{f-usrn}
 	\item The system accepts the email only if it is entered identically both times.\label{f-wrongmail}
@@ -192,7 +196,7 @@ The system informs Bob that he is successfully registered.
 	\item The system must allow the guest to abort the registration process at any time.
 	\item Email confirmation process:
 	\begin{enumerate}
-		\item The subscription ends successfully when the guest clicks on the link in the confirmation email. The system will provide, through the mobile or the web application, a password for the new driver.
+		\item The subscription ends successfully when the guest clicks on the link in the confirmation email. It must contain a password for the new driver.
 		\item After one day without an answer, the guest's registration info are deleted and the guest may re-try the registration process.  \label{f-confirm}
 	\end{enumerate}
 \end{enumerate}
@@ -200,38 +204,38 @@ The system informs Bob that he is successfully registered.
 \subsubsection{Search and reservation}
 
 \subsubsubsection{Purpose}
-Any logged driver, in possession of a valid driving license and a regular status of payments, can search and reserve a vehicle through the web application or the mobile app.
+Any logged driver, in possession of a valid driving license and a regular status of payments, can search and reserve a car through the web application or the mobile app.
 
-The system shows him/her a map, of the area nearby the driver, with the available vehicles as colorful markers. There are 3 diffent colors for the markers:
+The system shows him/her a map, of the area nearby the driver, with the available cars as colorful markers. There are 3 diffent colors for the markers:
 \begin{itemize}
 	\item red: 50-75\% of the battery empty
 	\item yellow: 25-50\% of the battery empty
 	\item green: 0-25\% of the battery empty
 \end{itemize}
-The driver can also search vehicles nearby from a given address through a search box on the page.
+The driver can also search cars nearby from a given address through a search box on the page.
 
-Once the driver chooses the vehicle he can click on its marker and a new dynamic frame will show more information about the vehicle and the possibility to reserve it clicking on the button "Reserve".
-The system notifies the driver that he/she succesfully reserved a vehicle.
+Once the driver chooses the car he can click on its marker and a new dynamic frame will show more information about the car and the possibility to reserve it clicking on the button "Reserve".
+The system notifies the driver that he/she succesfully reserved a car.
 
-Vehicles with more than 75\% of the battery empty require assistance from the operators to be recharged and the system won't show them as available. 
+cars with more than 75\% of the battery empty require assistance from the operators to be recharged and the system won't show them as available. 
 
 
 \subsubsubsection{Scenario 1}
-Bob logs in the PowerEnJoy application through his web browser. He wants to reserve a vehicle because an important meeting is waiting for him. Once logged the system redirects him to the homepage that now shows the vehicle search page. Bob realizes there's only a vehicle with a red marker within 1km from him. Bob has to hurry up so he clicks on the red marker and than on the button "Reserve".
+Bob logs in the PowerEnJoy application through his web browser. He wants to reserve a car because an important meeting is waiting for him. Once logged the system redirects him to the homepage that now shows the car search page. Bob realizes there's only a car with a red marker within 1km from him. Bob has to hurry up so he clicks on the red marker and than on the button "Reserve".
 
 \subsubsubsection{Scenario 2}
-Alice logs in the PowerEnJoy application through his mobile phone. She wants to reserve a vehicle but everytime she clicks on the button "Reserve" of an available vehicle the system stops her showing a dynamic message box that remember her to solve her pending payments. Once alice solves her pending payments she will be able to reserve an available vehicle.
+Alice logs in the PowerEnJoy application through his mobile phone. She wants to reserve a car but everytime she clicks on the button "Reserve" of an available car the system stops her showing a dynamic message box that remember her to solve her pending payments. Once alice solves her pending payments she will be able to reserve an available car.
 
 \begin{figure}[H]
 	\centering
 	\includegraphics[width=\textwidth]{mockup/WebSearch.png}
-	\caption{Concept of the search webpage.}
+	\caption{Concept for the search webpage.}
 \end{figure}
 
 \begin{figure}[H]
 	\centering
 	\includegraphics[width=\textwidth]{mockup/MobileSearch.png}
-	\caption{Concept of the mobile search page.}
+	\caption{Concept for the mobile search page.}
 \end{figure}
 
 \subsubsubsection{Use case description and sequence diagram}
@@ -245,23 +249,23 @@ Alice logs in the PowerEnJoy application through his mobile phone. She wants to 
 			Goal & G1.1
 			\\
 			\hline
-			Input condition & The driver is already logged and chooses to reserve a vehicle.  \\
+			Input condition & The driver is already logged and chooses to reserve a car.  \\
 			\hline
 			Event Flow & \begin{enumerate}
-				\item The driver opens the home page and search an available vehicle.
+				\item The driver opens the home page and search an available car.
 				\item Once choosen, the driver clicks on "Reserve".
 			\end{enumerate}
 			\\
 			\hline
-			Output condition & The system notifies the driver that he/she succesfully reserved the choosen vehicle \\
+			Output condition & The system notifies the driver that he/she succesfully reserved the choosen car \\
 			\hline
 			
 			Exception &  \begin{itemize}
-				\item Some exceptions are handled notifying the driver of the problem through a dynamic message box.				
+				\item Some exceptions are handled by notifying the driver of the problem through a dynamic message box.				
 				The requirements that generate these kind of exceptions are:
 				\ref{f-expired},    %The driving license is expired.
-				\ref{f-regular},    %Status of payments is not regular.			
-				\item No vehicle is available in the driver's area.
+				\ref{f-regular}.    %Status of payments is not regular.			
+				\item No car is available in the driver's area.
 				\end{itemize}
 			\\
 			\hline
@@ -279,50 +283,52 @@ Alice logs in the PowerEnJoy application through his mobile phone. She wants to 
 
 \subsubsubsection{Associated functional requirements}
 
+Interactions between system and driver occour through car or mobile applications.
+
 \begin{enumerate}
-	\item The driver must be logged in order to search and reserved a vehicle.
-	\item The system must show to the driver a map of the area, within a range of 1km from him/her or from a given address, with the available vehicles.
-	\item The system must provide more information about an availabe vehicle. These information are
+	\item The driver must be logged in order to search and reserved a car.
+	\item The system must show to the driver a map of the area, within a range of 1km from him/her or from a given address, with the available cars.
+	\item The system must provide more information about an availabe car. These information are
 		\begin{itemize}
 			\item license plate
 			\item address
 			\item battery level
 		\end{itemize}
-	\item The system must allow a driver to reserve an available vehicle.
-	\item In order to reserve a vehicle the driver's driving license mustn't be expired. \label{f-expired}
-	\item In order to reserve a vehicle the driver's status of payments must be regular. \label{f-regular}
-	\item The system must prevent the driver from reserving more than one vehicle at time.
-	\item The system must prevent the driver from reserving a vehicle already reserved, or in use, by another driver.
-	\item The system must prevent the driver from reserving an out of service or a discharged vehicle.
-	\item After a reservation is 
+	\item In order to reserve a car the driver's driving license mustn't be expired. \label{f-expired}
+	\item In order to reserve a car the driver's status of payments must be regular. \label{f-regular}
+	\item The system must prevent the driver from reserving more than one car at time.
+	\item The system must prevent the driver from reserving a car already reserved, or in use, by another driver.
+	\item The system must prevent the driver from reserving a "Out\_of\_service" car.
+	\item After a reservation is completed, the system automatically tags the reserved car as "Reserved".
+	\item After a reservation is completed, the system automatically redirects the driver to the reservation page fullfilled with the reservation information.
 \end{enumerate}
 
-\subsubsection{Vehicle use}
+\subsubsection{Car use}
 
 \subsubsubsection{Purpose}
-The driver can use the vehicle after he/she reserved it.
+The driver can use the car after he/she reserved it.
 
-When the driver is nearby the reserved vehicle he/she can click on the button "I'm nearby" and the system will check the GPS signal of both the vehicle and the driver's mobile phone, to assess if they are within a 25 meters range. If they are within that range, the system will unlock the vehicle and the driver can enter. This operation is available only through the mobile application.
+When the driver is nearby the reserved car he/she can click on the button "I'm nearby" of the mobile reservation page and the system will check the GPS signal of both the car and the driver's mobile phone, to assess if they are within a 25 meters range. If they are within that range, the system will unlock the car and the driver can enter. This operation is available only through the mobile application.
 
-As soon as the engine ignites, the system starts charging the driver for a given amount of money per minute; the driver is notified of the current charges through a screen on the vehicle.
+As soon as the engine ignites, the system starts charging the driver for a given amount of money per minute; the driver is notified of the current charges through a screen on the car.
 
 \subsubsubsection{Scenario 1}
-Bob has already reserved a vehicle and he is going to pick it up. He is far about 50 meters from the vehicle and he clicks on the button "I'm nearby" of the mobile application. The system checks the GPS signal of both the vehicle and the Bob's mobile phone, and it doesn't unlock the vehicle notifing Bob that he's too far from it.
+Bob has already reserved a car and he is going to pick it up. He is far about 50 meters from the car and he clicks on the button "I'm nearby" of the mobile application. The system checks the GPS signal of both the car and the Bob's mobile phone, and it doesn't unlock the car notifing Bob that he's too far from it.
 
-Once Bob is in front of the vehicle he clicks again on "I'm nearby", the system unlocks the vehicle and he finally enter.
+Once Bob is in front of the car he clicks again on "I'm nearby", the system unlocks the car and he finally enter.
 
-Bob starts the vehicle and the system notifies him about his current charges thanks to the vehicle application. He can start his ride.
+Bob starts the car and the system notifies him about his current charges thanks to the car application. He can start his ride.
 
 \begin{figure}[H]
 	\centering
 	\includegraphics[height=20cm]{mockup/MobileUnlock.png}
-	\caption{Concept of the mobile vehicle unlock page.}
+	\caption{Concept for the mobile car reservation page.}
 \end{figure}
 
 \begin{figure}[H]
 	\centering
 	\includegraphics[width=\textwidth]{mockup/VehicleApplication.png}
-	\caption{Concept of the vehicle application.}
+	\caption{Concept for the car application.}
 \end{figure}
 
 \begin{table}[H]
@@ -334,13 +340,13 @@ Bob starts the vehicle and the system notifies him about his current charges tha
 			Goal & G1.2
 			\\
 			\hline
-			Input condition & The driver has already reserved a vehicle and he/she is going to pick it up.  \\
+			Input condition & The driver has already reserved a car and he/she is going to pick it up.  \\
 			\hline
 			Event Flow & \begin{enumerate}
-				\item The driver is within 25 meters from the vehicole.
+				\item The driver is within 25 meters from the car.
 				\item The driver opens the reservation mobile page, through a section of the homepage, and clicks on "I'm nearby".
-				\item The system unlocks the vehicle.
-				\item The driver enters and starts the vehicle. 
+				\item The system unlocks the car.
+				\item The driver enters and starts the car. 
 			\end{enumerate}
 			\\
 			\hline
@@ -348,10 +354,12 @@ Bob starts the vehicle and the system notifies him about his current charges tha
 			\hline
 			
 			Exception &  \begin{itemize}
-				\item Some exceptions are handled notifying the driver of the problem through a dynamic message box.				
+				\item Some exceptions are handled by notifying the driver of the problem through a dynamic message box.				
 				The requirements that generate these kind of exceptions are:
 				\ref{f-reservationcanc},    %It passed more than one hour from the reservation
-				\ref{f-nearby},    %The driver isn't nearby.			
+				\ref{f-nearby}.    %The driver isn't nearby.		
+				\item GPS signal of the driver's mobile phone is not available.
+				\item GPS signal of the car is not available.		
 			\end{itemize}
 			\\
 			\hline
@@ -363,28 +371,137 @@ Bob starts the vehicle and the system notifies him about his current charges tha
 	\begin{center}
 		\centering
 		\includegraphics[height=0.9\textheight, keepaspectratio]{sequence_diagram/Unlock.png}
-		\caption{Sequence diagram of the vehicle use process.}
+		\caption{Sequence diagram of the car use process.}
 	\end{center}
 \end{figure}
 
 \subsubsubsection{Associated functional requirements}
 
 \begin{enumerate}
+	\item The driver can only use the mobile application to unluck the car. 
 	\item It mustn't pass more than one hour from the reservation to the 
-	unlocking of the vehicle. \label{f-reservationcanc}
-	\item The driver must be within 25 meters from the vehicle to unlock it. \label{f-nearby}
+	unlock of the car. In this case the system will tag the car as "Available" again.\label{f-reservationcanc}
+	\item The system checks the GPS signal of both the car and the driver's mobile phone, to assess if they are within a 25 meters range. If they are within that range, the system will unlock the car. \label{f-nearby}
+	\item The driver must enter in the car to start it.
+	\item The system will start charges the driver once he/she starts the car.
+	\item Once the car is unlocked, the system tags it as "In\_use".
+	\item The car application must notify the driver about the current charges.
 \end{enumerate}
 
 \subsubsection{Vehicle parking}
 
 \subsubsubsection{Purpose}
 
-Once the driver has finished to use the vehicle he/she should be able to park it in safe areas provided by the system. These areas are displayed by the navigator vehicle application.
+Once the driver has finished to use the car he/she should be able to park it in safe areas provided by the system. These areas are displayed by the navigator car application.
 
+After parking the car, the driver can exit from it. The system will lock the car and automatically charges the driver on the credit card indicated during the registration.
 
+If a driver brought other people with him/her, he/she will get a 10\% discount on the final charge.
+
+\subsubsubsection{Scenario 1}
+
+Bob is almost at his important meeting. The GPS navigator application shows several park areas and Bob chooses one of them for park his car. He checks if there's atleast one available park and he fortunatly finds one. Once he turns his car off and gets out from it, the system stops charging him and he can finall enjoy his evening.
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=\textwidth]{mockup/VehicleApplicationNavigator.png}
+	\caption{Concept for the car application.}
+\end{figure}
+
+\begin{table}[H]
+	\begin{center}
+		\begin{tabular}{| l | p{0.6\textwidth} |}
+			\hline
+			Actor & Driver with or without guests (passengers) \\
+			\hline
+			Goals & G1.3, G3
+			\\
+			\hline
+			Input condition & The driver is using the reserved car and wants to park it nearby his/her destination. He/she could be accompanied by some passangers. \\
+			\hline
+			Event Flow & \begin{enumerate}
+				\item The driver finds a park thank to the car application.
+				\item The driver parks the car in an available park of a safe area.
+				\item The drive turns the car off and gets out from it. If he/she is accompanied by someone, also the passengers get out from the car.
+				\item The system checks if the car can be locked and if discounts are appliable. 
+			\end{enumerate}
+			\\
+			\hline
+			Output condition & The system locks the car, directly charges the driver via the payment method that he/she indicated during the registration and notifies him/her that the rent has been terminated.\\
+			\hline
+			
+			Exception &  \begin{itemize}
+				\item The driver has an incident.
+				\item The car is completely discharged.	
+				\item There's no free parks available in the near safe area.	
+			\end{itemize}
+			\\
+			\hline
+		\end{tabular}
+	\end{center}
+\end{table}
+
+\begin{figure}[H]
+	\begin{center}
+		\centering
+		\includegraphics[height=0.9\textheight, keepaspectratio]{sequence_diagram/Park.png}
+		\caption{Sequence diagram of the car parking process.}
+	\end{center}
+\end{figure}
+
+\subsubsubsection{Associated functional requirements}
+
+\begin{enumerate}
+	\item The driver must park his/her car in a safe area.
+	\item The driver must get out from the car remembering to close all the doors and to roll up all the windows of the car, otherwise the system won't stop charge the driver and after 5 minutes a notification via sms will remember him/her that the rent operation can't be completed.
+	After 30 minutes the system tags the car as "Out\_of\_service" and it will apply a fee of 20 euros to the driver.
+	\item Once the car is locked, The system must directly charge the driver via the payment method that he/she indicated during the registration.
+	\item Once the car is locked, the system must send a message for notify the driver about the rent costs and the rental operation has been completed via sms. The reservation page will be cleared and closed by the system.
+	\item Once the car is locked, the system checks its condition. If the car has more than 75\% of the battery empty or a component of it is not working correctly, the system must tag the car as "Out\_of\_service". Otherwise the system tags the car as "Available".
+	\item Other requirements only for G3 are:
+	\begin{enumerate}
+		\item car's sensors must detect correctly the number of passengers.
+		\item If the driver is accompanied by atleast one passanger from the start of the ride, the system will apply him/her a discount of 10\% on the last ride, otherwise there won't be any discount.
+	\end{enumerate}
+\end{enumerate}
+
+\subsubsection{Service discounts and fees}
+
+\subsubsubsection{Purpose}
+During the rent of a car, the driver can be rewarded with discounts or punished with fees.
+For instance, if a driver lefts a car with no more than 50\% of the battery empty, the system applies a discount of 20\% on the last ride.
+
+\subsubsubsection{Scenario 1}
+
+Bob is going too fast because he is late for his important meeting. He commits a serious infraction and gets a speeding ticket. The system pays his fine and directly charges him by the same ammount of the fine plus an addictional fee of 10 euros provided by the system. Bob is not happy.
+
+\subsubsubsection{Associated functional requirements}
+
+Requirements for G4 are the following:
+
+\begin{enumerate}
+	\item Discounts must be applied one at time on the total cost of the rent excluding any fee or fine. The total cost of the rent is updated everytime a discount is applied.
+	\item For each fee applied to a driver, it will be directly charged through the driver's payment method indicated during the registration, indipendently by any rental operations.
+	\item If a driver doesn't pick up a reserved car within 1 hour, the system applies a fee of 1 euro.
+	\item If a driver gets a fine, the system pays his/her fine and directly charges him/her by the same ammount of the fine plus an addictional fee of 10 euros provided by the system.
+	\item If a driver lefts a car with no more than 50\% of the battery empty, the system applies a discount of 20\% on the last ride.
+\end{enumerate}
 
 \subsection{Performance Requirements}
 
+\begin{enumerate}
+	\item The system must support at least 1000 connected driver at time.
+	\item 95\% of requests must be processed in less than 5 s.
+	\item 100\% of requests must be processed in less than 10 s.
+	\item There is no limit on the total number of registered drivers.
+\end{enumerate}
+
 \subsection{Software System Attributes}
+
+\subsection{Availability}
+
+\begin{enumerate}
+	\item The system must guarantee an availability of 99\%.
+\end{enumerate}
 
 \subsection{Alloy}
