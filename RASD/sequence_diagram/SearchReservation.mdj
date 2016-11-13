@@ -808,9 +808,9 @@
 											"showShadow": true,
 											"containerChangeable": false,
 											"containerExtending": false,
-											"left": 222,
+											"left": 227,
 											"top": 251,
-											"width": 103.33349609375,
+											"width": 93.20263671875,
 											"height": 13,
 											"autoResize": false,
 											"alpha": 1.5707963267948966,
@@ -820,7 +820,7 @@
 											},
 											"edgePosition": 1,
 											"underline": false,
-											"text": "3 : Vehicle search",
+											"text": "3 : Car research",
 											"horizontalAlignment": 2,
 											"verticalAlignment": 5
 										},
@@ -1716,7 +1716,7 @@
 							"_parent": {
 								"$ref": "AAAAAAFYRRRIs4ZBsdE="
 							},
-							"name": "Vehicle search",
+							"name": "Car research",
 							"source": {
 								"$ref": "AAAAAAFYRRR3moZWlAU="
 							},

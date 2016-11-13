@@ -473,11 +473,11 @@
 											"containerExtending": false,
 											"left": 219.578125,
 											"top": 237,
-											"width": 108.681640625,
+											"width": 86.99169921875,
 											"height": 13,
 											"autoResize": false,
 											"underline": false,
-											"text": "Vehicle not parked",
+											"text": "Car not parked",
 											"horizontalAlignment": 2,
 											"verticalAlignment": 5
 										},
@@ -1139,9 +1139,9 @@
 											"showShadow": true,
 											"containerChangeable": false,
 											"containerExtending": false,
-											"left": 241,
+											"left": 238,
 											"top": 275,
-											"width": 132.234375,
+											"width": 139.45166015625,
 											"height": 13,
 											"autoResize": false,
 											"alpha": 1.5707963267948966,
@@ -1151,7 +1151,7 @@
 											},
 											"edgePosition": 1,
 											"underline": false,
-											"text": "4 : Vehicle park search",
+											"text": "4 : Car parking research",
 											"horizontalAlignment": 2,
 											"verticalAlignment": 5
 										},
@@ -1470,9 +1470,9 @@
 											"showShadow": true,
 											"containerChangeable": false,
 											"containerExtending": false,
-											"left": 263,
+											"left": 265,
 											"top": 387,
-											"width": 89.603515625,
+											"width": 85.26171875,
 											"height": 13,
 											"autoResize": false,
 											"alpha": 1.5707963267948966,
@@ -1482,7 +1482,7 @@
 											},
 											"edgePosition": 1,
 											"underline": false,
-											"text": "5 : Vehicle park",
+											"text": "5 : Car parking",
 											"horizontalAlignment": 2,
 											"verticalAlignment": 5
 										},
@@ -1637,9 +1637,9 @@
 											"showShadow": true,
 											"containerChangeable": false,
 											"containerExtending": false,
-											"left": 258,
+											"left": 269,
 											"top": 480,
-											"width": 170.548828125,
+											"width": 148.85888671875,
 											"height": 13,
 											"autoResize": false,
 											"alpha": 1.5707963267948966,
@@ -1649,7 +1649,7 @@
 											},
 											"edgePosition": 1,
 											"underline": false,
-											"text": "6 : Vehicle ready to be locked",
+											"text": "6 : Car ready to be locked",
 											"horizontalAlignment": 2,
 											"verticalAlignment": 5
 										},
@@ -1804,9 +1804,9 @@
 											"showShadow": true,
 											"containerChangeable": false,
 											"containerExtending": false,
-											"left": 420,
+											"left": 430,
 											"top": 539,
-											"width": 101.892578125,
+											"width": 80.20263671875,
 											"height": 13,
 											"autoResize": false,
 											"alpha": 1.5707963267948966,
@@ -1816,7 +1816,7 @@
 											},
 											"edgePosition": 1,
 											"underline": false,
-											"text": "7 : Vehicle locked",
+											"text": "7 : Car locked",
 											"horizontalAlignment": 2,
 											"verticalAlignment": 5
 										},
@@ -2176,7 +2176,7 @@
 							"_parent": {
 								"$ref": "AAAAAAFYU8b2lrRouG0="
 							},
-							"name": "Vehicle park search",
+							"name": "Car parking research",
 							"source": {
 								"$ref": "AAAAAAFYU8cdzbR95Zw="
 							},
@@ -2193,7 +2193,7 @@
 							"_parent": {
 								"$ref": "AAAAAAFYU8b2lrRouG0="
 							},
-							"name": "Vehicle park",
+							"name": "Car parking",
 							"source": {
 								"$ref": "AAAAAAFYU8cdzbR95Zw="
 							},
@@ -2210,7 +2210,7 @@
 							"_parent": {
 								"$ref": "AAAAAAFYU8b2lrRouG0="
 							},
-							"name": "Vehicle ready to be locked",
+							"name": "Car ready to be locked",
 							"source": {
 								"$ref": "AAAAAAFYU8cdzbR95Zw="
 							},
@@ -2227,7 +2227,7 @@
 							"_parent": {
 								"$ref": "AAAAAAFYU8b2lrRouG0="
 							},
-							"name": "Vehicle locked",
+							"name": "Car locked",
 							"source": {
 								"$ref": "AAAAAAFYU8c7lLSdIAE="
 							},
@@ -2291,7 +2291,7 @@
 							"_parent": {
 								"$ref": "AAAAAAFYU8b2lrRouG0="
 							},
-							"name": "Vehicle not parked",
+							"name": "Car not parked",
 							"visibility": "public",
 							"isReentrant": true,
 							"interactionOperator": "loop",
@@ -2346,6 +2346,7 @@
 					"visibility": "public",
 					"isStatic": false,
 					"isLeaf": false,
+					"type": "",
 					"isReadOnly": false,
 					"isOrdered": false,
 					"isUnique": false,
@@ -2363,6 +2364,7 @@
 					"visibility": "public",
 					"isStatic": false,
 					"isLeaf": false,
+					"type": "",
 					"isReadOnly": false,
 					"isOrdered": false,
 					"isUnique": false,

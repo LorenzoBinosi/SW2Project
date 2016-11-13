@@ -6,12 +6,12 @@ PowerEnJoy system is a simple client-server architecture based on a back-end ser
 \subsubsection{User Interfaces}
 Guests and users can interact with the service via the web application or the mobile application. Drivers can find other service functionalities in the car application. It is necessary to provide a common and uniform look and feel among the different hardware architectures.
 
-All the interfaces shall be intuitive and user friendly. They should not require the reading of detailed documentation to be used.
+All interfaces shall be intuitive and user friendly. They should not require the reading of detailed documentation to be used.
 
 \subsubsection{Hardware Interfaces}
 
-All cars are provided with a dedicated embedded system connected to several plugins and a touchscreen display used for interact with the lele application.
-Thanks to this embedded architecture the system will be also notified about the status of the car and its location, even if the main battery is completely discharged.
+All cars are provided with a dedicated embedded system connected to several plugins and a touchscreen display used for interact with the car application.
+Thanks to this embedded architecture the system will also be notified about the status of the car and its location, even if the main battery is completely discharged.
 
 \subsubsection{Software Interfaces}
 
@@ -52,9 +52,9 @@ The following lists reassume what anyone can do interacting with the system.
 
 \subsection{User Characteristics}
 
-The only users of the system are drivers. Driver must provide a valid driving license and a valid payment method in order to register to the service.
+The only users of the system are drivers. Drivers must provide a valid driving license and a valid payment method in order to register to the service.
 
-It's granted that drivers have access to Internet.
+It's granted that drivers have access to an internet connection.
 
 \subsection{Constraints}
 
@@ -63,20 +63,19 @@ Any driver must follow current traffic and regulamentation laws of the area wher
 
 The system must ask the driver for the permission to acquire, store and process personal data and web cookies.
 
-\subsubsection{Interfaces with other services}
+\subsubsection{Interfaces to other services}
 
-PowerEnJoy ha bisogno di interfacciarsi con un servizio per risolvere tutti quei problemi che possono affliggere un veicolo o che possono generarsi durante l'utilizzo di essi.
-Questi problemi possono essere:
+PowerEnJoy needs to communicate with a service to solve all those issues that can hit a car or that can happen while using it. These problems may be:
 \begin{itemize}
-	\item rottura di uno o piú componenti del veicolo
-	\item batteria scarica per piú del 75\%
-	\item incidenti
-	\item comunicazione mancante tra veicolo e sistema.
+	\item breaking of one or more parts of the car
+	\item battery power lower than 25\%
+	\item accidents
+	\item faulty communication between system and car
 \end{itemize}
-Il servizio delegato a risolvere questa tipologia di problemi, riceve tutte le segnalazioni che rientrano nei casi indicati precedentemente, e provvede a risolverli nel minor tempo possibile comunicandolo tempestivamente a PowerEnJoy.
+The service assigned to this kind of problems, receives all reports that fall in the previously specified cases, and solves them as soon as possible, reporting the results back to PowerEnJoy.
 
 \subsubsection{Hardware limitations}
-The service requires an Internet connection fast enought to guarantee a fast response from the server and hardware architectures that can run properly the client side applications (web and mobile apps).
+The service requires an Internet connection fast enough to guarantee a fast response from the server and hardware architectures that can run properly the client side applications (web and mobile apps).
 
 \subsubsection{Reliability requirements}
 The system must have a minimum availability of 99\%.
@@ -84,20 +83,12 @@ The system must have a minimum availability of 99\%.
 \subsubsection{Parallel operations}
 The system must support parallel operations from different drivers that may require access to the database.
 
-\subsection{Domain Properties}
-
-It suppose that the following properties hold in the analyzed domain
-\begin{itemize}
-	\item Once a reservation is done, it cannot be canceled by the driver.
-	\item Driver's payment method and driver's driving license must be valid in order to use the rental function.
-\end{itemize}
-
 \subsection{Assumptions and Dependencies}
 
-It assumes that:
+It's assumes that:
 \begin{itemize}
-	\item All users have access to a stable Internet connection.
-	\item Cars model is the same, so any cars will have the same number of seats.
+	\item All drivers have access to a stable internet connection.
+	\item All cars are the same model, so that any of them will have the same number of seats
 	\item The number of cars is sufficient to satisfy the demand in each area.
 	\item All the areas where the system is operating are covered by a reliable 3G/4G connection.
 	\item The system is operating in an area composed by a city or agglomerated cities, of the same country, closed each other.
@@ -109,5 +100,5 @@ The system will be implemented foreseeing the possibility of further extensions,
 \begin{enumerate}
 	\item If a car is left at special parking areas where they can be recharged and the driver take care of pluggin the car into the power grid, the system applies a discount of 30\% on the last ride.
 	\item If a car is left at more than 3 KM from the nearest power grid station or with more than 80\% of the battery empty, the system charges 30\% more on the last ride to compensate to compensate for the cost required to re-charge the car on-site.
-	\item If the driver enables the money saving option, he/she can input his/her final destination and the system provides information about the station where to leave the car to get a discount. This station is determinate to ensure a uniform distribution of cars in the city and depends both on the destination of the driver and on the availability of power plugs at the selected station.
+	\item If the driver enables the money saving option, he/she can input his/her final destination and the system provides informations about the station where to leave the car to get a discount. This station is determinate to ensure a uniform distribution of cars in the city and depends both on the destination of the driver and on the availability of power plugs at the selected station.
 \end{enumerate}
