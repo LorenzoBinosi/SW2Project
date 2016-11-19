@@ -2,6 +2,7 @@
 ## Latex
 #############
 
+*.db
 *.aux
 *.glo
 *.idx
