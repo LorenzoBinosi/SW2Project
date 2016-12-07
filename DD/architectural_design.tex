@@ -161,6 +161,8 @@ The application core is composed by a controller which translates the inputs fro
 
 As already said, the front-ends applications comunicate with the application server through \textbf{RESTful API} over the \textbf{HTTPS} protocol. They are provided by the application server and use \textbf{JSON} as data representation language.
 
+The detailed RESTful API is described in the following pages.
+
 \subsubsubsection{Creates user}
 \begin{figure}[H]
 	\noindent
@@ -191,4 +193,28 @@ As already said, the front-ends applications comunicate with the application ser
     	\centering
     	\includegraphics{apitables/APIPastRents.png}
     	\label{fig:api-past-rents}
+\end{figure}
+
+\subsubsubsection{Retrieves available cars}
+\begin{figure}[H]
+	\noindent
+    	\centering
+    	\includegraphics[height=550px, keepaspectratio]{apitables/APISearchCars.png}
+    	\label{fig:api-search-cars}
+\end{figure}
+
+\subsubsubsection{Reserves car}
+\begin{figure}[H]
+	\noindent
+    	\centering
+    	\includegraphics{apitables/APIReservation.png}
+    	\label{fig:api-reservation}
+\end{figure}
+
+\subsubsubsection{Retrieves current reservation}
+\begin{figure}[H]
+	\noindent
+    	\centering
+    	\includegraphics[height=550px, keepaspectratio]{apitables/APICurrentReservation.png}
+    	\label{fig:api-current-reservation}
 \end{figure}
