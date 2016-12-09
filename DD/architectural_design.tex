@@ -6,15 +6,15 @@ The PowerEnJoy's software architecture will be described starting from an high l
 
 A static and dynamic viewpoint are provided in order to better explaining how the architecture works through its components.
 
-\subsection{High Level View}
+\subsection{High level view}
 
 In order to explain the role of the system's components, it's better considering the layers involved for each component.
-There are 3 different distinguishable layers:
+There are 3 different distinguishable logical layers that make the system architecture a 3 layer architecture. The layers are:
 
 \begin{description}
-	\item[{\color{green} Presentation}:] this layer provides a data processing for a GUI and/or a GUI itself.
-	\item[{\color{blue} Application}:] this layer provides one or more logic functionalities. Functionalities could be core, if they are performing an essential function for the system, or peripheral, if they are managing interactions between core functionalities or interfaces between system's components.
-	\item[{\color{red} Data}:] this layer provides a way to store and retrieve the essential data for the system.
+	\item[{\color{green} Presentation}:] this layer process data coming from the Application layer in order to display them on a GUI.
+	\item[{\color{blue} Application}:] this layer provides the core functionalities of the system.
+	\item[{\color{red} Data}:] this layer provides a way to store the essential data for the system.
 \end{description}
 The main components of the system are the following:
 
@@ -23,10 +23,10 @@ The main components of the system are the following:
 	\item[Application server:] an application layer responsible for the whole application logic of the system. All the policies, the algorithms and the computation are performed here. This layer offers a service-oriented interface.
 	\item[Web server:] a presentation layer responsible for translating HTTPS requests into API requests and API responses into HTTPS responses. 
 	\item[Mobile application:] a presentation layer directly connected to the application server.
-	\item[Car applications:] Cambiarea presentation and application layer that provide utilities to the user and an interface to the server in order to manage the car.
+	\item[Car applications:] a presentation and application layer that provide utilities to the user and an interface to the server in order to manage the car.
 	\item[User's browser:] a presentation layer consisting in a web browser. Not under control of the system.
 \end{description}
-The following figure shows all the components of the system, highlighting the logic layers for each component, grouped by the physical tiers.
+The following figure shows all the components of the system, highlighting the logical layers for each component, grouped by the physical tiers.
 
 \begin{figure}[H]
 	\centering
@@ -35,13 +35,11 @@ The following figure shows all the components of the system, highlighting the lo
 	\label {fig:tiers}
 \end{figure}
 
-\subsection{Component View}
+\subsection{Component view}
 
 \subsubsection{Database}
 
 The server database of the system runs MySQL Community Edition 5.7 with InnoDB as default storage engine. InnoDB provides the standard ACID-compliant transaction features.
-
-The database is only and directly connected to the application server through the standard network interface, described in \autoref{sec:component-interfaces}.
 
 The following properties are satisfied:
 \begin{itemize}
@@ -49,7 +47,7 @@ The following properties are satisfied:
 	\item access to the data must be granted only to authorized users possessing the right credentials.
 	\item every software component that needs to access the DBMS must do so with the minimum level of privilege needed to perform the operations.
 \end{itemize}
-All the persistent application data is stored in the database. The relational model is illustrated in the following figure.
+All the persistent application data are stored in the database. The relational model is illustrated in the following figure.
 
 \begin{figure}[H]
 	\centering
@@ -65,38 +63,24 @@ Several triggers are implemented to manage some exceptions. For instance:
 	\item a report of assistance to a car is generated if it have been passed more than 10 minutes from the last car heartbeat.
 \end{itemize}
 
-\subsubsection{Application Server}
+\subsubsection{Application server}
 
-The application servers are implemented using Java EE; they runs on GlassFish server.
+The application server runs on a GlassFish server and it's implemented using Servlets. They are supposed to close any HTTP session after the response, because of the REST architectural communication style, providing better performances. 
 
-The business logic is implemented by custom-built EJB. Cosa sono e come sono formati. Given that the state of users, cars and rents is stored in the database, all the EJB are stateless.
+The business logic is implemented by custom-built EJB. Given that the state of users, cars and rents is stored in the database, all the EJB are stateless.
 
-Parlare delle servlet
-
-The access to the DBMS is not implemented with direct SQL queries: instead, it is completely wrapped by the JPA. The object-relation mapping is done by entity beans. They are simple java classes without a constructor and fulfilled by getter and setter methods for each attributes, that correspond to fields of a database table. EJBs use those entity beans in order to read and write on the database.
-
-FARE CLASSI UML
 
 Session Beans used for the application server are shown in~\autoref{fig:session-beans}.
 
-\subsubsubsection{DriverManager}
-This bean manages all the driver management features: user registration, user deletion, user profile editing.
+\begin{description}
+	\item[DriverManager:] manages all the user management features: user registration, user deletion, user profile editing and user salt bytes retrieving.
 User registration provides a function that sends an email, with a password and some guidelines, after the registration.
-
-\subsubsubsection{LogbookManager}
-This bean allows users to fetch the history of their past rents.
-
-\subsubsubsection{ReservationManager}
-This bean allows users to get information about the available cars and reserve cars.
-
-\subsubsubsection{DriverRentManager}
-This bean allows users to unlock a reserved cars and fetch information about the current rents.
-
-\subsubsubsection{CarHeartBeat}
-This bean manages information coming from cars. It also provides a function responsible for closing cars.
-
-\subsubsubsection{CarRentManager}
-This bean manages rental features: current rental charge, nearby safe areas.
+	\item[LogbookManager:] allows users to fetch the history of their past rents.
+	\item[SearchCarManager:] allows users to get information about the nearby available cars.
+	\item[DriverRentalManager:] allows users to reserve cars, to unlock reserved cars and fetch information about the current rents.
+	\item[CarHeartbeat:] manages information coming from cars. It also provides a function responsible for locking cars.
+	\item[CarRentalManager:] manages rental information.
+\end{description}
 
 \begin{figure}[H]
 	\centering
@@ -105,11 +89,15 @@ This bean manages rental features: current rental charge, nearby safe areas.
 	\label {fig:session-beans}
 \end{figure}
 
-\subsubsection{Web Server}
+The access to the DBMS is not implemented with direct SQL queries: instead, it is completely wrapped by the JPA. The object-relation mapping is done by entity beans. They are simple java classes without a constructor and fulfilled by getter and setter methods for each attributes, that correspond to fields of a database table.
+
+FARE CLASSI UML
+
+\subsubsection{Web server}
 
 The web server runs on GlassFish server. It's implemented using JSP; java EE web components useful when the goal of the web server is to translate RESTful API requests/responses into  HTTP/HTTPS requests/responses. Thanks to JSPs, developers can focusing better on the GUI.
 
-The API requests are managed by a translator, an internal Java interface that simply the JSP job translating methods calls into API calls.
+The API requests are managed by a translator, a stateless EJB that simplify the JSP job translating methods calls into API calls.
 
 
 \begin{figure}[H]
@@ -119,13 +107,13 @@ The API requests are managed by a translator, an internal Java interface that si
 	\label {fig:web-components}
 \end{figure}
 
-Even if REST is a stateless architectural style, JSPs lead users to a stateful communication saving the session; in order to avoid further insertion of user's credentials.
+Even if REST is a stateless architectural style, JSPs lead users to a stateful communication saving the session in order to avoid further insertion of user's credentials.
 
-\subsubsection{Car Applications}
+\subsubsection{Car applications}
 
 Every car hosts a computer with a linux distribution of Ubuntu 16.10 as operating system. In any OS is installed openssh-server, in order to access to the car remotly, and two applications:
 \begin{description}
-	\item[HeartBeat:] this application is always running and sends, every 10 seconds, information about the current state of the car and the rent, to the application server through a single API call. The application server will ignore the rental information if the car is not rented.
+	\item[HeartBeat:] this application is always running and sends, every 10 seconds, information about the current state, of the car and the rent, to the application server through a single API call. The application server will ignore the rental information if the car is not rented.
 	\item[CarGUI:] this application is started everytime the car gets unlocked, and closed everytime the car gets locked. It asks, through API calls, for user information, user's current charges and nearby availabe safe areas, in order to display those information on the GUI.
 \end{description}
 
@@ -136,7 +124,7 @@ Every car hosts a computer with a linux distribution of Ubuntu 16.10 as operatin
 	\label {fig:car-client-components}
 \end{figure}
 
-\subsubsection{Mobile Application}
+\subsubsection{Mobile application}
 
 The mobile client implementation depends on the specific platform. 
 The iOS application is implemented in Swift and mainly uses UIKit framework to manage the UI interface.
@@ -158,20 +146,48 @@ The application core is composed by a controller which translates the inputs fro
     \label{fig:android-app}
 \end{figure}
 
-\subsection{Component Interfaces}
+\subsection{Deployment view}
 
-\subsubsection{Front-ends to Application Server (API)}
+The deployment diagram for the system is shown in~\autoref{fig:deployment}.
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[height=500px, keepaspectratio]{diagrams/Deployment.png}
+	\caption{The deployment diagram of the PowerEnJoy system.}
+	\label {fig:deployment}
+\end{figure}
+
+\subsection{Component interfaces}
+
+\subsubsection{Application server to database}
+
+The application server communicates with the DBMS via the Java Persistence API over standard network protocols.
+
+The low-level technicalities about the specific dialect of SQL for the selected DBMS are abstracted by the Java Persistence API, which also deals with the O/R mapping.
+
+\subsubsection{Application server to cars}
+
+The application server communicates with the cars through the SSHv2 protocol. It provides an encrypted and remote communication over the standard network.
+
+The credentials used for the remote access are stored in the database as plaintext and different for each car. There is no reason to protect the credentials hashing and/or salting them, because it won't add any security measure.
+
+\subsubsection{Front-ends to application server (API)}
 
 As already said, the front-ends applications comunicate with the application server through RESTful API over the HTTPS protocol. They are provided by the application server and use JSON as data representation language.
 
 The detailed RESTful API is described in the following pages. 
 
-Common to all the requests:
+\bigskip
+
+\noindent Common to all the requests:
 \begin{itemize}
 	\item the paths must be applied to the application server domain.
 	\item a 422 error means that the JSON object has been not created correctly or the values of the objects' fields cannot be processed by the application server. For instance, the username choosen could be already taken or could not match to the regular expression choosen by the system.
 	\item requests over HTTP protocol are denied.
 \end{itemize}
+Requests processed by cars require an authentication process too; in order to avoid fake requests from unknown entities. As already said for the SSH credentials, they stored in the database as plaintext, diffent for each car and also different from the SSH credentials.
+
+
 
 
 \subsubsubsection{[User] Creates user}
@@ -206,7 +222,7 @@ Common to all the requests:
     	\label{fig:api-past-rents}
 \end{figure}
 
-\subsubsubsection{[User]Retrieves available cars}
+\subsubsubsection{[User] Retrieves nearby available cars}
 \begin{figure}[H]
 	\noindent
     	\centering
@@ -253,7 +269,7 @@ Common to all the requests:
     	\label{fig:api-car-heartbeat2}
 \end{figure}
 
-\subsubsubsection{[Car] Retrieves available safe areas}
+\subsubsubsection{[Car] Retrieves nearby available safe areas}
 \begin{figure}[H]
 	\noindent
     	\centering
@@ -271,3 +287,69 @@ There are other requests, but they are not relevant as the previous requests. Fo
 	\item get the current charge of a rent.
 	\item get information about a single car.
 \end{itemize}
+
+\subsubsection{Web server to browser}
+
+The users' browsers communicate with the web server via HTTPS requests. Any unencrypted request will be denied.
+
+\subsubsection{External interfaces}
+
+The application server has two external interfaces
+\begin{description}
+	\item[SMSGateway:] to send SMS to users.
+	\item[PaymentGateway:] to execute credit card payments of users.
+\end{description}
+
+\subsection{Runtime view}
+
+The dynamic behaviour of the system is described through sequence diagrams. The following diagrams highlight the most interesting functionalities of the system.
+
+\begin{figure}[H]
+	\noindent
+    	\centering
+    	\includegraphics[height=550px, keepaspectratio]{diagrams/SequenceLogin.png}
+	\caption{Sequence diagram of the login through the web interface.}
+    	\label{fig:sequence-login}
+\end{figure}
+
+
+\begin{figure}[H]
+	\noindent
+    	\centering
+    	\includegraphics[height=550px, keepaspectratio]{diagrams/SequenceReservation.png}
+	\caption{Sequence diagram of the reservation through the web interface.}
+    	\label{fig:sequence-reservation}
+\end{figure}
+
+\begin{figure}[H]
+	\noindent
+    	\centering
+    	\includegraphics[height=550px, keepaspectratio]{diagrams/SequenceCarUnlocking.png}
+	\caption{Sequence diagram of the car unlocking through the mobile application.}
+    	\label{fig:sequence-unlocking}
+\end{figure}
+
+\begin{figure}[H]
+	\noindent
+    	\centering
+    	\includegraphics[height=550px, keepaspectratio]{diagrams/SequenceCarHeartbeat.png}
+	\caption{Sequence diagram of the car heartbeat process and the car locking.}
+    	\label{fig:sequence-heartbeat}
+\end{figure}
+
+\subsection{Why this architecture}
+
+A good starting point, as an inexperienced software designer, was to keep the level of abstraction of my software as high as possible. That's why, once defined the different logical layers, I chose a multitier architecture with a logical layer per physical tier.
+
+The choice of the REST architectural style increased the level of abstraction of the entire software architecture and brought properties like:
+
+\begin{description}
+	\item[Performance:] application server doesn't save any session, so, after replied to a request, is ready to reply to a new request from a different user. The number of active threads is equal to the number of requests that the application server is processing.
+	\item[Scalability:] it's possible to add new components without modifying those that already exist.
+	\item[Simplicity:] the RESTful API is an uniform interface.
+	\item[Modifiability:] it's simple to modify the components. 
+	\item[Portability:] components are duplicated easily.
+	\item[Reliability:] if there are more web servers, application servers and databases, the system will be able to provide the service even if a component fails.
+\end{description}
+
+Last but not least, Java EE offers a set of components that hugely increased the level of abstraction.
