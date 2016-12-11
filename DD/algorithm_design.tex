@@ -1,5 +1,14 @@
 \section{Algorithm Design} \label{sec algorithm design}
 
+The proposed algorithms are the most interesting, and less intuitive, algorithms of the business logic. We won't be using any reference to the Java EE components in order to look at these algorithms in the most abstract way possible. 
+The convention used for them contains:
+ \begin{itemize}
+	\item $variables$.
+	\item {\color{blue}not\_implemented\_methods()}: intuitive methods that often interact with other components like the database or the car.
+	\item {\color{green}implemented\_methods()}: methods described later.
+	\item {\color{red} COSTANTS}.
+\end{itemize}
+
 \subsection{Car Heartbeat}
 
 The car hearbeat management is a core function of the businnes logic. It checks the cars' status and execute actions based on their status.
@@ -112,16 +121,51 @@ The algorithm is the following.
 	{
 		{\color{blue}updateEvents} ($rentID$, $events$); \\
 	}
-	\uIf{\upshape{($isLockable$ \&\& $isEmpty$)}}
+	\If{\upshape{($isLockable$ \&\& $isEmpty$)}}
 	{
-		\uIf{\upshape{(getRentalEvent($rentID$, TURNED_OFF) != null \&\& inASafeArea($carID$))}}
+		\If{\upshape{({\color{blue}inASafeArea} ($carID$))}}
 		{
-			closeCar($carID$);
-			closeRent($rentID$);
-			calculateCost($rentID$);
-			checkCarStatus($carID$);  //Similar to updateCarStatus without 1st line
-			executePayment($rentID$);
+			{\color{blue}closeCar} ($carID$); \\
+			{\color{blue}closeRent} ($rentID$); \\
+			{\color{green}calculateCost} ($rentID$); \\
+			{\color{blue}checkCarStatus} ($carID$);  \/\/Similar to updateCarStatus without 1st line \\
+			{\color{blue}executePayment} ($rentID$); \\
 		}
-	}
+	} 
 	Other error cases...
+\end{algorithm}
+
+\subsubsection{Rental cost calculation}
+
+The parameters of this function are:
+\begin{itemize}
+	\item $rentID$: the rental ID.
+\end{itemize}
+The algorithm is the following.
+\bigskip
+
+\begin{algorithm}[H]
+\small
+	$endTime$ = {\color{blue} getRentalEndDate} ($rentID$); \\
+	$beginTime$ = {\color{blue}getFirstRentalEventByType} ($rentID$, {\color{red}TURNED\_ON}); \\
+	\If{\upshape{($beginTime$ == null)}}
+	{
+		$beginTime$  = {\color{blue}getRentalBeginDate} ($rentID$);\\
+	}
+	$rentalTime$ = ($endTime$  -  $beginTime$); \\
+	$totalCost$ = ($rentalTime$ : 60) * {\color{blue}getFee}(); \\
+	$passengerTimes[]$ =  {\color{blue} orderArraysByTime} ({\color{blue}getRentalEventsByType} ($rentID$, {\color{red}PASSENGERS\_DETECTED}), {\color{blue}getRentalEventsByType} ($rentID$, {\color{red}ALL\_PASSENGERS\_LEFT})); 
+	
+	\If{\upshape{($passengerTimes$ != null)}}
+	{
+		$passengerTotalTime$ = 0; \\
+		\For{\upshape{$i$ = 0 \textbf{to} $passengerTimes$.length()}}{$passengerTotalTime$ = $passengerTimes[i + 1]$ - $passengerTimes[i]$; \\
+			$i$ = $i$ + 2; \\
+		}
+		\If{\upshape{($passengerTotalTime$ \textgreater= ($rentalTime$ * 0.5))}}
+		{
+			$totalCost$ = $totalCost$ * 0.8; \\
+		} 
+	}
+	{\color{blue}setCost} ($rentID$, $totalCost$);
 \end{algorithm}

@@ -79,6 +79,7 @@ User registration provides a function that sends an email, with a password and s
 	\item[DriverRentalManager:] allows users to reserve cars, to unlock reserved cars and fetch information about the current rents.
 	\item[CarHeartbeat:] manages information coming from cars. It also provides a function responsible for locking cars.
 	\item[CarRentalManager:] manages rental information.
+	\item[RentalFee:] a singleton that reads the fee of the service from an XML configuration file.
 \end{description}
 
 \begin{figure}[H]
@@ -89,8 +90,6 @@ User registration provides a function that sends an email, with a password and s
 \end{figure}
 
 The access to the DBMS is not implemented with direct SQL queries: instead, it is completely wrapped by the JPA. The object-relation mapping is done by entity beans. They are simple java classes without a constructor and fulfilled by getter and setter methods for each attributes, that correspond to fields of a database table.
-
-FARE CLASSI UML
 
 \subsubsection{Web server}
 
@@ -338,17 +337,19 @@ The dynamic behaviour of the system is described through sequence diagrams. The 
 
 \subsection{Why this architecture}
 
-A good starting point, as an inexperienced software designer, was to keep the level of abstraction of my software as high as possible. That's why, once defined the different logical layers, I chose a multitier architecture with a logical layer per physical tier.
+A good starting point, as an inexperienced software designer, was to keep the level of abstraction of my software as high as possible. 
+
+The first step has been to define the different logical layers in order to assign all the functionalities of the system to the respective logical layer. Each layer have been assigned to a physical tier, creating a multitier architecture.
 
 The choice of the REST architectural style increased the level of abstraction of the entire software architecture and brought properties like:
 
 \begin{description}
 	\item[Performance:] application server doesn't save any session, so, after replied to a request, is ready to reply to a new request from a different user. The number of active threads is equal to the number of requests that the application server is processing.
-	\item[Scalability:] it's possible to add new components without modifying those that already exist.
+	\item[Scalability:] it's possible to add new components, without modifying those that already exist, in order to manage more requests from users.
 	\item[Simplicity:] the RESTful API is an uniform interface.
 	\item[Modifiability:] it's simple to modify the components. 
 	\item[Portability:] components are duplicated easily.
 	\item[Reliability:] if there are more web servers, application servers and databases, the system will be able to provide the service even if a component fails.
 \end{description}
 
-Last but not least, Java EE offers a set of components that hugely increased the level of abstraction.
+Last but not least, Java EE offered a set of components that hugely increased the level of abstraction.
