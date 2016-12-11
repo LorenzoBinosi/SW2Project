@@ -2496,7 +2496,7 @@
 										},
 										{
 											"_type": "ERDColumnView",
-											"_id": "AAAAAAFY5KO//G8r960=",
+											"_id": "AAAAAAFY6dTg90b2CEg=",
 											"_parent": {
 												"$ref": "AAAAAAFY5KIc4G8JVoA="
 											},
@@ -2541,6 +2541,30 @@
 											"width": 222,
 											"height": 13,
 											"autoResize": false
+										},
+										{
+											"_type": "ERDColumnView",
+											"_id": "AAAAAAFY6fXIG2wKoTE=",
+											"_parent": {
+												"$ref": "AAAAAAFY5KIc4G8JVoA="
+											},
+											"model": {
+												"$ref": "AAAAAAFY6fXH02wHHLo="
+											},
+											"visible": true,
+											"enabled": true,
+											"lineColor": "#000000",
+											"fillColor": "#ffffff",
+											"fontColor": "#000000",
+											"font": "Arial;13;0",
+											"showShadow": true,
+											"containerChangeable": false,
+											"containerExtending": false,
+											"left": 853,
+											"top": 440,
+											"width": 222,
+											"height": 13,
+											"autoResize": false
 										}
 									],
 									"visible": true,
@@ -2555,7 +2579,7 @@
 									"left": 848,
 									"top": 375,
 									"width": 232,
-									"height": 68,
+									"height": 83,
 									"autoResize": false
 								}
 							],
@@ -2571,7 +2595,7 @@
 							"left": 848,
 							"top": 352,
 							"width": 232,
-							"height": 91,
+							"height": 106,
 							"autoResize": false,
 							"nameLabel": {
 								"$ref": "AAAAAAFY5KIc4G8IGTU="
@@ -4018,9 +4042,8 @@
 							"_parent": {
 								"$ref": "AAAAAAFY5KIc328Fhp8="
 							},
-							"name": "Description",
-							"type": "VARCHAR",
-							"length": "500",
+							"name": "ErrorCode",
+							"type": "INTEGER",
 							"primaryKey": false,
 							"foreignKey": false,
 							"nullable": false,
@@ -4035,6 +4058,20 @@
 							"name": "SolveDate",
 							"type": "DATETIME",
 							"length": 0,
+							"primaryKey": false,
+							"foreignKey": false,
+							"nullable": true,
+							"unique": false
+						},
+						{
+							"_type": "ERDColumn",
+							"_id": "AAAAAAFY6fXH02wHHLo=",
+							"_parent": {
+								"$ref": "AAAAAAFY5KIc328Fhp8="
+							},
+							"name": "Description",
+							"type": "VARCHAR",
+							"length": "500",
 							"primaryKey": false,
 							"foreignKey": false,
 							"nullable": true,

@@ -1,1 +1,58 @@
 \section{Requirements Traceability} \label{sec requirements traceability}
+
+All the decisions in the DD have been taken following functional and nonfunctional requirements written in the RASD~\cite{rasd}.
+Some minor tweak must still be brought to the RASD.
+
+\subsection{Functional requirements and components}
+
+\autoref{tab:Comp-Table} maps the functional requirements contained in specific sections of the RASD to the components in the Design Document that fulfill them.
+
+\begin{table}[h]
+\begin{center}
+\begin{tabular}{|l|p{0.7\textwidth}|}
+\hline
+{\bf Component (DD)}  & {\bf Requirements (RASD)}\\
+\hline
+DriverManager & 3.2.1 User registration\\
+\hline
+SearchCarManager & 3.2.2 Search and reservation\\
+\hline
+DriverRentalManager & 3.2.2 Search and reservation \newline 3.2.3 Car usage \newline 3.2.5 Service discounts and fees\\
+\hline
+CarHeartbeat & 3.2.4 Car parking \newline 3.2.5 Service discounts and fees \\
+\hline
+CarRentalManager & 3.2.4 Car parking\\
+\hline
+\end{tabular}
+\caption{Table that links components to functional requirements.}
+\label{tab:Comp-Table}
+\end{center}
+\end{table}
+
+\subsection{Non functional requirements and components}
+
+\autoref{tab:Comp-Table} maps the non functional requirements contained in specific sections of the RASD to the components in the Design Document that fulfill them.
+
+\begin{table}[h]
+\begin{center}
+\begin{tabular}{|p{0.3\textwidth}|p{0.7\textwidth}|}
+\hline
+{\bf Component (DD)}  & {\bf Requirements (RASD)}\\
+\hline
+Mobile application & 3.1.1 User interfaces (Mobile application) \newline 3.1.3 Software interfaces (Mobile application) \\
+\hline
+Web application \newline Web server & 3.1.1 User interfaces (Web application) \newline 3.1.3 Software interfaces (Web application) \\
+\hline
+Mobile application \newline Web application \newline Web server & 3.1.1 User interfaces (Common to web and mobile applications) \\
+\hline
+Car computer & 3.1.1 User interfaces (Car application) \newline 3.1.2 Hardware interfaces \newline 3.1.3 Software interfaces (Car application)\\
+\hline
+CarRentalManager & 3.1.1  User interfaces (Server back-end)\\
+\hline
+LogbookManager & 3.1.1  User interfaces (Rental logbook)\\
+\hline
+\end{tabular}
+\caption{Table that links components to functional requirements.}
+\label{tab:Comp-Table}
+\end{center}
+\end{table}

@@ -2,9 +2,9 @@
 
 \subsection{Overview}
 
-The PowerEnJoy's software architecture will be described starting from an high level view up to an in detail view of a specific system component. Going into details will be discussed the roles of these components and how can they interact through several interfaces.
+The PowerEnJoy's software architecture will be described starting from an high level view to an in detail view of a specific system component. We will discuss the role of these components and how can they interact through several interfaces.
 
-A static and dynamic viewpoint are provided in order to better explaining how the architecture works through its components.
+A static and dynamic viewpoint are provided in order to better explain how the architecture works through its components.
 
 \subsection{High level view}
 
@@ -23,7 +23,7 @@ The main components of the system are the following:
 	\item[Application server:] an application layer responsible for the whole application logic of the system. All the policies, the algorithms and the computation are performed here. This layer offers a service-oriented interface.
 	\item[Web server:] a presentation layer responsible for translating HTTPS requests into API requests and API responses into HTTPS responses. 
 	\item[Mobile application:] a presentation layer directly connected to the application server.
-	\item[Car applications:] a presentation and application layer that provide utilities to the user and an interface to the server in order to manage the car.
+	\item[Car computer:] two layers, a presentation and an application one, that provide respectively utilities to the user and an interface to the server in order to manage the car.
 	\item[User's browser:] a presentation layer consisting in a web browser. Not under control of the system.
 \end{description}
 The following figure shows all the components of the system, highlighting the logical layers for each component, grouped by the physical tiers.
@@ -43,7 +43,7 @@ The server database of the system runs MySQL Community Edition 5.7 with InnoDB a
 
 The following properties are satisfied:
 \begin{itemize}
-	\item users' passwords are not saved in plain-text, but they are salted with 8 random bytes, added to the password, and encrypted using the SHA-1 algorithm. The 8 random bytes are different for each password and obviously stored.
+	\item users' passwords are not saved in plain-text, but they are salted with 8 random bytes and encrypted using the SHA-1 algorithm. The 8 random bytes are different for each password and obviously stored.
 	\item access to the data must be granted only to authorized users possessing the right credentials.
 	\item every software component that needs to access the DBMS must do so with the minimum level of privilege needed to perform the operations.
 \end{itemize}
@@ -58,17 +58,16 @@ All the persistent application data are stored in the database. The relational m
 
 Several triggers are implemented to manage some exceptions. For instance:
 \begin{itemize}
-	\item the registration is cancelled if a driver has never logged into the system for 10 days since his/her registration.
-	\item the rent is aborted if a driver doesn't unlock the reserved car within 1 hour. Cost of the rent is setted to 1 euro.
-	\item a report of assistance to a car is generated if it have been passed more than 10 minutes from the last car heartbeat.
+	\item the registration is cancelled if a driver has never logged into the system in 10 days since his/her registration.
+	\item the rent is aborted if a driver doesn't unlock the reserved car within 1 hour. Rental cost is setted to 1 euro.
+	\item a report of assistance to a car is generated if more than 10 minutes have passed from the last car heartbeat.
 \end{itemize}
 
 \subsubsection{Application server}
 
-The application server runs on a GlassFish server and it's implemented using Servlets. They are supposed to close any HTTP session after the response, because of the REST architectural communication style, providing better performances. 
+The application server runs on a GlassFish server and it's implemented using Servlets. 
 
 The business logic is implemented by custom-built EJB. Given that the state of users, cars and rents is stored in the database, all the EJB are stateless.
-
 
 Session Beans used for the application server are shown in~\autoref{fig:session-beans}.
 
@@ -109,11 +108,11 @@ The API requests are managed by a translator, a stateless EJB that simplify the 
 
 Even if REST is a stateless architectural style, JSPs lead users to a stateful communication saving the session in order to avoid further insertion of user's credentials.
 
-\subsubsection{Car applications}
+\subsubsection{Car computer}
 
 Every car hosts a computer with a linux distribution of Ubuntu 16.10 as operating system. In any OS is installed openssh-server, in order to access to the car remotly, and two applications:
 \begin{description}
-	\item[HeartBeat:] this application is always running and sends, every 10 seconds, information about the current state, of the car and the rent, to the application server through a single API call. The application server will ignore the rental information if the car is not rented.
+	\item[Heartbeat:] this application is always running and sends, every 10 seconds, information about the current status, of both car and rent, to the application server through a single API call. The application server will ignore the rental information if the car is not rented.
 	\item[CarGUI:] this application is started everytime the car gets unlocked, and closed everytime the car gets locked. It asks, through API calls, for user information, user's current charges and nearby availabe safe areas, in order to display those information on the GUI.
 \end{description}
 
@@ -142,7 +141,7 @@ The application core is composed by a controller which translates the inputs fro
 \begin{figure}[H]
     \centering
     \includegraphics[width=\textwidth, keepaspectratio]{diagrams/Android.png}
-    \caption{The components of the Andorid application.}
+    \caption{The components of the Android application.}
     \label{fig:android-app}
 \end{figure}
 
@@ -173,7 +172,7 @@ The credentials used for the remote access are stored in the database as plainte
 
 \subsubsection{Front-ends to application server (API)}
 
-As already said, the front-ends applications comunicate with the application server through RESTful API over the HTTPS protocol. They are provided by the application server and use JSON as data representation language.
+As already said, the front-ends applications communicate with the application server through RESTful API over the HTTPS protocol. They are provided by the application server and use JSON as data representation language.
 
 The detailed RESTful API is described in the following pages. 
 
@@ -185,12 +184,12 @@ The detailed RESTful API is described in the following pages.
 	\item a 422 error means that the JSON object has been not created correctly or the values of the objects' fields cannot be processed by the application server. For instance, the username choosen could be already taken or could not match to the regular expression choosen by the system.
 	\item requests over HTTP protocol are denied.
 \end{itemize}
-Requests processed by cars require an authentication process too; in order to avoid fake requests from unknown entities. As already said for the SSH credentials, they stored in the database as plaintext, diffent for each car and also different from the SSH credentials.
+Requests processed by cars also require an authentication process in order to avoid fake requests from unknown entities. As already said for the SSH credentials, they are stored in the database as plaintext, diffent for each car and from the SSH credentials.
 
 
 
 
-\subsubsubsection{[User] Creates user}
+\subsubsubsection{[User] User creation}
 \begin{figure}[H]
 	\noindent
     	\centering
@@ -198,7 +197,7 @@ Requests processed by cars require an authentication process too; in order to av
     	\label{fig:api-add-user}
 \end{figure}
 
-\subsubsubsection{[User] Retrieves user's salt bytes}
+\subsubsubsection{[User] User's salt bytes retrieval}
 \begin{figure}[H]
 	\noindent
     	\centering
@@ -206,7 +205,7 @@ Requests processed by cars require an authentication process too; in order to av
     	\label{fig:api-salt-bytes}
 \end{figure}
 
-\subsubsubsection{[User] Deletes user}
+\subsubsubsection{[User] User deletion}
 \begin{figure}[H]
 	\noindent
     	\centering
@@ -214,7 +213,7 @@ Requests processed by cars require an authentication process too; in order to av
     	\label{fig:api-delete-user}
 \end{figure}
 
-\subsubsubsection{[User] Retrieves user's rental logbook}
+\subsubsubsection{[User] User's rental logbook retrieval}
 \begin{figure}[H]
 	\noindent
     	\centering 
@@ -222,7 +221,7 @@ Requests processed by cars require an authentication process too; in order to av
     	\label{fig:api-past-rents}
 \end{figure}
 
-\subsubsubsection{[User] Retrieves nearby available cars}
+\subsubsubsection{[User] Available cars' retrieval}
 \begin{figure}[H]
 	\noindent
     	\centering
@@ -230,7 +229,7 @@ Requests processed by cars require an authentication process too; in order to av
     	\label{fig:api-search-cars}
 \end{figure}
 
-\subsubsubsection{[User] Reserves car}
+\subsubsubsection{[User] Car reservation}
 \begin{figure}[H]
 	\noindent
     	\centering
@@ -238,7 +237,7 @@ Requests processed by cars require an authentication process too; in order to av
     	\label{fig:api-reservation}
 \end{figure}
 
-\subsubsubsection{[User] Retrieves current reservation}
+\subsubsubsection{[User] Current reservation retrieval}
 \begin{figure}[H]
 	\noindent
     	\centering
@@ -269,7 +268,7 @@ Requests processed by cars require an authentication process too; in order to av
     	\label{fig:api-car-heartbeat2}
 \end{figure}
 
-\subsubsubsection{[Car] Retrieves nearby available safe areas}
+\subsubsubsection{[Car] Available safe areas' retrieval}
 \begin{figure}[H]
 	\noindent
     	\centering
@@ -282,10 +281,10 @@ Requests processed by cars require an authentication process too; in order to av
 There are other requests, but they are not relevant as the previous requests. For instance:
 
 \begin{itemize}
-	\item update user's information.
-	\item execute payments.
-	\item get the current charge of a rent.
-	\item get information about a single car.
+	\item user's information updating.
+	\item payment execution.
+	\item current charging information retrieval.
+	\item car information retrieval.
 \end{itemize}
 
 \subsubsection{Web server to browser}
@@ -294,7 +293,7 @@ The users' browsers communicate with the web server via HTTPS requests. Any unen
 
 \subsubsection{External interfaces}
 
-The application server has two external interfaces
+The application server has two external interfaces:
 \begin{description}
 	\item[SMSGateway:] to send SMS to users.
 	\item[PaymentGateway:] to execute credit card payments of users.
@@ -325,7 +324,7 @@ The dynamic behaviour of the system is described through sequence diagrams. The 
 	\noindent
     	\centering
     	\includegraphics[height=550px, keepaspectratio]{diagrams/SequenceCarUnlocking.png}
-	\caption{Sequence diagram of the car unlocking through the mobile application.}
+	\caption{Sequence diagram for car unlocking through the mobile application.}
     	\label{fig:sequence-unlocking}
 \end{figure}
 
@@ -333,7 +332,7 @@ The dynamic behaviour of the system is described through sequence diagrams. The 
 	\noindent
     	\centering
     	\includegraphics[height=550px, keepaspectratio]{diagrams/SequenceCarHeartbeat.png}
-	\caption{Sequence diagram of the car heartbeat process and the car locking.}
+	\caption{Sequence diagram of the car heartbeat process and car locking.}
     	\label{fig:sequence-heartbeat}
 \end{figure}
 

@@ -1,1 +1,127 @@
 \section{Algorithm Design} \label{sec algorithm design}
+
+\subsection{Car Heartbeat}
+
+The car hearbeat management is a core function of the businnes logic. It checks the cars' status and execute actions based on their status.
+ 
+The associated request provides the following infomation to the application server:
+\begin{description}
+\item [JSON Object:] it contains:
+	\begin{itemize}
+		\item $carInformation$: the information about the car.
+		\item $rentInformation$: the information about the current rent.
+	\end{itemize}
+\item [Path Parameters:] they are:
+	\begin{itemize}
+		\item $carID$: the car ID used to get authenticate by server.
+		\item $carPassword$: the car's password used to get authenticate by server.
+	\end{itemize}
+\end{description}
+The algorithm used to manage the car hearbeat is the following.
+
+\bigskip
+
+\begin{algorithm}[H]
+\small
+	\eIf{\upshape{({\color{blue}verifyCredentials} ($carID$, $carPassword$))}}
+	{
+		{\color{green} updateCarStatus} ($carID$, $carInformation$); \\
+		\If{\upshape{({\color{blue}rentedCar} ($carID$))}}
+		{
+			{\color{green} updateRentalStatus} ($carID$, $rentInformation$); \\
+		}
+		HTTPResponseCode({\color{red}200});
+	}
+	{
+		HTTPResponseCode({\color{red}403});
+	}
+\end{algorithm}
+
+\subsubsection{Car status updating}
+
+The parameters of this function are:
+\begin{itemize}
+	\item $carInformation$: the information about the car.
+	\item $carID$: the car ID used to get authenticate by server.
+\end{itemize}
+The $carInformation$ object contains:
+\begin{itemize}
+	\item $batteryLevel$: the battery level of the car.
+	\item $position$: an object that contains the geographical postion of the car.
+	\item $brokenParts[]$: the list of the broken parts of the car.
+\end{itemize}
+The $position$ object contains:
+\begin{itemize}
+	\item $latitude$: the latitude value.
+	\item $longitude$: the longitude value..
+\end{itemize}
+The algorithm is the following.
+
+\bigskip
+
+\begin{algorithm}[H]
+\small
+	{\color{blue} updateCarValues}($carID$, $batteryLevel$, $position$); \\ 
+	\If{\upshape{($brokenParts$ != null)}}
+	{
+		\If{\upshape{({\color{blue}getOpenedAssistanceReport} ($carID$, {\color{red}105}) == null)}}
+		{
+			{\color{blue} createAssistanceReport} ($carID$, {\color{red}105}, brokenParts[]); \\
+		} 
+	}
+	\eIf{\upshape{($batteryLevel$ == 0)}}
+	{
+		\If{\upshape{({\color{blue}getOpenedAssistanceReport} ($carID$, {\color{red}103}) == null)}}
+		{
+			{\color{blue}createAssistanceReport} ($carID$, {\color{red}103}); \\
+		} 
+	}
+	{
+		\If{\upshape{($batteryLevel$ \textless= 25  \&\& !{\color{blue}rentedCar} ($carID$))}}
+		{
+			\If{\upshape{({\color{blue}getOpenedAssistanceReport} ($carID$, {\color{red}104}) == null)}}
+			{
+				{\color{blue} setCarOutOfService} ($carID$); \\
+				{\color{blue} createAssistanceReport} ($carID$, {\color{red}104}); \\
+			} 
+		}
+	}
+\end{algorithm}
+
+\subsubsection{Rental status updating}
+
+The parameters of this function are:
+\begin{itemize}
+	\item $rentInformation$: the information about the current rent.
+	\item $carID$: the car ID used to get authenticate by server.
+\end{itemize}
+The $carInformation$ object contains:
+\begin{itemize}
+	\item $events[]$: the list of rental events.
+	\item $isEmpty$: is true if there is no one in the car.
+	\item $isLockable$: is true if the car is turned off and closed correctly.
+\end{itemize}
+The algorithm is the following.
+
+\bigskip
+
+\begin{algorithm}[H]
+\small
+	$rentID$ = {\color{blue} getRentID} ($carID$ ); \\
+	\If{\upshape{($events$ != null)}}
+	{
+		{\color{blue}updateEvents} ($rentID$, $events$); \\
+	}
+	\uIf{\upshape{($isLockable$ \&\& $isEmpty$)}}
+	{
+		\uIf{\upshape{(getRentalEvent($rentID$, TURNED_OFF) != null \&\& inASafeArea($carID$))}}
+		{
+			closeCar($carID$);
+			closeRent($rentID$);
+			calculateCost($rentID$);
+			checkCarStatus($carID$);  //Similar to updateCarStatus without 1st line
+			executePayment($rentID$);
+		}
+	}
+	Other error cases...
+\end{algorithm}
