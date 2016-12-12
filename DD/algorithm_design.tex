@@ -159,7 +159,7 @@ The algorithm is the following.
 	\If{\upshape{($passengerTimes$ != null)}}
 	{
 		$passengerTotalTime$ = 0; \\
-		\For{\upshape{$i$ = 0 \textbf{to} $passengerTimes$.length()}}{$passengerTotalTime$ = $passengerTimes[i + 1]$ - $passengerTimes[i]$; \\
+		\For{\upshape{$i$ = 0 \textbf{to} $passengerTimes$.length()}}{$passengerTotalTime$ = $passengerTotalTime$  + ($passengerTimes[i + 1]$ - $passengerTimes[i]$); \\
 			$i$ = $i$ + 2; \\
 		}
 		\If{\upshape{($passengerTotalTime$ \textgreater= ($rentalTime$ * 0.5))}}
