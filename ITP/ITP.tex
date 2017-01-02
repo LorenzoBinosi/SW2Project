@@ -1,0 +1,81 @@
+\documentclass[a4paper, 12pt, titlepage]{article}
+\usepackage{graphicx}
+\usepackage{titlesec}
+\usepackage{hyperref}
+\usepackage{float}
+
+\usepackage{amsmath}
+\numberwithin{figure}{section}
+\graphicspath{{Images/}}
+
+%subsubsubsection
+\titleclass{\subsubsubsection}{straight}[\subsection]
+
+\newcounter{subsubsubsection}[subsubsection]
+\renewcommand\thesubsubsubsection{\thesubsubsection.\arabic{subsubsubsection}}
+\renewcommand\theparagraph{\thesubsubsubsection.\arabic{paragraph}} % optional; useful if paragraphs are to be numbered
+
+\titleformat{\subsubsubsection}
+{\normalfont\normalsize\bfseries}{\thesubsubsubsection}{1em}{}
+\titlespacing*{\subsubsubsection}
+{0pt}{3.25ex plus 1ex minus .2ex}{1.5ex plus .2ex}
+
+\makeatletter
+\renewcommand\paragraph{\@startsection{paragraph}{5}{\z@}%
+	{3.25ex \@plus1ex \@minus.2ex}%
+	{-1em}%
+	{\normalfont\normalsize\bfseries}}
+\renewcommand\subparagraph{\@startsection{subparagraph}{6}{\parindent}%
+	{3.25ex \@plus1ex \@minus .2ex}%
+	{-1em}%
+	{\normalfont\normalsize\bfseries}}
+\def\toclevel@subsubsubsection{4}
+\def\toclevel@paragraph{5}
+\def\toclevel@paragraph{6}
+\@addtoreset{subsubsubsection}{section}
+\@addtoreset{subsubsubsection}{subsection}
+\def\l@subsubsubsection{\@dottedtocline{4}{7em}{4em}}
+\def\l@paragraph{\@dottedtocline{5}{10em}{5em}}
+\def\l@subparagraph{\@dottedtocline{6}{14em}{6em}}
+\makeatother
+%end
+\setcounter{secnumdepth}{4}
+\setcounter{tocdepth}{4}
+\hypersetup{
+	colorlinks=true,
+	linkcolor=black,
+	filecolor=magenta,      
+	urlcolor=cyan,
+}
+%opening
+\title{
+	\begin{figure}[h]
+		\centering
+		\includegraphics{images/polimi_logo.jpg}
+	\end{figure}
+	Politecnico di Milano, A.A. 2016/2017 
+	\newline\newline 
+	Software Engineering 2: PowerEnJoy \\
+	Integration Test Plan Document}
+\author{Binosi Lorenzo 876022}
+	
+	
+\begin{document}
+	
+	\maketitle
+	\tableofcontents
+	\newpage
+	
+	\include{introduction}
+	
+	\include{integration_strategy/integration_strategy.tex}
+	
+	\include{individual_steps/individual_steps.tex}
+
+	\include{tools/tools.tex}
+
+	\include{stubs/stubs.tex}
+	
+	\include{appendix}
+	
+\end{document}
