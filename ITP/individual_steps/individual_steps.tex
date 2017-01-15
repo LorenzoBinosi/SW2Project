@@ -1,17 +1,569 @@
-\section{Introduction} \label{sec introduction}
+\section{Individual Steps and Test Description} \label{sec individual steps}
 
+This section provides a detailed description of the tests to be performed on each elements that have to be integrated.
 
-\subsection{Purpose}
+Test cases whose code starts with \textbf{SI} are integration tests between subsystems; test cases whose code starts with \textbf{I} are integration tests between components.
 
+\subsection {Integration test cases I01, I02, I03, I04, I05, I06, I07, I08, I09}
 
-\subsection{Scope}
+\indent
 
-  
-\subsection{Definitions, Acronyms, Abbreviations}
+\vspace{1em}
 
+\begin{tabular}{l p{0.55\textwidth}}
+    \hline
+    \textbf{Test Case Identifier} & I01T1\\
+    \hline
+    \textbf{Test Item(s)} & Car $\rightarrow$ DBMS \\
+    \hline
+    \textbf{Input Specification} & Typical queries on the table Car. \\
+    \hline
+    \hline
+    \textbf{Test Case Identifier} & I02T1\\
+    \hline
+    \textbf{Test Item(s)} & Rent $\rightarrow$ DBMS \\
+    \hline
+    \textbf{Input Specification} & Typical queries on the table Rent. \\
+    \hline
+    \hline
+    \textbf{Test Case Identifier} & I03T1\\
+    \hline
+    \textbf{Test Item(s)} & Driver $\rightarrow$ DBMS \\
+    \hline
+    \textbf{Input Specification} & Typical queries on the table Driver. \\
+    \hline
+    \hline
+    \textbf{Test Case Identifier} & I04T1\\
+    \hline
+    \textbf{Test Item(s)} & Park $\rightarrow$ DBMS \\
+    \hline
+    \textbf{Input Specification} & Typical queries on the table Park. \\
+    \hline
+    \hline
+    \textbf{Test Case Identifier} & I05T1\\
+    \hline
+    \textbf{Test Item(s)} & SafeArea $\rightarrow$ DBMS \\
+    \hline
+    \textbf{Input Specification} & Typical queries on the table SafeArea. \\
+    \hline
+    \hline
+    \textbf{Test Case Identifier} & I06T1\\
+    \hline
+    \textbf{Test Item(s)} & RentalEvent $\rightarrow$ DBMS \\
+    \hline
+    \textbf{Input Specification} & Typical queries on the table RentalEvent. \\
+    \hline
+    \hline
+    \textbf{Test Case Identifier} & I07T1\\
+    \hline
+    \textbf{Test Item(s)} & CreditCard $\rightarrow$ DBMS \\
+    \hline
+    \textbf{Input Specification} & Typical queries on the table CreditCard. \\
+    \hline
+\end{tabular}
 
-\subsection{Reference Documents}
+\begin{tabular}{l p{0.55\textwidth}}
+    \hline
+    \textbf{Test Case Identifier} & I08T1\\
+    \hline
+    \textbf{Test Item(s)} & CarAssistance $\rightarrow$ DBMS \\
+    \hline
+    \textbf{Input Specification} & Typical queries on the table CarAssistance. \\
+    \hline
+    \hline
+    \textbf{Test Case Identifier} & I09T1\\
+    \hline
+    \textbf{Test Item(s)} & CarCredential $\rightarrow$ DBMS \\
+    \hline
+    \textbf{Input Specification} & Typical queries on the table CarCredential. \\
+    \hline
+    \hline
+    \textbf{Output Specification} & The queries return the correct results. \\
+    \hline
+    \textbf{Environmental Needs} & GlassFish server, Test Database, drivers for the Java Entity Beans. \\
+    \hline
+    \textbf{Test Description} & The purpose of these tests is to check the communication between the EJB and the DBMS. Moreover, the tests must check if the queries are executed correctly.  \\
+    \hline
+    \textbf{Testing Method} & Automated with JUnit and Arquillian. \\
+    \hline
+\end{tabular}
 
+\vspace{2em}
 
-\subsection{Document Structure}
+\subsection {Integration test case I10}
 
+\indent
+
+\vspace{1em}
+
+\begin{tabular}{l p{0.55\textwidth}}
+    \hline
+    \textbf{Test Case Identifier} & I10T1\\
+    \hline
+    \textbf{Test Item(s)} & RentalFee $\rightarrow$ Settings.xml \\
+    \hline
+    \textbf{Input Specification} &  Methods call from the RentalFee singleton. \\
+    \hline
+    \textbf{Output Specification} & The returned value of the method calls contains the fee choosen by the system . \\
+    \hline
+    \textbf{Environmental Needs} & GlassFish server, drivers for the singleton. \\
+    \hline
+    \textbf{Test Description} & The purpose of these tests is to check if the returned value is correct.  \\
+    \hline
+    \textbf{Testing Method} & Automated with JUnit. \\
+    \hline
+\end{tabular}
+
+\subsection {Integration test cases I11, I12, I13, I14, I15, I16 }
+
+\indent
+
+\vspace{1em}
+
+\begin{tabular}{l p{0.55\textwidth}}
+    \hline
+    \textbf{Test Case Identifier} & I11T1\\
+    \hline
+    \textbf{Test Item(s)} & DriverManager $\rightarrow$ Driver, CreditCard \\
+    \hline
+    \textbf{Input Specification} &  Methods call from the DriverManager session bean. \\
+    \hline
+    \hline
+    \textbf{Test Case Identifier} & I12T1\\
+    \hline
+    \textbf{Test Item(s)} & DriverRentalManager $\rightarrow$ Driver, Car, Rent, CarCredential, Park \\
+    \hline
+    \textbf{Input Specification} &  Methods call from the DriverRentalManager session bean. \\
+    \hline
+    \hline
+    \textbf{Test Case Identifier} & I13T1\\
+    \hline
+    \textbf{Test Item(s)} & SearchCarManager $\rightarrow$ Driver, Car \\
+    \hline
+    \textbf{Input Specification} &  Methods call from the SearchCarManager session bean. \\
+    \hline
+    \hline
+    \textbf{Test Case Identifier} & I14T1\\
+    \hline
+    \textbf{Test Item(s)} & LogBookManager $\rightarrow$ Driver, Rent \\
+    \hline
+    \textbf{Input Specification} &  Methods call from the LogBookManager session bean. \\
+    \hline
+    \hline
+    \textbf{Test Case Identifier} & I15T1\\
+    \hline
+    \textbf{Test Item(s)} & CarHeartbeat $\rightarrow$ CarCredential, Rent, Car, CreditCard, Park, CarAssistance, RentalEvent, RentalFee \\
+    \hline
+    \textbf{Input Specification} &  Methods call from the CarHeartbeat session bean. \\
+    \hline
+    \hline
+    \textbf{Test Case Identifier} & I16T1\\
+    \hline
+    \textbf{Test Item(s)} & CarRentalManager $\rightarrow$ CarCredential, Driver, SafeArea, Park, RentalFee, RentalEvent \\
+    \hline
+    \textbf{Input Specification} &  Methods call from the SearchCarManager session bean. \\
+    \hline
+    \hline
+    \textbf{Output Specification} & Methods are fully executed providing the right functionalities to the system.\\
+    \hline
+    \textbf{Environmental Needs} & GlassFish server, drivers for the session beans, stubs for the car application. \\
+    \hline
+    \textbf{Test Description} & The purpose of these tests is to ensure that the methods of the session beans provide the right functionalities
+to the system.  \\
+    \hline
+    \textbf{Testing Method} & Automated with JUnit and Arquillian. \\
+    \hline
+\end{tabular}
+
+\vspace{2em}
+
+\subsection {Integration test case I17}
+
+\indent
+
+\vspace{1em}
+
+\begin{tabular}{l p{0.55\textwidth}}
+    \hline
+    \textbf{Test Case Identifier} & I17T1\\
+    \hline
+    \textbf{Test Item(s)} & Servlets $\rightarrow$ DriverManager, DriverRentalManager, SearchCarManager, LogBookManager, CarHeartbeat, CarRentalManager \\
+    \hline
+    \textbf{Input Specification} &  Servlets' methods call. \\
+    \hline
+    \textbf{Output Specification} &  Methods are fully executed providing the right functionalities to the system.\\
+    \hline
+    \textbf{Environmental Needs} & GlassFish server, drivers for the servlets. \\
+    \hline
+    \textbf{Test Description} &  The purpose of these tests is to ensure that the methods of the servlets provide the right functionalities
+to the system.  \\
+    \hline
+    \textbf{Testing Method} & Automated with JUnit and Mockito. \\
+    \hline
+\end{tabular}
+
+\vspace{2em}
+
+\subsection {Integration test cases SI1, I18}
+
+\indent
+
+\vspace{1em}
+
+\begin{tabular}{l p{0.55\textwidth}}
+    \hline
+    \textbf{Test Case Identifier} & SI1T1, I18T1\\
+    \hline
+    \textbf{Test Item(s)} & ServletContainer $\rightarrow$ Servlet \\
+    \hline
+    \textbf{Input Specification} &  HTTPS requests to the application server. \\
+    \hline
+    \textbf{Output Specification} &  The ServletContainer invokes the correct servlets. \\
+    \hline
+    \textbf{Environmental Needs} & GlassFish server, plug-in for custom HTTPs requests. \\
+    \hline
+    \textbf{Test Description} & The purpose of these tests is to check if the correct servlet has been called.  \\
+    \hline
+    \textbf{Testing Method} & Automated with JUnit and Arquillian. \\
+    \hline
+\end{tabular}
+
+\vspace{2em}
+
+\subsection {Integration test case SI1}
+
+\indent
+
+\vspace{1em}
+
+\begin{tabular}{l p{0.55\textwidth}}
+    \hline
+    \textbf{Test Case Identifier} & SI1T2\\
+    \hline
+    \textbf{Test Item(s)} & Business $\rightarrow$ Database \\
+    \hline
+    \textbf{Input Specification} &  Multiple concurrent HTTPS requests to the application server. \\
+    \hline
+    \textbf{Output Specification} & The application server must answer the request in a reasonable time with the applied load. \\
+    \hline
+    \textbf{Environmental Needs} & GlassFish server. \\
+    \hline
+    \textbf{Test Description} & This test case checks if the performance requirements, described in the RASD, are fulfilled.  \\
+    \hline
+    \textbf{Testing Method} & Automated with Apache JMeter. \\
+    \hline
+\end{tabular}
+
+\vspace{2em}
+
+\subsection {Integration test case I19}
+
+\indent
+
+\vspace{1em}
+
+\begin{tabular}{l p{0.55\textwidth}}
+    \hline
+    \textbf{Test Case Identifier} & I19T1\\
+    \hline
+    \textbf{Test Item(s)} & WebController $\rightarrow$ (Business) ServletContainer \\
+    \hline
+    \textbf{Input Specification} &  Methods calls from the WebController. \\
+    \hline
+    \textbf{Output Specification} &  The WebController executes the correct API call. \\
+    \hline
+    \textbf{Environmental Needs} & GlassFish server, drivers for the WebController. \\
+    \hline
+    \textbf{Test Description} & The purpose of these tests is to check if the WebController executes the correct API call.  \\
+    \hline
+    \textbf{Testing Method} & Automated with JUnit and Mockito. \\
+    \hline
+\end{tabular}
+
+\vspace{2em}
+
+\subsection {Integration test case I20}
+
+\indent
+
+\vspace{1em}
+
+\begin{tabular}{l p{0.55\textwidth}}
+    \hline
+    \textbf{Test Case Identifier} & I20T1\\
+    \hline
+    \textbf{Test Item(s)} & JSP $\rightarrow$ WebController \\
+    \hline
+    \textbf{Input Specification} & Manual interaction with the JSPs. \\
+    \hline
+    \textbf{Output Specification} &  The JSPs display the web pages correctly according to the injected parameters and execute the right operation. \\
+    \hline
+    \textbf{Environmental Needs} & GlassFish server. \\
+    \hline
+    \textbf{Test Description} & The purpose of these tests is to check the behavior of the JSP and its graphical components.  \\
+    \hline
+    \textbf{Testing Method} & Manual testing. \\
+    \hline
+\end{tabular}
+
+\vspace{2em}
+
+\subsection {Integration test cases SI2, I21}
+
+\indent
+
+\vspace{1em}
+
+\begin{tabular}{l p{0.55\textwidth}}
+    \hline
+    \textbf{Test Case Identifier} & SI2T1, I21T1\\
+    \hline
+    \textbf{Test Item(s)} & WebContainer $\rightarrow$ JSP \\
+    \hline
+    \textbf{Input Specification} &  HTTPS requests to the web server. \\
+    \hline
+    \textbf{Output Specification} &  The WebContainer invokes the correct JSPs and executes them.  \\
+    \hline
+    \textbf{Environmental Needs} & GlassFish server, web browser. \\
+    \hline
+    \textbf{Test Description} & The purpose of these tests is to check if the correct JSP has been called and the iteractions between JSPs.  \\
+    \hline
+    \textbf{Testing Method} & Automated with JUnit and Arquillian. \\
+    \hline
+\end{tabular}
+
+\vspace{2em}
+
+\subsection {Integration test case SI2}
+
+\indent
+
+\vspace{1em}
+
+\begin{tabular}{l p{0.55\textwidth}}
+    \hline
+    \textbf{Test Case Identifier} & SI2T2\\
+    \hline
+    \textbf{Test Item(s)} & Web $\rightarrow$ Businnes \\
+    \hline
+    \textbf{Input Specification} &  Multiple concurrent HTTPS requests to the web server. \\
+    \hline
+    \textbf{Output Specification} & The web server must answer the request in a reasonable time with the applied load. \\
+    \hline
+    \textbf{Environmental Needs} & GlassFish server. \\
+    \hline
+    \textbf{Test Description} & This test case checks if the performance requirements, described in the RASD, are fulfilled.  \\
+    \hline
+    \textbf{Testing Method} & Automated with Apache JMeter. \\
+    \hline
+\end{tabular}
+
+\vspace{2em}
+
+\subsection {Integration test case I22}
+
+\indent
+
+\vspace{1em}
+
+\begin{tabular}{l p{0.55\textwidth}}
+    \hline
+    \textbf{Test Case Identifier} & I22T1\\
+    \hline
+    \textbf{Test Item(s)} & iOSController $\rightarrow$ (Business) ServletContainer \\
+    \hline
+    \textbf{Input Specification} &  Methods calls from the iOSController. \\
+    \hline
+    \textbf{Output Specification} &  The iOSController executes the correct API call. \\
+    \hline
+    \textbf{Environmental Needs} & Xcode, iOS Simulator, drivers for the iOSController. \\
+    \hline
+    \textbf{Test Description} & The purpose of these tests is to check if the iOSController executes the correct API call.  \\
+    \hline
+    \textbf{Testing Method} & Automated (iOS testing suite). \\
+    \hline
+\end{tabular}
+
+\vspace{2em}
+
+\subsection {Integration test case I23}
+
+\indent
+
+\vspace{1em}
+
+\begin{tabular}{l p{0.55\textwidth}}
+    \hline
+    \textbf{Test Case Identifier} & I23T1\\
+    \hline
+    \textbf{Test Item(s)} & AndroidController $\rightarrow$ (Business) ServletContainer \\
+    \hline
+    \textbf{Input Specification} &  Methods calls from the AndroidController. \\
+    \hline
+    \textbf{Output Specification} &  The AndroidController executes the correct API call. \\
+    \hline
+    \textbf{Environmental Needs} & Android Emulator, drivers for the AndroidController. \\
+    \hline
+    \textbf{Test Description} & The purpose of these tests is to check if the AndroidController executes the correct API call.  \\
+    \hline
+    \textbf{Testing Method} & Automated (Android testing suite). \\
+    \hline
+\end{tabular}
+
+\vspace{2em}
+
+\subsection {Integration test case I24}
+
+\indent
+
+\vspace{1em}
+
+\begin{tabular}{l p{0.55\textwidth}}
+    \hline
+    \textbf{Test Case Identifier} & I24T1\\
+    \hline
+    \textbf{Test Item(s)} & iOSGPSManager $\rightarrow$ iOSController \\
+    \hline
+    \textbf{Input Specification} &  Method calls from the iOSGPSManager. \\
+    \hline
+    \textbf{Output Specification} &  The returned value of the method calls is the correct geographical position.  \\
+    \hline
+    \textbf{Environmental Needs} & Xcode, iOS Simulator, driver for the iOSGPSManager. \\
+    \hline
+    \textbf{Test Description} & The purpose of these tests is to check if the iOSGPSManager returns the correct geographical position.  \\
+    \hline
+    \textbf{Testing Method} & Automated (iOS testing suite). \\
+    \hline
+\end{tabular}
+
+\vspace{2em}
+
+\subsection {Integration test case I25}
+
+\indent
+
+\vspace{1em}
+
+\begin{tabular}{l p{0.55\textwidth}}
+    \hline
+    \textbf{Test Case Identifier} & I25T1\\
+    \hline
+    \textbf{Test Item(s)} & AndroidGPSManager $\rightarrow$ AndroidController \\
+    \hline
+    \textbf{Input Specification} &  Method calls from the AndroidGPSManager. \\
+    \hline
+    \textbf{Output Specification} &  The returned value of the method calls is the correct geographical position.  \\
+    \hline
+    \textbf{Environmental Needs} & Android Emulator, drivers for the AndroidGPSManager. \\
+    \hline
+    \textbf{Test Description} & The purpose of these tests is to check if the AndroidGPSManager returns the correct geographical position.  \\
+    \hline
+    \textbf{Testing Method} & Automated (Android testing suite). \\
+    \hline
+\end{tabular}
+
+\vspace{2em}
+
+\subsection {Integration test cases SI3, I26}
+
+\indent
+
+\vspace{1em}
+
+\begin{tabular}{l p{0.55\textwidth}}
+    \hline
+    \textbf{Test Case Identifier} & SI3T1, I26T1\\
+    \hline
+    \textbf{Test Item(s)} & iOSUIManager $\rightarrow$ iOSController \\
+    \hline
+    \textbf{Input Specification} &  Manual interaction with the GUI. \\
+    \hline
+    \textbf{Output Specification} &  The GUI reacts correctly to the executed operations. \\
+    \hline
+    \textbf{Environmental Needs} & Xcode, iOS Simulator. \\
+    \hline
+    \textbf{Test Description} & The purpose of these tests is to check the behavior of the iOS GUI and its graphical components.  \\
+    \hline
+    \textbf{Testing Method} & Manual testing. \\
+    \hline
+\end{tabular}
+
+\vspace{2em}
+
+\subsection {Integration test cases SI3, I27}
+
+\indent
+
+\vspace{1em}
+
+\begin{tabular}{l p{0.55\textwidth}}
+    \hline
+    \textbf{Test Case Identifier} & SI3T2, I27T1\\
+    \hline
+    \textbf{Test Item(s)} & AndroidUIManager $\rightarrow$ AndroidController \\
+    \hline
+    \textbf{Input Specification} &  Manual interaction with the GUI. \\
+    \hline
+    \textbf{Output Specification} &  The GUI reacts correctly to the executed operations. \\
+    \hline
+    \textbf{Environmental Needs} & Android Emulator. \\
+    \hline
+    \textbf{Test Description} & The purpose of these tests is to check the behavior of the Android GUI and its graphical components.  \\
+    \hline
+    \textbf{Testing Method} & Manual testing. \\
+    \hline
+\end{tabular}
+
+\vspace{2em}
+
+\subsection {Integration test case I28}
+
+\indent
+
+\vspace{1em}
+
+\begin{tabular}{l p{0.55\textwidth}}
+    \hline
+    \textbf{Test Case Identifier} & I28T1\\
+    \hline
+    \textbf{Test Item(s)} & CarApplication $\rightarrow$ (Business) ServletContainer \\
+    \hline
+    \textbf{Input Specification} &  Runs the CarApplication. \\
+    \hline
+    \textbf{Output Specification} &  The CarApplication sends the correct information every 10 seconds.  \\
+    \hline
+    \textbf{Environmental Needs} & Linux. \\
+    \hline
+    \textbf{Test Description} & The purpose of these tests is to check if the CarApplication sends the correct information to the system every 10 seconds.  \\
+    \hline
+    \textbf{Testing Method} & Automated using JUnit, manual testing. \\
+    \hline
+\end{tabular}
+
+\vspace{2em}
+
+\subsection {Integration test cases SI4, I29}
+
+\indent
+
+\vspace{1em}
+
+\begin{tabular}{l p{0.55\textwidth}}
+    \hline
+    \textbf{Test Case Identifier} & SI4T1, I29T1\\
+    \hline
+    \textbf{Test Item(s)} & CarGUI $\rightarrow$ (Business) ServletContainer \\
+    \hline
+    \textbf{Input Specification} &   Runs the CarGUI application. \\
+    \hline
+    \textbf{Output Specification} &  The application allows us to interact with some utility tools.  \\
+    \hline
+    \textbf{Environmental Needs} & Linux. \\
+    \hline
+    \textbf{Test Description} & The purpose of these tests is to check if the utility tools of the application work correctly.  \\
+    \hline
+    \textbf{Testing Method} & Automated using JUnit, manual testing. \\
+    \hline
+\end{tabular}
+
+\vspace{2em}

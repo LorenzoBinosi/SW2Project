@@ -1,17 +1,224 @@
-\section{Introduction} \label{sec introduction}
+\section{Integration Strategy} \label{sec integration strategy}
 
 
-\subsection{Purpose}
+\subsection{Entry Criteria}
+
+In order to perform an efficient and reliable integration testing of the software architecture, we must define the prerequisites to be achieved before it can be started.
+
+First of all, both the RASD and the DD must be delivered, and tested according to the following criteria: 
+
+\begin{description}
+	\item[completeness:] whether all components are present and described completely.
+	\item[consistency:] whether all components do not contradict each other.
+	\item[feasibility:] whether the project is feasible considering the given constraints (deadlines, budget and so on).
+	\item[testability:] whether or not a system fulfills its requirements.
+\end{description}
+
+Afterwards, the integration testing process must be developed following the defined strategy of Section \ref{sec integration test strategy}. 
+
+It's suggested to start the integration process once there is enought code that could be integrated, taking into account the constraints carried by the strategy. For instance, if the development of the mobile application is not started, we could still start the integration process of the web logic. Obviously, it requires the integration of the business logic to be completed and the entire web logic to be written.
+
+\subsection{Elements to be Integrated}
+
+The elements to be integrated are described in the DD and now recalled, highlighting the subsystem that belong to them, in Table \ref{table subsystem 2}.
+
+\begin{table} [H]
+    \centering
+    \begin{small}
+    \begin{tabular}{| p{0.3\textwidth} | p{0.45\textwidth} | p{0.2\textwidth} |}
+    \hline
+    \textbf{Element} & \textbf{Description} & \textbf{Subsystem} \\
+    \hline
+    DBMS & The database of the system & Database\\
+    \hline
+    SafeArea & The EJB of the safe areas & Business\\
+    \hline
+    Car & The EJB of the cars & Business\\
+    \hline
+    Rent & The EJB of the rents & Business\\
+    \hline
+    RentalEvent & The EJB of the rental events & Business\\
+    \hline
+    CarCredential & The EJB of the cars' credential & Business\\
+    \hline
+    Driver & The EJB of the drivers & Business\\
+    \hline
+    CreditCard & The EJB of the credit cards & Business\\
+    \hline
+    Park & The EJB of the parked cars & Business\\
+   \hline
+    CarAssistance & The EJB of the cars' issues reports & Business\\
+    \hline
+    DriverManager & The session EBJ for the user's operations & Business\\
+    \hline
+    DriverRentalManager & The session EBJ for the rental operations & Business\\
+    \hline
+    SearchCarManager & The session EBJ for the searching operations & Business\\
+    \hline
+    LogBookManager & The session EBJ for the logbook operations & Business\\
+    \hline
+    CarHeartbeat & The session EBJ for the car heartbeat management & Business\\
+    \hline
+    RentalFee & The singleton EBJ for the rental fee  & Business\\
+    \hline
+    CarRentalManager & The session EBJ for the car rental information & Business\\
+    \hline
+    Servlets & All the servlets that operate using the session EJBs & Business\\
+    \hline
+    ServletContainer & The servlet container that invoke the right servlet once called & Business\\
+    \hline
+    AndroidUIManager & The Android UI manager & AndroidMobile\\
+    \hline
+    iOSUIManager & The iOs UI manager & iOSMobile\\
+    \hline
+    AndroidGPSManager & The Android GPS manager & AndroidMobile\\
+    \hline
+    iOSGPSManager & The iOS GPS manager & iOSMobile\\
+    \hline
+    AndroidController & The Android controller & AndroidMobile\\
+    \hline
+    iOSController & The iOS controller & iOSMobile\\
+    \hline
+    WebContoller & The web controller that communicates with the application server & Web\\
+    \hline
+    JSP & The JSP of the web application & Web\\
+    \hline
+    WebContainer & The web container that invoke the right JSP once called & Web\\
+    \hline
+    \end{tabular}
+    \end{small}
+    \label{table subsystem 1}
+\end{table}
 
 
-\subsection{Scope}
-
+\begin{table} [H]
+    \centering
+    \begin{small}
+    \begin{tabular}{| p{0.3\textwidth} | p{0.45\textwidth} | p{0.2\textwidth} |}
+    \hline
+    CarApplication & The car application that notifies the system about the car/renta status & Car\\
+    \hline
+    CarGUI & The car application that supports several utilities (Radio, GPS Navigator, ...) & Car\\
+    \hline
+    \end{tabular}
+    \end{small}
+    \caption{Elements of the PowerEnJoy system to be integrated.}
+    \label{table subsystem 2}
+\end{table}
   
-\subsection{Definitions, Acronyms, Abbreviations}
+\subsection{Integration Testing Strategy} \label{sec integration test strategy}
 
+The strategy adopted for the integration testing is the \textbf{bottom-up} approach, for the software integration, and the \textbf{critical-module-first} approach, for the subsystem integration. The choice of these approaches it's due to the fact that the integration process of a subsystem is automatically completed once the software of the same subsystem is integrated.
 
-\subsection{Reference Documents}
+Moreover, the performance of the system could be evaluated at each integration step using \textbf{JMeter}. In fact if the performance drop down it's probably due to the last integrated element/subsystem.
 
+\subsection{Sequence of Component/Function Integration}
 
-\subsection{Document Structure}
+\subsubsection{Software Integration Sequence} \label{software integration}
 
+The software integration sequence is summarized in Table \ref{elements sequence 2}.
+
+Choosing the bottom-up approach the elements are tested from the most indipendent to the less one. They require the implementation of some drivers which are developed using \textbf{Mockito}, aimed to tests the iteraction between elements of the same subsystem, and \textbf{Arquillian}, aimed to tests the iteraction beetwen elements of different subsystem. Both frameworks require \textbf{JUnit} for some essential testing functionalities (for instance the \textit{assertEquals} function).
+
+\begin{table}[H]
+    \centering
+    \begin{small}
+    \begin{tabular}{| l | l | p{0.35\textwidth} | p{0.3\textwidth} |}
+    \hline
+    \textbf{N.} & \textbf{Subsystem} & \textbf{Component} & \textbf{Integrates with} \\
+    \hline
+    I1 & Database, Business & (JEB) Car & DBMS\\
+    \hline
+    I2 & Database, Business & (JEB) Rent & DBMS\\
+    \hline
+    I3 & Database, Business & (JEB) Driver & DBMS\\
+    \hline
+    I4 & Database, Business & (JEB) Park & DBMS\\
+   \hline
+    I5 & Database, Business & (JEB) SafeArea & DBMS\\
+    \hline
+    I6 & Database, Business & (JEB) RentalEvent & DBMS\\
+    \hline
+    I7 & Database, Business & (JEB) CreditCard & DBMS\\
+    \hline
+     I8 & Database, Business & (JEB) CarAssistance & DBMS\\
+    \hline
+     I9 & Database, Business & (JEB) CarCredential & DBMS\\
+    \hline
+     I10 & Business & (SB) RentalFee & Settings.xml \\
+    \hline
+     I11 & Business & (SB) DriverManager & Driver \newline CreditCard\\
+    \hline
+     I12 & Business & (SB) DriverRentalManager & Driver \newline Car \newline Rent \newline CarCredential \newline Park\\
+    \hline
+     I13 & Business & (SB) SearchCarManager & Driver \newline Car\\
+    \hline
+     I14 & Business & (SB) LogBookManager & Driver \newline Rent  \\
+    \hline
+     I15 & Business & (SB) CarHeatbeat & CarCredential \newline Rent \newline Car  \newline CreditCard  \newline Park  \newline CarAssistance  \newline RentalEvent  \newline RentalFee  \\
+    \hline
+     I16 & Business & (SB) CarRentalManager & CarCredential \newline Driver \newline SafeArea  \newline Park \newline RentalFee  \newline RentalEvent \\
+    \hline
+    I17  & Business & Servlets & DriverManager \newline DriverRentalManager \newline SearchCarManager \newline LogBookManager \newline CarHeatbeat \newline CarRentalManager\\
+    \hline
+    \end{tabular}
+    \end{small}
+    \label{elements sequence 1}
+\end{table}
+
+\begin{table}[H]
+    \centering
+    \begin{small}
+    \begin{tabular}{| l | l | p{0.35\textwidth} | p{0.3\textwidth} |}
+    \hline
+    I18 & Business & ServletContainer & Servlets \\
+    \hline
+    I19  & Web & WebController & (Business) ServletContainer\\
+    \hline
+    I20 & Web & JSP & WebController\\
+    \hline
+    I21 & Web & WebContainer & JSP\\
+    \hline
+    I22  & Mobile & iOSController & (Business) ServletContainer\\
+    \hline
+    I23  & Mobile & AndroidController & (Business) ServletContainer\\
+    \hline
+    I24  & Mobile & iOSGPSManager & iOSController\\
+    \hline
+    I25  & Mobile & AndroidGPSManager & AndroidController\\
+    \hline
+    I26  & Mobile & iOSUIManager & iOSController\\
+    \hline
+    I27  & Mobile & AndroidUIManager & AndroidController\\
+    \hline   
+    I28  & Car & CarApplication & (Business) ServletContainer\\
+    \hline   
+    I29  & Car & CarGUI & (Business) ServletContainer\\
+    \hline 
+    \end{tabular}
+    \end{small}
+    \caption{Integration of the PowerEnJoy system's elements.}
+    \label{elements sequence 2}
+\end{table}
+
+\subsubsection{Subsystem Integration Sequence} \label{subsystem integration}
+
+As already said, the strategy adopted for the subsystem integration is the critical-module-first approach. For the chosen software architecture, this approach allow us to a better and easier integration. The database requires simple drivers in order to be integrate, instead, the business logic doesn't need them at all. In fact it's possible to test the correct integration of the business subsytem just making API calls in an automated fashion.
+
+The subsystem integration sequence is summerized in Table \ref{subsystems sequence}.
+
+\begin{table}[H]
+    \centering
+    \begin{tabular}{| l | l | l |}
+        \hline
+        \textbf{N.} & \textbf{Subsystem} & \textbf{Integrates with} \\
+        \hline
+        SI1 & Business & Database\\
+        SI2 & Web & Business\\
+        SI3 & Mobile & Business \\
+        SI4 & Car & Business \\
+        \hline
+    \end{tabular}
+    \caption{Integration of the PowerEnJoy's subsystems.}
+    \label{subsystems sequence}
+\end{table}

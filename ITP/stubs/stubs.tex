@@ -1,0 +1,12 @@
+\section{Program Stubs and Test Data Required} \label{sec stubs}
+
+In order to perform an efficient integration testing we require some drivers aimed to simulate the behavior of the real software. 
+
+\begin{description}
+\item[Drivers for Java Entity Beans: ] drivers aimed to test the communication between the application server and the database, and the correctness of the queries. They are developed using JUnit and Arquillian.
+\item[Drivers for Java Session Beans: ] drivers aimed to test the correctness of the beans' methods. They are developed using JUnit and Arquillian.
+\item[Drivers for Servlets: ] drivers aimed to test the correctness of the Servlets' methods. They are developed using JUnit and Mockito.
+\item[Drivers for containers: ] drivers aimed to test if the correct component is injected. They are developed using JUnit and Arquillian.
+\item[Drivers for controllers: ] drivers aimed to test the communication between client applications/web server and the application server, and the correctness of the API calls executed. They are developed using JUnit and Mockito.
+
+\end{description}
