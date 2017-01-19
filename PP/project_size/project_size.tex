@@ -1,0 +1,185 @@
+\section{Project size, cost and effort estimation}
+
+This section describes which are the main functionalities of PowerEnJoy that allowed us to estimate the expected size, the cost and the required effort of the project. 
+
+For the size estimation we will use the \textbf{Function Points} approach. It allows to estimate the correspondent amount of lines of code to be written in Java, according to the main functionalities of PowerEnJoy. We won't consider the functionalies of the user interface in order to have a more meaningful and reliable estimation.
+
+For the cost and effort estimation we will use the \textbf{COCOMO II} model, relying on the amount of lines of code estimated previously.
+
+\subsection{Size estimation}
+
+For the size estimation we will refer to the IFPUG 1994 standard~\cite{ifpug} which specifies the definitions, rules and steps for applying the IFPUG's functional size measurement (FSM) method.
+
+In order to determine the complexity level, the IFPUG standard classifies each function count into Low, Average and High complexity levels depending on the number of data element types contained and the number of file types referenced. Tables \ref{tab:complexity-estimation1},  \ref{tab:complexity-estimation2} and \ref{tab:complexity-estimation3} reassume the complexity levels for each type of file. 
+
+Once determined the complexity of each function, it's possible to define its weight, i.e., the relative effort required to implement it. Table \ref{tab:complexity-weights} reassume the Unadjusted Function Points (UFP) for each complexity level.
+
+\begin{table}[H]
+\centering
+\begin{subtable}{\textwidth}
+    \centering
+    \begin{tabular}{| c | l | l | l |}
+        \hline
+         & \multicolumn{3}{c|}{\textbf{Data Elements}} \\
+        \hline
+        \textbf{Record Elements} & 1-19 & 20-50 & 51+ \\
+        \hline
+        1       & Low     & Low     & Avg.     \\
+        2-5    & Low     & Avg.    & High     \\
+        6+     & Avg.    & High    & High     \\
+        \hline
+    \end{tabular}
+    \caption{Complexity estimation for ILFs and EIFs.}
+    \label{tab:complexity-estimation1}
+\end{subtable}
+
+\vspace{2em}
+
+\begin{subtable}{\textwidth}
+    \centering
+    \begin{tabular}{| c | l | l | l |}
+        \hline
+         & \multicolumn{3}{c|}{\textbf{Data Elements}} \\
+        \hline
+        \textbf{Record Elements} & 1-5 & 6-19 & 20+ \\
+        \hline
+        0-1     & Low     & Low     & Avg.     \\
+        2-3     & Low     & Avg.    & High     \\
+        4+      & Avg.    & High    & High     \\
+        \hline
+    \end{tabular}
+    \caption{Complexity estimation for EOs and EQs.}
+    \label{tab:complexity-estimation2}
+\end{subtable}
+
+\vspace{2em}
+
+\begin{subtable}{\textwidth}
+    \centering
+    \begin{tabular}{| c | l | l | l |}
+        \hline
+         & \multicolumn{3}{c|}{\textbf{Data Elements}} \\
+        \hline
+        \textbf{Record Elements} & 1-4 & 5-15 & 16+ \\
+        \hline
+        1       & Low     & Low     & Avg.     \\
+        2-3     & Low     & Avg.    & High     \\
+        3+      & Avg.    & High    & High     \\
+        \hline
+    \end{tabular}
+    \caption{Complexity estimation for EIs.}
+    \label{tab:complexity-estimation3}
+\end{subtable}
+\caption{Estimation of complexities for different types of Function Points.}
+\label{tab:complexity-estimation}
+\end{table}
+
+\begin{table}[H]
+    \centering
+    \begin{tabular}{| l | l | l | l |}
+        \hline
+        \multirow{2}{*}{\textbf{Function Type}} & \multicolumn{3}{c|}{\textbf{Complexity-Weight}} \\
+        \cline{2-4}
+        & Low & Average & High \\
+        \hline
+        Internal Logic Files    & 7     & 10    & 15    \\
+        External Interface Files & 5     & 7     & 10    \\
+        External Inputs          & 3     & 4     & 6     \\
+        External Outputs       & 4     & 5     & 7     \\
+        External Inquiries        & 3     & 4     & 6     \\
+        \hline
+    \end{tabular}
+    \caption{UFP complexity weights.}
+    \label{tab:complexity-weights}
+\end{table}
+
+\newpage 
+
+\subsubsection{Internal Logic Files (ILFs)}
+
+The ILFs are those logical files generated, used or mantained by the software system. In our case they include all the information that the system has to store:
+\begin{itemize}
+	\item Driver:
+	\begin{itemize}
+		\item Driver information
+		\item CreditCard
+	\end{itemize}
+	\item Rent:
+	\begin{itemize}
+		\item Rental information
+		\item RentalEvents
+	\end{itemize}
+	\item Car
+	\item SafeArea
+	\item CarAssistance
+\end{itemize}
+The Driver Record Element (RET) contains 15 Data Elements (DET's) and the CreditCard RET, which contains 2 DET's. Hence, according to the Table \ref{tab:complexity-estimation}, the Driver ILF has a low complexity with an amount of 2 RET's and 17 DET's.
+
+The Rent RET contains 6 DET's  and the RentalEvent RET, which contains 2 DET's. Hence, the Rent ILF has a low complexity with an amount of 2 RET's and 8 DET's.
+
+The Car, SafeArea and CarAssistance RET's contain respectively 11, 4 and 4 DET's, and their ILFs have a low complexity.
+
+\vspace{2em}
+
+\begin{table}[H]
+    \centering
+    \begin{tabular}{| l | l | l |}
+        \hline
+        \textbf{ILF} & \textbf{Complexity} & \textbf{FPs} \\
+        \hline
+        Driver           & Low     & 7     \\
+        Rent           & Low     & 7     \\
+        Car           & Low     & 7     \\
+        SafeArea           & Low     & 7     \\
+        CarAssistance           & Low     & 7     \\
+        \hline
+        \multicolumn{2}{| l |}{\textbf{Total}}  & \textbf{35} \\
+        \hline
+    \end{tabular}
+    \caption{The ILFs complexity and the total Function Points.}
+    \label{tab:computed-num-weights}
+\end{table}
+
+\subsubsection{External Interface Files (EIFs)}
+
+PowerEnJoy needs to interface with 3 services, described in the DD, in order to perform some operations. They are:
+\begin{description}
+	\item[SMSGateway]: for the SMS dispatching.
+	\item[EmailSender]: for the email dispatching.
+	\item[PaymentGateway]: for the payment execution.	
+\end{description}
+Obviously, each of these services doesn't require too much data, so we can consider their complexity as low.
+
+\vspace{2em}
+
+\begin{table}[H]
+    \centering
+    \begin{tabular}{| l | l | l |}
+        \hline
+        \textbf{ELF} & \textbf{Complexity} & \textbf{FPs} \\
+        \hline
+        SMSGateway           & Low     & 5     \\
+        EmailSender           & Low     & 5     \\
+        PaymentGateway           & Low     & 5     \\
+        \hline
+        \multicolumn{2}{| l |}{\textbf{Total}}  & \textbf{15} \\
+        \hline
+    \end{tabular}
+    \caption{The ELFs complexity and the total Function Points.}
+    \label{tab:computed-num-weights}
+\end{table}
+
+\subsubsection{External Inputs (EIs) and External Inquiries (EQs)}
+
+The PowerEnJoy business logic provides a RESTful API for all the core functionalities of the system. All the API requests are completely described in the DD [2.5.3, p. 14] and summarized below. Thanks to this detailed description, the complexity estimation of the EIs and the EQs will be performed accurately.
+
+\begin{itemize}
+	\item User creation: this request allows the creation of a new user. It requires all the user information as input and doesn't provide any output data. According to Table \ref{tab:complexity-estimation3}, the EI of the request has an high complexity with an amount of 3 RET's and 12 DET's.
+	\item User's salt bytes retrieval: this request allows to retrieve the user's salt bytes in order to use them for the password hashing. It requires only the username of the user as input and provides the user's salt bytes as output. The EI and the EQ of the request have both a low complexity.
+	\item User deletion: this request allows to delete the user that performs the request. It requires only the credentials of the user (username and hashed password) as input and doesn't provide any output data. The EI of the request has a low complexity.
+	\item User's rental logbook retrieval: this request allows a user to retrieve his/her rental logbook. It requires only the credentials of the user as input and provides the logbook information as output. The EI and the EQ of the request have respectively a low and a medium complexity. In particular we can observe that the EQ contains an amount of 2 RET's and 6 DET's which give the medium complexity, according to Table \ref{tab:complexity-estimation2}.
+	\item Available cars' retrieval: this request allows a user to retrieve all the available cars in the nearby area. It requires the credentials of the user and his/her geographical position as input, and provides the data about the available cars as output. The EI and the EQ of the request have respectively a low and a medium complexity. In particular we can observe thath the EQ cointains an amount of 3 RET's and 6 DET's which give the medium complexity
+	\item Car reservation: this request allows a user to reserve a choosen car. It requires the credentials of the user and the license plate of the car as input, and doesn't provide any output data. The EI of the request has a low complexity.
+	\item Current reservation retrieval:
+\end{itemize}
+
