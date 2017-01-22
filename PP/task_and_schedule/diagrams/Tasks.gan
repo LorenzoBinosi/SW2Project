@@ -1,0 +1,119 @@
+<?xml version="1.0" encoding="UTF-8"?><project name="Untitled Gantt Project" company="" webLink="http://" view-date="2016-10-01" view-index="0" gantt-divider-location="329" resource-divider-location="300" version="2.8.1" locale="it">
+    <description/>
+    <view zooming-state="default:8" id="gantt-chart">
+        <field id="tpd3" name="Nome" width="310" order="0"/>
+        <option id="color.recent"><![CDATA[#000000]]></option>
+    </view>
+    <view id="resource-table">
+        <field id="0" name="Nome" width="210" order="0"/>
+        <field id="1" name="Ruolo predefinito" width="86" order="1"/>
+    </view>
+    <!-- -->
+    <calendars>
+        <day-types>
+            <day-type id="0"/>
+            <day-type id="1"/>
+            <default-week id="1" name="default" sun="1" mon="0" tue="0" wed="0" thu="0" fri="0" sat="1"/>
+            <only-show-weekends value="false"/>
+            <overriden-day-types/>
+            <days/>
+        </day-types>
+    </calendars>
+    <tasks empty-milestones="true">
+        <taskproperties>
+            <taskproperty id="tpd0" name="type" type="default" valuetype="icon"/>
+            <taskproperty id="tpd1" name="priority" type="default" valuetype="icon"/>
+            <taskproperty id="tpd2" name="info" type="default" valuetype="icon"/>
+            <taskproperty id="tpd3" name="name" type="default" valuetype="text"/>
+            <taskproperty id="tpd4" name="begindate" type="default" valuetype="date"/>
+            <taskproperty id="tpd5" name="enddate" type="default" valuetype="date"/>
+            <taskproperty id="tpd6" name="duration" type="default" valuetype="int"/>
+            <taskproperty id="tpd7" name="completion" type="default" valuetype="int"/>
+            <taskproperty id="tpd8" name="coordinator" type="default" valuetype="text"/>
+            <taskproperty id="tpd9" name="predecessorsr" type="default" valuetype="text"/>
+        </taskproperties>
+        <task id="0" name="RASD" color="#000000" meeting="false" start="2016-10-04" duration="29" complete="0" expand="true">
+            <task id="3" name="Initial draft of goals" color="#8cb6ce" meeting="false" start="2016-10-04" duration="5" complete="0" expand="true"/>
+            <task id="9" name="Stakeholders identification" color="#8cb6ce" meeting="false" start="2016-10-04" duration="3" complete="0" expand="true"/>
+            <task id="108" name="Initial draft of functional requirements" meeting="false" start="2016-10-10" duration="6" complete="0" expand="true"/>
+            <task id="110" name="Initial draft of non functional requirements" meeting="false" start="2016-10-10" duration="3" complete="0" expand="true"/>
+            <task id="112" name="Initial draft of assumptions" meeting="false" start="2016-10-10" duration="3" complete="0" expand="true"/>
+            <task id="118" name="Initial draft of use cases and activity diagrams" color="#8cb6ce" meeting="false" start="2016-10-10" duration="3" complete="0" expand="true"/>
+            <task id="11" name="Meetings with local government" color="#8cb6ce" meeting="false" start="2016-10-14" duration="2" complete="0" expand="true"/>
+            <task id="120" name="Refinement on goals" color="#8cb6ce" meeting="false" start="2016-10-18" duration="6" complete="0" expand="true"/>
+            <task id="122" name="Refinement of functional requirements" meeting="false" start="2016-10-18" duration="6" complete="0" expand="true"/>
+            <task id="124" name="Refinement of non functional requirements" meeting="false" start="2016-10-18" duration="4" complete="0" expand="true"/>
+            <task id="126" name="Refinement of assumptions" meeting="false" start="2016-10-18" duration="4" complete="0" expand="true"/>
+            <task id="128" name="Refinement of use cases and activity diagrams" color="#8cb6ce" meeting="false" start="2016-10-18" duration="4" complete="0" expand="true"/>
+            <task id="130" name="Final goals" color="#8cb6ce" meeting="false" start="2016-10-26" duration="4" complete="0" expand="true"/>
+            <task id="132" name="Final functional requirements" meeting="false" start="2016-10-26" duration="4" complete="0" expand="true"/>
+            <task id="134" name="Final non functional requirements" meeting="false" start="2016-10-26" duration="3" complete="0" expand="true"/>
+            <task id="136" name="Final assumptions" meeting="false" start="2016-10-26" duration="3" complete="0" expand="true"/>
+            <task id="138" name="Final use cases and activity diagrams" color="#8cb6ce" meeting="false" start="2016-10-26" duration="3" complete="0" expand="true"/>
+            <task id="139" name="Alloy modellation" meeting="false" start="2016-10-31" duration="5" complete="0" expand="true"/>
+            <task id="29" name="Document writing" color="#8cb6ce" meeting="false" start="2016-11-02" duration="5" complete="0" expand="true"/>
+            <task id="22" name="Final refinements" color="#8cb6ce" meeting="false" start="2016-11-08" duration="4" complete="0" expand="true"/>
+        </task>
+        <task id="39" name="DD" meeting="false" start="2016-11-11" duration="21" complete="0" expand="true">
+            <task id="145" name="High level draft of architecture" color="#8cb6ce" meeting="false" start="2016-11-11" duration="2" complete="0" expand="true"/>
+            <task id="41" name="Components identification" color="#8cb6ce" meeting="false" start="2016-11-11" duration="2" complete="0" expand="true"/>
+            <task id="47" name="Subcomponents identification" color="#8cb6ce" meeting="false" start="2016-11-15" duration="5" complete="0" expand="true"/>
+            <task id="151" name="Tools and frameworks identification" color="#8cb6ce" meeting="false" start="2016-11-18" duration="2" complete="0" expand="true"/>
+            <task id="45" name="Refinement of architecture" color="#8cb6ce" meeting="false" start="2016-11-18" duration="2" complete="0" expand="true"/>
+            <task id="43" name="Initial draft of mockups" color="#8cb6ce" meeting="false" start="2016-11-22" duration="4" complete="0" expand="true"/>
+            <task id="147" name="Initial draft of interfaces" color="#8cb6ce" meeting="false" start="2016-11-22" duration="4" complete="0" expand="true"/>
+            <task id="149" name="Initial draft of algorithms" color="#8cb6ce" meeting="false" start="2016-11-22" duration="4" complete="0" expand="true"/>
+            <task id="154" name="Final architecture design" color="#8cb6ce" meeting="false" start="2016-11-25" duration="2" complete="0" expand="true"/>
+            <task id="156" name="Refinement of mockups" color="#8cb6ce" meeting="false" start="2016-11-29" duration="4" complete="0" expand="true"/>
+            <task id="158" name="Refinement of interfaces" color="#8cb6ce" meeting="false" start="2016-11-29" duration="4" complete="0" expand="true"/>
+            <task id="160" name="Refinement of algorithms" color="#8cb6ce" meeting="false" start="2016-11-29" duration="4" complete="0" expand="true"/>
+            <task id="51" name="Document writing" color="#8cb6ce" meeting="false" start="2016-11-29" duration="8" complete="0" expand="true"/>
+            <task id="162" name="Final mockups" color="#8cb6ce" meeting="false" start="2016-12-05" duration="2" complete="0" expand="true"/>
+            <task id="164" name="Final interfaces" color="#8cb6ce" meeting="false" start="2016-12-05" duration="2" complete="0" expand="true"/>
+            <task id="166" name="Final algorithms" color="#8cb6ce" meeting="false" start="2016-12-05" duration="2" complete="0" expand="true"/>
+            <task id="55" name="Final refinements" color="#8cb6ce" meeting="false" start="2016-12-07" duration="3" complete="0" expand="true"/>
+        </task>
+        <task id="60" name="ITPD" meeting="false" start="2016-12-09" duration="26" complete="0" expand="true">
+            <task id="62" name="Integration testing approach selection" color="#8cb6ce" meeting="false" start="2016-12-09" duration="4" complete="0" expand="true"/>
+            <task id="66" name="Initial draft of Integration testing sequence" color="#8cb6ce" meeting="false" start="2016-12-16" duration="4" complete="0" expand="true"/>
+            <task id="168" name="Refinement of integration testing sequence" color="#8cb6ce" meeting="false" start="2016-12-22" duration="4" complete="0" expand="true"/>
+            <task id="170" name="Final integration testing sequence" color="#8cb6ce" meeting="false" start="2016-12-28" duration="4" complete="0" expand="true"/>
+            <task id="73" name="Tools and frameworks identification" color="#8cb6ce" meeting="false" start="2016-12-28" duration="4" complete="0" expand="true"/>
+            <task id="64" name="Document writing" color="#8cb6ce" meeting="false" start="2016-12-28" duration="9" complete="0" expand="true"/>
+            <task id="172" name="Final refinement" color="#8cb6ce" meeting="false" start="2017-01-09" duration="5" complete="0" expand="true"/>
+        </task>
+        <task id="74" name="PP" meeting="false" start="2017-01-13" duration="6" complete="0" expand="true">
+            <task id="78" name="Risk analysis" meeting="false" start="2017-01-13" duration="2" complete="0" expand="true"/>
+            <task id="76" name="Size, cost and effort estimation" color="#8cb6ce" meeting="false" start="2017-01-13" duration="2" complete="0" expand="true"/>
+            <task id="79" name="Tasks and schedule definition" meeting="false" start="2017-01-16" duration="3" complete="0" expand="true"/>
+            <task id="107" name="Document writing" meeting="false" start="2017-01-18" duration="3" complete="0" expand="true"/>
+        </task>
+        <task id="85" name="Documents review" color="#000000" meeting="false" start="2017-01-20" duration="22" complete="0" expand="true"/>
+        <task id="84" name="Presentation" color="#000000" meeting="false" start="2017-02-21" duration="1" complete="0" expand="true"/>
+        <task id="80" name="Development" meeting="false" start="2017-02-22" duration="134" complete="0" expand="true">
+            <task id="82" name="Tools and framework obtainment" meeting="false" start="2017-02-22" duration="8" complete="0" expand="true"/>
+            <task id="174" name="External components obtainment" meeting="false" start="2017-02-22" duration="8" complete="0" expand="true"/>
+            <task id="86" name="Subcomponents development" meeting="false" start="2017-03-03" duration="74" complete="0" expand="true"/>
+            <task id="93" name="Code error fixing" meeting="false" start="2017-03-20" duration="103" complete="0" expand="true"/>
+            <task id="176" name="Components development" meeting="false" start="2017-03-20" duration="76" complete="0" expand="true"/>
+            <task id="89" name="Software integration testing" meeting="false" start="2017-03-30" duration="77" complete="0" expand="true"/>
+            <task id="91" name="Subsystem integration testing" meeting="false" start="2017-04-20" duration="72" complete="0" expand="true"/>
+            <task id="94" name="System testing" meeting="false" start="2017-07-28" duration="10" complete="0" expand="true"/>
+            <task id="178" name="Final refinements" meeting="false" start="2017-08-11" duration="9" complete="0" expand="true"/>
+            <task id="99" name="Release" meeting="false" start="2017-08-24" duration="3" complete="0" expand="true"/>
+        </task>
+        <task id="95" name="Deployment" meeting="false" start="2017-08-29" duration="40" complete="0" expand="true">
+            <task id="97" name="System deployment" meeting="false" start="2017-08-29" duration="6" complete="0" expand="true"/>
+            <task id="103" name="Alpha testing" color="#8cb6ce" meeting="false" start="2017-09-06" duration="12" complete="0" expand="true"/>
+            <task id="100" name="Meetings with personnel" meeting="false" start="2017-09-18" duration="10" complete="0" expand="true"/>
+            <task id="101" name="Mobile applications distribution" meeting="false" start="2017-09-28" duration="8" complete="0" expand="true"/>
+            <task id="181" name="Start-up" meeting="false" start="2017-10-10" duration="10" complete="0" expand="true"/>
+        </task>
+        <task id="106" name="Maintenance" color="#000000" meeting="false" start="2017-10-10" duration="74" complete="0" expand="true"/>
+    </tasks>
+    <resources/>
+    <allocations/>
+    <vacations/>
+    <previous/>
+    <roles roleset-name="Default"/>
+</project>

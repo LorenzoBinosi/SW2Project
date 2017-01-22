@@ -8,6 +8,52 @@
 \usepackage{amsmath}
 \numberwithin{figure}{section}
 \graphicspath{{Images/}}
+\usepackage{listings}
+\usepackage{hhline}
+\usepackage{longtable}
+
+%cost driver
+\newenvironment{costdriverstable}[1]{
+	\setlength{\LTleft}{-40pt}
+	\begin{longtable}{|p{\dimexpr.16\textwidth}|p{\dimexpr.14\textwidth}|p{\dimexpr.14\textwidth}|p{\dimexpr.14\textwidth}|p{\dimexpr.14\textwidth}|p{\dimexpr.14\textwidth}|p{\dimexpr.14\textwidth}|}
+	\hline
+	\multicolumn{7}{|c|}{{#1}}\\\hhline{|=======|}
+}{
+	\hline\end{longtable}
+}
+
+\newcommand{\costdescriptors}[7]{
+	#1 & #2 & #3 & #4 & #5 & #6 & #7\\
+}
+
+\newcommand{\ratinglevel}[6]{
+	Rating level & #1 & #2 & #3 & #4 & #5 & #6 \\\hline
+}
+
+\newcommand{\effortmultipliers}[6]{
+	Effort multipliers & #1 & #2 & #3 & #4 & #5 & #6 \\\hline
+}
+
+%scale driver
+%  table
+\newenvironment{scaledriverstable}[1]{
+	\setlength{\LTleft}{-40pt}
+	\begin{center}
+	#1 
+	\begin{longtable}{|p{\dimexpr.16\textwidth}|p{\dimexpr.14\textwidth}|p{\dimexpr.14\textwidth}|p{\dimexpr.14\textwidth}|p{\dimexpr.14\textwidth}|p{\dimexpr.14\textwidth}|p{\dimexpr.14\textwidth}|}
+	\hline
+}{
+	\hline\end{longtable}\end{center}
+}
+
+
+%scale driver command
+\newcommand{\addfactor}[7]{
+	#1 & #2 & #3 & #4 & #5 & #6 & #7 \\
+}
+\newcommand{\addfactorvalues}[6]{
+SF$_j$ & #1 & #2 & #3 & #4 & #5 & #6 \\\hline
+}
 
 % Table cells spanning multiple rows
 \usepackage{multirow}

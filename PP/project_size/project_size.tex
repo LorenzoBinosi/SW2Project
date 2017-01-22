@@ -137,7 +137,6 @@ The Car, SafeArea and CarAssistance RET's contain respectively 11, 4 and 4 DET's
         \hline
     \end{tabular}
     \caption{The ILFs complexity and the total Function Points.}
-    \label{tab:computed-num-weights}
 \end{table}
 
 \subsubsection{External Interface Files (EIFs)}
@@ -156,7 +155,7 @@ Obviously, each of these services doesn't require too much data, so we can consi
     \centering
     \begin{tabular}{| l | l | l |}
         \hline
-        \textbf{ELF} & \textbf{Complexity} & \textbf{FPs} \\
+        \textbf{EIF} & \textbf{Complexity} & \textbf{FPs} \\
         \hline
         SMSGateway           & Low     & 5     \\
         EmailSender           & Low     & 5     \\
@@ -165,8 +164,7 @@ Obviously, each of these services doesn't require too much data, so we can consi
         \multicolumn{2}{| l |}{\textbf{Total}}  & \textbf{15} \\
         \hline
     \end{tabular}
-    \caption{The ELFs complexity and the total Function Points.}
-    \label{tab:computed-num-weights}
+    \caption{The EIFs complexity and the total Function Points.}
 \end{table}
 
 \subsubsection{External Inputs (EIs) and External Inquiries (EQs)}
@@ -174,12 +172,496 @@ Obviously, each of these services doesn't require too much data, so we can consi
 The PowerEnJoy business logic provides a RESTful API for all the core functionalities of the system. All the API requests are completely described in the DD [2.5.3, p. 14] and summarized below. Thanks to this detailed description, the complexity estimation of the EIs and the EQs will be performed accurately.
 
 \begin{itemize}
-	\item User creation: this request allows the creation of a new user. It requires all the user information as input and doesn't provide any output data. According to Table \ref{tab:complexity-estimation3}, the EI of the request has an high complexity with an amount of 3 RET's and 12 DET's.
+	\item User creation: this request allows the creation of a new user. It requires all of the user information as input and doesn't provide any output data. According to Table \ref{tab:complexity-estimation3}, the EI of the request has an high complexity with an amount of 3 RET's and 12 DET's.
 	\item User's salt bytes retrieval: this request allows to retrieve the user's salt bytes in order to use them for the password hashing. It requires only the username of the user as input and provides the user's salt bytes as output. The EI and the EQ of the request have both a low complexity.
 	\item User deletion: this request allows to delete the user that performs the request. It requires only the credentials of the user (username and hashed password) as input and doesn't provide any output data. The EI of the request has a low complexity.
-	\item User's rental logbook retrieval: this request allows a user to retrieve his/her rental logbook. It requires only the credentials of the user as input and provides the logbook information as output. The EI and the EQ of the request have respectively a low and a medium complexity. In particular we can observe that the EQ contains an amount of 2 RET's and 6 DET's which give the medium complexity, according to Table \ref{tab:complexity-estimation2}.
-	\item Available cars' retrieval: this request allows a user to retrieve all the available cars in the nearby area. It requires the credentials of the user and his/her geographical position as input, and provides the data about the available cars as output. The EI and the EQ of the request have respectively a low and a medium complexity. In particular we can observe thath the EQ cointains an amount of 3 RET's and 6 DET's which give the medium complexity
+	\item User's rental logbook retrieval: this request allows a user to retrieve his/her rental logbook. It requires only the credentials of the user as input and provides the logbook information as output. The EI and the EQ of the request have both a low complexity. In particular the low complexity of the EQ is given by an amount of 2 RET's and 5 DET's, according to Table \ref{tab:complexity-estimation2}.
+	\item Available cars' retrieval: this request allows a user to retrieve all the available cars in the nearby area. It requires the credentials of the user and his/her geographical position as input, and provides the data about the available cars as output. The EI and the EQ of the request have both a low complexity.
 	\item Car reservation: this request allows a user to reserve a choosen car. It requires the credentials of the user and the license plate of the car as input, and doesn't provide any output data. The EI of the request has a low complexity.
-	\item Current reservation retrieval:
+	\item Current reservation retrieval: this request allows a user to retrieve the information about the current reservation. It requires the credentials of the user as input and provides the information about the current reservation. The EI and the EQ of the request have both a low complexity.
+	\item Unlocks car: this request allows a user to unlock a reserved car. It requires the credentials of the user and his/her position as input, and doesn't provide any output data. The EI of the request has a low complexity.
+	\item Car heartbeat: this request allows any car to be tracked by the system. It requires all the information about the car status and rent, and doesn't provide any output data. The EI of the request has an high complexity with an amount of 6 RET's and 10 DET's.
+	\item Available safe areas' retrieval: this request allows any car to provide all the available neaby safe areas to the driver. It requires the credentials of the car and its geographical position, and provides the information about the available nearby safe areas. The EI and the EQ of the request have both a low complexity.
 \end{itemize}
 
+\vspace{2em}
+
+\begin{table}[H]
+    \centering
+    \begin{tabular}{| l | l | l |}
+        \hline
+        \textbf{EI} & \textbf{Complexity} & \textbf{FPs} \\
+        \hline
+        User creation           &  High     & 6     \\
+        User's salt bytes retrieval           & Low     & 3     \\
+        User deletion           & Low     & 3    \\
+        User's rental logbook retrieval          & Low     & 3    \\
+        Available cars' retrieval           & Low     & 3     \\
+        Car reservation          & Low     & 3    \\
+        Current reservation retrieval         & Low     & 3     \\
+        Unlocks car          & Low     & 3   \\ 
+        Car heartbeat          & High     & 6     \\
+        Available safe areas' retrieval          & Low     & 3    \\ 
+        \hline
+        \multicolumn{2}{| l |}{\textbf{Total}}  & \textbf{36} \\
+        \hline
+    \end{tabular}
+    \caption{The EIs complexity and the total Function Points.}
+\end{table}
+
+\vspace{2em}
+
+\begin{table}[H]
+    \centering
+    \begin{tabular}{| l | l | l |}
+        \hline
+        \textbf{EQ} & \textbf{Complexity} & \textbf{FPs} \\
+        \hline
+        User's salt bytes retrieval           & Low     & 3     \\
+        User's rental logbook retrieval          & Low     & 3    \\
+        Available cars' retrieval           & Low     & 3     \\
+        Current reservation retrieval         & Low     & 3     \\
+        Available safe areas' retrieval          & Low     & 3    \\ 
+        \hline
+        \multicolumn{2}{| l |}{\textbf{Total}}  & \textbf{15} \\
+        \hline
+    \end{tabular}
+    \caption{The EQs complexity and the total Function Points.}
+\end{table}
+
+\subsubsection{External Outputs (EOs)}
+
+Sometimes the system has to notify the user outside the context of a response. These occasions are: 
+\begin{itemize}
+	\item Notify the user that his/her rent has been concluded.
+	\item Notify the user that his/her rent cannot be concluded.
+	\item Notify the user that the payment of the rent has been received.
+	\item Notify the user that the payment of the rent hasn't been received.
+\end{itemize}
+Like the EIFs, each of these notification doesn't require too much data, so we can consider their complexity as low.
+
+\vspace{2em}
+
+\begin{table}[H]
+    \centering
+    \begin{tabular}{| l | l | l |}
+        \hline
+        \textbf{EO} & \textbf{Complexity} & \textbf{FPs} \\
+        \hline
+        Rent concluded          & Low     & 4     \\
+        Rent not concluded          & Low     & 4     \\
+        Payment received          & Low     & 4    \\
+        Payment not received         & Low     & 4     \\
+        \hline
+        \multicolumn{2}{| l |}{\textbf{Total}}  & \textbf{16} \\
+        \hline
+    \end{tabular}
+    \caption{The EOs complexity and the total Function Points.}
+\end{table}
+
+\subsubsection{Overall estimation}
+
+The following table summarizes the results of our estimation activity:
+
+\vspace{2em}
+
+\begin{table}[H]
+    \centering
+    \begin{tabular}{| l | l |}
+        \hline
+        \textbf{Function Type} & \textbf{Value} \\
+        \hline
+        Internal Logic Files    & 35    \\
+        External Interface Files    & 15    \\
+        External Inputs   & 36     \\
+        External Outputs   & 16    \\
+        External Inquiries   & 15    \\
+        \hline
+        \textbf{Total}  & \textbf{117} \\
+        \hline
+    \end{tabular}
+    \caption{Count of UFPs of our system.}
+\end{table}
+As already said, the estimation made doesn't concern the mobile applications, the web server and the car application. Hence, we can finally convert the UFPs in the total number of lines of Java code.
+
+According to IFPUG, the multiplicator to convert the Unadjusted Function Points to Source Lines of Code for Java is 53.
+
+\vspace{1em}
+
+\begin{lstlisting}[stepnumber=0, frame=single]
+	SLOC = 117 * 53 = 6201
+\end{lstlisting}
+
+\subsection{Cost and effort estimation} \label{cost-effort-est}
+
+For the cost and the effort estimation we will use the COCOMO II approach. In order to get a feasibile estimation, we suppose that our team has just been made up and is formed by 3 people: Lorenzo, Bob and Alice.
+
+\subsubsection{Scale Factors}
+
+The scale factors are parameters that concern several aspects regarding the overall experience of our team and the fesibility of the given project.
+The following table summarize all the scale factors and their values, according to COCOMO II.
+
+\begin{scaledriverstable}{}
+	Scale Factors & Very Low & Low & Nominal & High & Very High & Extra High\\\hline
+	\addfactor{PREC}{thoroughly unprecedented}{largely unprecedented}{somewhat unprecedented}{generally familiar}{largely familiar}{thoroughly familiar}
+	\addfactorvalues{6.20}{4.96}{3.72}{2.48}{1.24}{0.00}
+	\addfactor{FLEX}{rigorous}{occasional relaxation}{some relaxation}{general conformity}{some conformity}{general goals}
+	\addfactorvalues{5.07}{4.05}{3.04}{2.03}{1.01}{0.00}
+	\addfactor{RESL}{little (20\%)}{some (40\%)}{often (60\%)}{generally (75\%)}{mostly (90\%)}{full (100\%)}
+	\addfactorvalues{7.07}{5.65}{4.24}{2.83}{1.41}{0.00}
+	\addfactor{TEAM}{very difficult interactions}{some difficult interactions}{basically cooperative interactions}{largely cooperative}{highly cooperative}{seamless interactions}
+	\addfactorvalues{5.48}{4.38}{3.29}{2.19}{1.10}{0.00}
+	\addfactor{PMAT}{Level 1 Lower}{Level 1 Upper}{Level 2}{Level 3}{Level 4}{Level 5}
+	\addfactorvalues{7.80}{6.24}{4.68}{3.12}{1.56}{0.00}
+\end{scaledriverstable}
+Let's explain what's the meaning of each factor and what could be the suitable values in our case.
+\begin{description}
+	\item[Precedentedness: ]reflects the previous experience of our team with the development of large scale projects. Since this is the first project for our team, the value will be low.
+	\item[Development flexibility: ]reflects the degree of flexibility in the development process. Since we declared many functional and non functional requirements in the RASD, the value will be low.
+	\item[Risk resolution: ]reflects the level of awareness and reactiveness with respect to risks. The risk analysis we performed is quite extensive, so the value will be set to very high.
+	\item[Team cohesion: ]reflects how well the development team know each other and work together. As we already said, this is the first project for our team, so the value will be low.
+	\item[Process maturity: ]reflects the process maturity of the organization. Untill now, the project has been conducted correctly, so the value will be set to nominal.
+\end{description} 
+The estimated scale factors for our project are shown in Table \ref{tab:scale-factor}.
+
+\begin{table}[H]
+    \centering
+    \begin{tabular}{| l | l | l | l | l |}
+        \hline
+        \textbf{Code}   & \textbf{Name}             & \textbf{Factor}   & \textbf{Value}    \\
+        \hline
+        PREC            & Precedentedness           & Low               &    4.96             \\
+        \hline
+        FLEX            & Development flexibility   & Low           &       4.05         \\
+        \hline
+        RESL            & Risk resolution           & Very High              &    1.41            \\
+        \hline
+        TEAM            & Team cohesion             & Low         &       4.38           \\
+        \hline
+        PMAT            & Process maturity          & Nominal              &   4.68              \\
+        \hline
+        \textbf{Total}  & \multicolumn{2}{|c|}{$E=0.91 + 0.01 \times \sum_{i}SF_i$}    &  \textbf{1.1048}     \\
+        \hline
+    \end{tabular}
+    \caption{Scale factors for our project.}
+    \label{tab:scale-factor}
+\end{table}
+
+\subsubsection{Cost Drivers}
+
+\begin{itemize}
+	\item Required software reliability: 
+	\begin{itemize}
+		\item [] this is the measure of the extent to which the software must perform its intended function over a period of time. Since our system has been thought to provide a further and timely transport service, its reliability must be high.
+\begin{costdriverstable}{RELY Cost Drivers}
+	\costdescriptors{RELY Descriptors}{slightly inconvenience}{easily recoverable losses}{moderate recoverable losses}{high financial loss}{risk to human life}{}\hline
+	\ratinglevel{Very low}{Low}{Nominal}{High}{Very High}{Extra High}
+	\effortmultipliers{0.82}{0.92}{1.00}{1.10}{1.26}{n/a}
+\end{costdriverstable}
+	\end{itemize}
+\end{itemize}
+
+\begin{itemize}
+	\item Database size: 
+	\begin{itemize}
+		\item [] this cost driver attempts to capture the effect large test data requirements have on product development. The rating is determined by calculating D/P, the ratio of bytes in the testing database to SLOC in the program. We suppose to reach at least 5GB of bytes in the testing database, so the value of the D/P ratio will be about 800 (high).
+\begin{costdriverstable}{DATA Cost Drivers}
+	\costdescriptors{DATA Descriptors}{}{Testing DB bytes/pgm SLOC $<$ 10}{10 $\le$D/P$\le$ 100}{100 $\le$D/P$\le$ 1000}{DP $>$ 1000}{}\hline
+	\ratinglevel{Very low}{Low}{Nominal}{High}{Very High}{Extra High}
+	\effortmultipliers{n/a}{0.90}{1.00}{1.14}{1.28}{n/a}
+\end{costdriverstable}
+	\end{itemize}
+\end{itemize}
+
+\begin{itemize}
+	\item Product complexity: 
+	\begin{itemize}
+		\item [] this cost driver attempts to capture the average complexity of the following areas: control operations, computational operations, device-dependent operations, data management operations and user interface management operations. Our estimation doesn't include the mobile applications, the web server and the car application. For this reason we are not able to estimate correctly this driver, hence we set its value to nominal. 
+\begin{costdriverstable}{CPLX Cost Driver}
+	\ratinglevel{Very low}{Low}{Nominal}{High}{Very High}{Extra High}
+	\effortmultipliers{0.73}{0.87}{1.00}{1.17}{1.34}{1.74}	
+\end{costdriverstable}
+	\end{itemize}
+\end{itemize}
+
+\begin{itemize}
+	\item Required reusability: 
+	\begin{itemize}
+	\item[] this cost driver accounts for the additional effort needed to construct components intended for reuse on current or future projects. This effort is consumed with creating more generic design of software, more elaborate documentation, and more extensive testing to ensure components are ready for use in other applications. Our project relies on many Java EE tools and components, and the coded part is strictly related to the project itself. Hence, the value will be low.
+	\begin{costdriverstable}{RUSE Cost Driver}
+		\costdescriptors{RUSE Descriptors}{}{None}{Across project}{Across program}{Across product line}{Across multiple product lines}\hline
+		\ratinglevel{Very low}{Low}{Nominal}{High}{Very High}{Extra High}
+		\effortmultipliers{n/a}{0.95}{1.00}{1.07}{1.15}{1.24}		
+	\end{costdriverstable}
+	\end{itemize}
+\end{itemize}
+
+\begin{itemize}
+	\item Documentation match to life-cycle needs: 
+	\begin{itemize}
+	\item[] this cost driver is evaluated in terms of the suitability of the project’s documentation to its life-cycle needs. Considering the purpose of our system, its maintenance phase will be extremely important. For this reason, we have to provide an accurate documentation in order to minimize any further effort. Hence, the value of this driver will be very high.
+	\begin{costdriverstable}{DOCU Cost Driver}
+		\costdescriptors{DOCU Descriptors}{Many life-cycle needs uncovered}{Some life-cycle needs uncovered}{Right-sized to life-cycle needs}{Excessive for life-cycle needs}{Very excessive for life-cycle needs}{}\hline
+		\ratinglevel{Very low}{Low}{Nominal}{High}{Very High}{Extra High}
+		\effortmultipliers{0.81}{0.91}{1.00}{1.11}{1.23}{n/a}		
+	\end{costdriverstable}
+	\end{itemize}
+\end{itemize}
+
+\begin{itemize}
+	\item Execution time constraint: 
+	\begin{itemize}
+	\item[] this is a measure of the execution time constraint imposed upon a software system. The rating is expressed in terms of the percentage of available execution time expected to be used by the system or subsystem consuming the execution time resource. Even if the sofware of our system is not too complex, we are expecting a high amount of users which use our service every day. For this reason the value will be very high.
+	\begin{costdriverstable}{TIME Cost Driver}
+		\costdescriptors{TIME Descriptors}{}{}{$\le$ 50\% use of available execution time}{70\% use of available execution time}{85\% use of available execution time} {95\% use of available execution time}\hline
+		\ratinglevel{Very low}{Low}{Nominal}{High}{Very High}{Extra High}
+		\effortmultipliers{n/a}{n/a}{1.00}{1.11}{1.29}{1.63}	
+	\end{costdriverstable}
+	\end{itemize}
+\end{itemize}
+
+\begin{itemize}
+	\item Storage constraint: 
+	\begin{itemize}
+	\item[] this rating represents the degree of main storage constraint imposed on a software system or subsystem. In other words, it describes the expected amount of storage usage with respect to the availability of the hardware. Our system continuously store information about users and rents, so the usage percentage of the available storage will be extremely high.
+	\begin{costdriverstable}{STOR Cost Driver}
+		\costdescriptors{STOR Descriptors}{}{}{$\le$  50\% use of available storage}{70\% use of available storage}{85\% use of available storage} {95\% use of available storage}\hline
+		\ratinglevel{Very low}{Low}{Nominal}{High}{Very High}{Extra High}
+		\effortmultipliers{n/a}{n/a}{1.00}{1.05}{1.17}{1.46}	
+	\end{costdriverstable}
+	\end{itemize}
+\end{itemize}
+
+\vspace{2em}
+
+\begin{itemize}
+	\item Platform volatility: 
+	\begin{itemize}
+	\item[] for what concerns the core system, we don't expect our fundamental platforms to change very often. Hence, the value of this cost driver will be low.
+	\begin{costdriverstable}{PVOL Cost Driver}
+		\costdescriptors{PVOL Descriptors}{}{Major change every 12 mo., minor change every 1 mo.}{Major: 6mo; minor: 2wk.}{Major: 2mo, minor: 1wk}	{Major: 2wk; minor: 2 days}{}\hline
+		\ratinglevel{Very low}{Low}{Nominal}{High}{Very High}{Extra High}
+		\effortmultipliers{n/a}{0.87}{1.00}{1.15}{1.30}{n/a}
+	\end{costdriverstable}
+	\end{itemize}
+\end{itemize}
+
+\begin{itemize}
+	\item Analyst capability: 
+	\begin{itemize}
+	\item[] the major attributes that should be considered in this rating are analysis and design ability, efficiency and thoroughness, and the ability to communicate and cooperate. Being new to the development of large scale projects, the parameter is set to nominal.
+	\begin{costdriverstable}{ACAP Cost Driver}
+		\costdescriptors{ACAP Descriptors}{15th percentile}{35th percentile}{55th percentile}{75th percentile}{90th percentile}{}\hline
+		\ratinglevel{Very low}{Low}{Nominal}{High}{Very High}{Extra High}
+		\effortmultipliers{1.42}{1.19}{1.00}{0.85}{0.71}{n/a}	
+	\end{costdriverstable}
+	\end{itemize}
+\end{itemize}
+
+\begin{itemize}
+	\item Programmer capability: 
+	\begin{itemize}
+	\item[] this evaluation should be based on the capability of the programmers as a team rather than as individuals. Our team is composed by competent people which have never worked as team, so the value of this driver will be set to nominal.
+	\begin{costdriverstable}{PCAP Cost Driver}
+		\costdescriptors{PCAP Descriptors}{15th percentile}{35th percentile}{55th percentile}{75th percentile}{90th percentile}{}\hline
+		\ratinglevel{Very low}{Low}{Nominal}{High}{Very High}{Extra High}
+		\effortmultipliers{1.34}{1.15}{1.00}{0.88}{0.76}{n/a}	
+	\end{costdriverstable}
+	\end{itemize}
+\end{itemize}
+
+\begin{itemize}
+	\item Application experience: 
+	\begin{itemize}
+	\item[] the rating for this cost driver is dependent on the level of applications experience of the project team developing the software system or subsystem. 
+Our team have some experience in the development of Java applications, but haven't developed any Java EE applications yet. For this reason, the parameter will be set to low.
+	\begin{costdriverstable}{APEX Cost Driver}
+		\costdescriptors{APEX Descriptors}{$\le$ 2 months}{6 months}{1 year}{3 years}{6 years}{}\hline
+		\ratinglevel{Very low}{Low}{Nominal}{High}{Very High}{Extra High}
+		\effortmultipliers{1.22}{1.10}{1.00}{0.88}{0.81}{n/a}
+	\end{costdriverstable}
+	\end{itemize}
+\end{itemize}
+
+\begin{itemize}
+	\item Platform experience: 
+	\begin{itemize}
+	\item[] our team have previous experiences with the development of database and servers, hence the parameter will be set to nominal.
+	\begin{costdriverstable}{PLEX Cost Driver}
+		\costdescriptors{PLEX Descriptors}{$\le$ 2 months}{6 months}{1 year}{3 years}{6 years}{}\hline
+		\ratinglevel{Very low}{Low}{Nominal}{High}{Very High}{Extra High}
+		\effortmultipliers{1.19}{1.09}{1.00}{0.91}{0.85}{n/a}
+	\end{costdriverstable}
+	\end{itemize}
+\end{itemize}
+
+\begin{itemize}
+	\item Language and tool experience: 
+	\begin{itemize}
+	\item[] our team have some experience in the development of Java applications, but haven't developed with Java EE tools yet. For this reason, the parameter will be set to nominal.
+	\begin{costdriverstable}{LTEX Cost Driver}
+		\costdescriptors{LTEX Descriptors}{$\le$ 2 months}{6 months}{1 year}{3 years}{6 years}{}\hline
+		\ratinglevel{Very low}{Low}{Nominal}{High}{Very High}{Extra High}
+		\effortmultipliers{1.20}{1.09}{1.00}{0.91}{0.84}{n/a}
+	\end{costdriverstable}
+	\end{itemize}
+\end{itemize}
+
+\begin{itemize}
+	\item Personnel continuity: 
+	\begin{itemize}
+	\item[]  this driver is evaluated in terms of the project’s annual personnel turnover. Being this our first project, the value of this driver will be set to low.
+	\begin{costdriverstable}{PCON Cost Driver}
+		\costdescriptors{PCON Descriptors}{48\% / year}{24\% / year}{12\% / year}{6\% / year}{3\% / year}{}\hline	
+		\ratinglevel{Very low}{Low}{Nominal}{High}{Very High}{Extra High}
+		\effortmultipliers{1.29}{1.12}{1.00}{0.90}{0.81}{n/a}
+	\end{costdriverstable}
+	\end{itemize}
+\end{itemize}
+
+\begin{itemize}
+	\item Usage of software tools: 
+	\begin{itemize}
+	\item[] Our application environment is complete and well integrated, so we'll set this parameter as high.
+	\begin{costdriverstable}{TOOL Cost Driver}
+		\costdescriptors{TOOL Descriptors}{edit, code, debug}{simple, frontend, backend CASE, little integration}{basic life-cycle tools, moderately integrated}{strong, mature life-cycle tools, moderately integrated}{strong, mature, proactive life-cycle tools, well integrated with processes, methods, reuse}{}\hline
+		\ratinglevel{Very low}{Low}{Nominal}{High}{Very High}{Extra High}
+		\effortmultipliers{1.17}{1.09}{1.00}{0.90}{0.78}{n/a}	
+	\end{costdriverstable}
+	\end{itemize}
+\end{itemize}
+
+\begin{itemize}
+	\item Multisite development: 
+	\begin{itemize}
+	\item[] even if the people of our team lives in different cities, we have collaborated relying hugely on wideband Internet services including social networks and emails. For this reason, we're going to set this parameter to very high.
+
+	\begin{costdriverstable}{SITE Cost Driver}
+		\costdescriptors{SITE Collocation Descriptors}{Intern-ational}{Multi-city and multi-company}{Multi-city or multi-company}{Same city or metro area}{Same building or complex}{Fully collocated}
+		\costdescriptors{SITE Communications Descriptors}{Some phone, mail}{Individual phone, fax}{Narrow band email}{Wideband electronic communication}{Wideband elect. comm., occasional video conf.}{Interactive multimedia}\hline
+		\ratinglevel{Very low}{Low}{Nominal}{High}{Very High}{Extra High}
+		\effortmultipliers{1.22}{1.09}{1.00}{0.93}{0.86}{0.80}		
+	\end{costdriverstable}
+	
+	\end{itemize}
+\end{itemize}
+
+\begin{itemize}
+	\item Required development schedule: 
+	\begin{itemize}
+	\item[] this rating measures the schedule constraint imposed on the project team developing the software. Untill now, all the deadlines have been met, hence the parameter is set to nominal.
+	\begin{costdriverstable}{SCED Cost Driver}
+		\costdescriptors{SCED Descriptors}{75\% of nominal}{85\% of nominal}{100\% of nominal}{130\% of nominal}{160\% of nominal}{}\hline
+		\ratinglevel{Very low}{Low}{Nominal}{High}{Very High}{Extra High}
+		\effortmultipliers{1.43}{1.14}{1.00}{1.00}{1.00}{n/a}	
+	\end{costdriverstable}
+	\end{itemize}
+\end{itemize}
+The estimated cost drivers for our project are shown in Table \ref{tab:cost-drivers}.
+
+\begin{table}[H]
+    \centering
+    \begin{tabular}{| l | l | l | l |}
+        \hline
+        \textbf{Code}   & \textbf{Cost Driver}             & \textbf{Factor}   & \textbf{Value}    \\
+        \hline
+        RELY            & Required software reliability           & High               &    1.10             \\
+        \hline
+        DATA            & Database size   & High           &      1.14         \\
+        \hline
+        CPLX            & Product complexity           &   Nominal              &    1.00            \\
+        \hline
+        RUSE            & Required reusability             &   Low         &       0.95          \\
+        \hline
+        DOCU            & Documentation match to life-cycle needs         & Very High              &   1.23              \\
+        \hline
+        TIME            & Execution time constraint        & Very High              &   1.29            \\
+        \hline
+        STOR            & Storage constraint        & Extra High              &   1.46           \\
+        \hline
+        PVOL            & Platform volatility       & Low              &   0.87           \\
+        \hline
+        ACAP            & Analyst capability       & Nominal              &   1.00         \\
+        \hline
+        PCAP            & Programmer capability      & Nominal              &   1.00         \\
+        \hline
+        APEX            & Application experience      & Low              &   1.10         \\
+        \hline
+        PLEX            & Platform experience      & Nominal              &   1.00         \\
+        \hline
+        LTEX            & Language and tool experience     & Nominal              &   1.00         \\
+        \hline
+        PCON            & Personnel continuity      & Low              &   1.12         \\
+        \hline
+        TOOL            & Usage of software tools      & High              &   0.90         \\
+        \hline
+        SITE            & Multisite development      & Very High              &   0.86         \\
+        \hline
+        SCED            & Required development schedul      & Nominal              &   1.00         \\
+        \hline
+        \textbf{Total}  & \multicolumn{2}{|c|}{$EAF=\prod_i C_i$}          &  \textbf{2.2895}     \\
+        \hline
+    \end{tabular}
+    \caption{Cost drivers for our project.}
+    \label{tab:cost-drivers}
+\end{table}
+
+\subsubsection{Effort equation}
+
+This final equation gives us the effort estimation measured in Person-Months (PM):
+
+\vspace{1em}
+
+\begin{lstlisting}[stepnumber=0, frame=single,mathescape]
+	Effort = A * EAF * KSLOC$^E$
+\end{lstlisting}
+
+ \vspace{1em}
+
+where:
+
+\vspace{1em}
+
+\begin{lstlisting}[stepnumber=0, frame=single,mathescape]
+	A = 2.94 (according to COCOMO II) 
+	EAF = 2.2895 
+	E = 1.1048
+\end{lstlisting}
+
+The total effort results in \textbf{50.5} person-months.
+
+\subsubsection{Schedule estimation}
+
+According to COCOMO II, the schedule estimation is given by the following formula:
+
+ \vspace{1em}
+
+\begin{lstlisting}[stepnumber=0, frame=single,mathescape]
+	Duration = 3.67 * Effort$^F$
+\end{lstlisting}
+
+ \vspace{1em}
+
+where:
+
+\vspace{1em}
+
+\begin{lstlisting}[stepnumber=0, frame=single,mathescape]
+	B = 0.91
+	F = 0.28 + 0.2 * (E - B) = 0.31896
+\end{lstlisting}
+
+ \vspace{1em}
+
+The duration calculated results in a total of \textbf{12.82} months. The average number of people required for the development time is given by the following formula:
+
+\vspace{1em}
+
+\begin{lstlisting}[stepnumber=0, frame=single,mathescape]
+	People = Effort / Duration
+\end{lstlisting}
+
+\vspace{1em}
+
+We would need 4 people in order to complete the project in about 13 months, but since our team consists of 3 people, a reasonable development time would
+be about \textbf{17} months. This last value is obviously calculated turning around the last formula.
