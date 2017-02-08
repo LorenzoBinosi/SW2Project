@@ -1,0 +1,17 @@
+\section{Description of the code}
+
+\subsection {Assigned class}
+
+The assigned class is the \textbf{InjectNodeTrailCsvTransform} class which is located in the \texttt{org.apache.ofbiz.content.webapp.ftl} package of the Apache OFBiz project. In particular, it's a class of the Apache Freemarker Java library which allows to generate text output (HTML web pages, e-mails, configuration files, source code, etc.) based on templates and changing data.
+
+\subsection {Functional role of the class}
+
+The class implements the \textbf{TemplateTransformModel} public interface which contains the \texttt{getWriter} method. However, it provides also the following deprecated methods:
+
+\begin{itemize}
+	\item \texttt{getArg}
+	\item \texttt{getWrappedObject}
+\end{itemize}
+Thanks to the \texttt{getWriter} method it is possible to transform an URL, which contains markers, into another one replacing the markers with provided arguments. 
+
+Unfortunately, this class it's not documented and the lack of comments make the guessing of its role harder.
