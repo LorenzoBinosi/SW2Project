@@ -10,14 +10,15 @@ All interfaces shall be intuitive and user friendly. They should not require the
 
 \subsubsection{Hardware Interfaces}
 
-All cars are provided with a dedicated embedded system connected to several plugins and a touchscreen display used for interact with the car application.
+All cars are provided of a computer which is connected to several plugins and a touchscreen display used for interact with an ad-hoc application.
 Thanks to this embedded architecture the system will also be notified about the status of the car and its location, even if the main battery is completely discharged.
 
 \subsubsection{Software Interfaces}
 
 Mobile application and web application are supposed to be friendly with any device, in particular the first one must be developed for iOS and Android, and the second one will work on any operating system that support a web browser.
 
-On the embedded system of any cars is installed a JVM that runs a Java application that provides informations to the driver and to the system.
+The computer of each car is provided of Ubuntu 16.10 as operating system. In any OS is installed openssh-server, in order to access
+to the car remotly.
 
 The back-end server stores its data in a RDBMS and can run on every platform that supports the JVM. It also provides different APIs for different functions that a user, or a guest, can do through client applications. 
 
@@ -72,7 +73,9 @@ PowerEnJoy needs to communicate with a service to solve all those issues that ca
 	\item accidents
 	\item faulty communication between system and car
 \end{itemize}
-The service assigned to this kind of problems, receives all reports that fall in the previously specified cases, and solves them as soon as possible, reporting the results back to PowerEnJoy.
+All of the cars' issues will be reported on specific tables of the database, and the system will provide the access to those tables to the assigned service in order to retrieve and update all the information about the status of the cars.
+
+The service is free to develop an application to simplify the interactions with the database. The costs faced for the development of the application won't be covered by PowerEnJoy. 
 
 \subsubsection{Hardware limitations}
 The service requires an Internet connection fast enough to guarantee a fast response from the server and hardware architectures that can run properly the client side applications (web and mobile apps).
@@ -88,8 +91,8 @@ The system must support parallel operations from different drivers that may requ
 It's assumes that:
 \begin{itemize}
 	\item All drivers have access to a stable internet connection.
-	\item All cars are the same model, so that any of them will have the same number of seats
-	\item The number of cars is sufficient to satisfy the demand in each area.
+	\item Once a driver unlocks a car, he will use it for his trip.
+	\item Before leaving the car, the driver locks it correctly.
 	\item All the areas where the system is operating are covered by a reliable 3G/4G connection.
 	\item The system is operating in an area composed by a city or agglomerated cities, of the same country, closed each other.
 \end{itemize}
