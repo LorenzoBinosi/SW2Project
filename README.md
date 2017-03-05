@@ -9,4 +9,7 @@ This is the project for the Software Engineering 2 course of M.Sc. course of Com
 
 1. **RASD**: [download the latest version here](https://github.com/LorenzoBinosi/SW2Project/raw/master/RASD/Rasdv2.pdf).
 1. **DD**: [download the latest version here](https://github.com/LorenzoBinosi/SW2Project/raw/master/DD/DDv2.pdf).
-1. **Testing**: [download the latest version here]().
+1. **ITP**: [download the latest version here](https://github.com/LorenzoBinosi/SW2Project/raw/master/ITP/ITP.pdf).
+1. **PP**: [download the latest version here](https://github.com/LorenzoBinosi/SW2Project/raw/master/PP/PPV2.pdf).
+1. **Inspection**: [download the latest version here](https://github.com/LorenzoBinosi/SW2Project/raw/master/Inspection/Inspection.pdf).
+1. **Presentation**: [download the latest version here]().
